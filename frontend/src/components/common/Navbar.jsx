@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Compass, Sparkles, Briefcase, Bot, Menu, X, ArrowRight, LogOut, User, Users, FileText, TrendingUp } from 'lucide-react';
+import { Compass, Sparkles, Briefcase, Bot, Menu, X, ArrowRight, LogOut, User, Users, FileText, TrendingUp, Calendar } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 
 export const Navbar = () => {
@@ -18,13 +18,17 @@ export const Navbar = () => {
       ? [
           { name: 'Manage Jobs', href: '/recruiter/jobs', icon: Briefcase },
           { name: 'Applicants', href: '/recruiter/applicants', icon: Users },
+          { name: 'Interviews', href: '/recruiter/interviews', icon: Calendar },
         ]
       : [
           { name: 'Skill Roadmap', href: '/roadmap', icon: TrendingUp },
           { name: 'AI Resume Analyzer', href: '/resume-analyzer', icon: Sparkles },
           { name: 'AI Mock Interview', href: '/mock-interview', icon: Bot },
           ...(isAuthenticated
-            ? [{ name: 'My Applications', href: '/applications', icon: FileText }]
+            ? [
+                { name: 'My Applications', href: '/applications', icon: FileText },
+                { name: 'Interviews', href: '/interviews', icon: Calendar },
+              ]
             : []),
         ]),
   ];

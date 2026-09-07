@@ -15,9 +15,11 @@ import {
   SlidersHorizontal,
   X,
   TrendingUp,
-  Cpu
+  Cpu,
+  Calendar
 } from 'lucide-react';
 import api from '../services/api';
+import { ScheduleInterviewModal } from '../components/interviews/ScheduleInterviewModal';
 
 export const RecruiterApplicantsPage = () => {
   const [applications, setApplications] = useState([]);
@@ -36,6 +38,7 @@ export const RecruiterApplicantsPage = () => {
   const [statusMessage, setStatusMessage] = useState(null);
   const [selectedNote, setSelectedNote] = useState(null);
   const [selectedMatchModal, setSelectedMatchModal] = useState(null);
+  const [scheduleModalData, setScheduleModalData] = useState(null);
 
   const statusTabs = [
     'All',
@@ -111,12 +114,21 @@ export const RecruiterApplicantsPage = () => {
           </p>
         </div>
 
-        <Link
-          to="/recruiter/jobs"
-          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-semibold text-white bg-slate-900 border border-slate-800 hover:border-slate-700 transition-colors w-fit"
-        >
-          Manage Vacancies
-        </Link>
+        <div className="flex items-center gap-3">
+          <Link
+            to="/recruiter/interviews"
+            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-semibold text-brand-300 bg-brand-500/10 border border-brand-500/30 hover:bg-brand-500/20 transition-colors w-fit"
+          >
+            <Calendar className="w-3.5 h-3.5 text-brand-400" />
+            <span>Scheduled Interviews</span>
+          </Link>
+          <Link
+            to="/recruiter/jobs"
+            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-semibold text-white bg-slate-900 border border-slate-800 hover:border-slate-700 transition-colors w-fit"
+          >
+            Manage Vacancies
+          </Link>
+        </div>
       </div>
 
       {/* Metrics Row */}
@@ -323,26 +335,43 @@ export const RecruiterApplicantsPage = () => {
                     </td>
 
                     <td className="py-4 px-4">
-                      <select
-                        value={app.status}
-                        onChange={(e) => handleStatusChange(app._id, e.target.value)}
-                        className={`text-xs px-2.5 py-1 rounded-xl font-bold border transition-colors ${
-                          app.status === 'Selected'
-                            ? 'bg-emerald-500/15 text-emerald-300 border-emerald-500/30'
-                            : app.status === 'Shortlisted' || app.status === 'Interview'
-                            ? 'bg-cyber-500/15 text-cyber-300 border-cyber-500/30'
-                            : app.status === 'Rejected'
-                            ? 'bg-rose-500/15 text-rose-300 border-rose-500/30'
-                            : 'bg-slate-800 text-slate-300 border-slate-700'
-                        }`}
-                      >
-                        <option value="Applied" className="bg-slate-900 text-white">Applied</option>
-                        <option value="Under Review" className="bg-slate-900 text-white">Under Review</option>
-                        <option value="Shortlisted" className="bg-slate-900 text-white">Shortlisted</option>
-                        <option value="Interview" className="bg-slate-900 text-white">Interview</option>
-                        <option value="Selected" className="bg-slate-900 text-white">Selected</option>
-                        <option value="Rejected" className="bg-slate-900 text-white">Rejected</option>
-                      </select>
+                      <div className="flex items-center gap-2">
+                        <select
+                          value={app.status}
+                          onChange={(e) => handleStatusChange(app._id, e.target.value)}
+                          className={`text-xs px-2.5 py-1 rounded-xl font-bold border transition-colors ${
+                            app.status === 'Selected'
+                              ? 'bg-emerald-500/15 text-emerald-300 border-emerald-500/30'
+                              : app.status === 'Shortlisted' || app.status === 'Interview'
+                              ? 'bg-cyber-500/15 text-cyber-300 border-cyber-500/30'
+                              : app.status === 'Rejected'
+                              ? 'bg-rose-500/15 text-rose-300 border-rose-500/30'
+                              : 'bg-slate-800 text-slate-300 border-slate-700'
+                          }`}
+                        >
+                          <option value="Applied" className="bg-slate-900 text-white">Applied</option>
+                          <option value="Under Review" className="bg-slate-900 text-white">Under Review</option>
+                          <option value="Shortlisted" className="bg-slate-900 text-white">Shortlisted</option>
+                          <option value="Interview" className="bg-slate-900 text-white">Interview</option>
+                          <option value="Selected" className="bg-slate-900 text-white">Selected</option>
+                          <option value="Rejected" className="bg-slate-900 text-white">Rejected</option>
+                        </select>
+
+                        <button
+                          onClick={() =>
+                            setScheduleModalData({
+                              candidate: app.candidate,
+                              job: app.job,
+                              applicationId: app._id,
+                            })
+                          }
+                          className="inline-flex items-center gap-1 px-2.5 py-1 rounded-xl bg-brand-500/15 hover:bg-brand-500/25 border border-brand-500/30 text-brand-300 text-xs font-semibold transition shrink-0"
+                          title="Schedule Interview with Candidate"
+                        >
+                          <Calendar className="w-3 h-3 text-brand-400" />
+                          <span className="hidden sm:inline">Schedule</span>
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 ))}
@@ -447,6 +476,24 @@ export const RecruiterApplicantsPage = () => {
             </div>
           </div>
         </div>
+      )}
+
+      {/* Schedule Interview Modal */}
+      {scheduleModalData && (
+        <ScheduleInterviewModal
+          isOpen={!!scheduleModalData}
+          onClose={() => setScheduleModalData(null)}
+          candidate={scheduleModalData.candidate}
+          job={scheduleModalData.job}
+          applicationId={scheduleModalData.applicationId}
+          onSuccess={(interview) => {
+            setStatusMessage({
+              type: 'success',
+              text: `Interview successfully scheduled with ${scheduleModalData.candidate?.name}! Invitation email sent.`,
+            });
+            fetchApplicants(selectedStatus, sortBy);
+          }}
+        />
       )}
     </div>
   );

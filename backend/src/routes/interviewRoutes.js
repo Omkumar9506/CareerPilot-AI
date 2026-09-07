@@ -6,11 +6,20 @@ import {
   completeSession,
   getMyInterviewHistory,
 } from '../controllers/interviewController.js';
+import {
+  scheduleInterview,
+  getRecruiterInterviews,
+  getCandidateInterviews,
+  updateInterviewStatus,
+  getInterviewById,
+} from '../controllers/interviewScheduleController.js';
 import { protect, authorize } from '../middlewares/authMiddleware.js';
 
 const router = Router();
 
-// Candidate only routes
+// ==========================================
+// 1. AI Mock Interview Routes (Candidate)
+// ==========================================
 router.post(
   '/start',
   protect,
@@ -44,6 +53,49 @@ router.post(
   protect,
   authorize('candidate', 'admin'),
   completeSession
+);
+
+// ==========================================
+// 2. Real Interview Scheduling Routes
+// ==========================================
+
+// Recruiter: Schedule new interview & send invitation email
+router.post(
+  '/schedule',
+  protect,
+  authorize('recruiter', 'admin'),
+  scheduleInterview
+);
+
+// Recruiter: Fetch scheduled interviews & summary stats
+router.get(
+  '/recruiter',
+  protect,
+  authorize('recruiter', 'admin'),
+  getRecruiterInterviews
+);
+
+// Candidate: Fetch scheduled interviews & status
+router.get(
+  '/candidate',
+  protect,
+  authorize('candidate', 'admin'),
+  getCandidateInterviews
+);
+
+// Recruiter / Candidate / Admin: View single interview details
+router.get(
+  '/scheduled/:id',
+  protect,
+  getInterviewById
+);
+
+// Recruiter: Update status (Completed / Cancelled / Rescheduled) or details
+router.patch(
+  '/scheduled/:id',
+  protect,
+  authorize('recruiter', 'admin'),
+  updateInterviewStatus
 );
 
 export default router;
