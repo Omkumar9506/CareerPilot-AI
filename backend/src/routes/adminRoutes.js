@@ -1,5 +1,6 @@
 import express from 'express';
 import { protect, authorize } from '../middlewares/authMiddleware.js';
+import { validateObjectId } from '../middlewares/validationMiddleware.js';
 import {
   getAdminDashboardStats,
   getAllUsers,
@@ -21,13 +22,13 @@ router.get('/dashboard', getAdminDashboardStats);
 
 // User management & moderation
 router.get('/users', getAllUsers);
-router.patch('/users/:id/status', toggleUserStatus);
-router.patch('/users/:id/role', updateUserRole);
-router.delete('/users/:id', deleteUser);
+router.patch('/users/:id/status', validateObjectId('id'), toggleUserStatus);
+router.patch('/users/:id/role', validateObjectId('id'), updateUserRole);
+router.delete('/users/:id', validateObjectId('id'), deleteUser);
 
 // Job listing oversight & moderation
 router.get('/jobs', getAllJobsAdmin);
-router.patch('/jobs/:id/status', toggleJobStatusAdmin);
-router.delete('/jobs/:id', deleteJobAdmin);
+router.patch('/jobs/:id/status', validateObjectId('id'), toggleJobStatusAdmin);
+router.delete('/jobs/:id', validateObjectId('id'), deleteJobAdmin);
 
 export default router;

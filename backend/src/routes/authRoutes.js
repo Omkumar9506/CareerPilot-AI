@@ -8,15 +8,17 @@ import {
   resetPassword,
 } from '../controllers/authController.js';
 import { protect, authorize } from '../middlewares/authMiddleware.js';
+import { authLimiter } from '../middlewares/rateLimitMiddleware.js';
+import { validateRegister, validateLogin } from '../middlewares/validationMiddleware.js';
 import { ApiResponse } from '../utils/ApiResponse.js';
 
 const router = Router();
 
-// Public auth endpoints
-router.post('/register', register);
-router.post('/login', login);
-router.post('/forgot-password', forgotPassword);
-router.put('/reset-password/:resetToken', resetPassword);
+// Public auth endpoints with brute-force rate limiter and input validation
+router.post('/register', authLimiter, validateRegister, register);
+router.post('/login', authLimiter, validateLogin, login);
+router.post('/forgot-password', authLimiter, forgotPassword);
+router.put('/reset-password/:resetToken', authLimiter, resetPassword);
 
 // Protected endpoints
 router.get('/me', protect, getMe);

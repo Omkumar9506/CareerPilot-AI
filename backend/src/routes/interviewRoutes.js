@@ -14,6 +14,7 @@ import {
   getInterviewById,
 } from '../controllers/interviewScheduleController.js';
 import { protect, authorize } from '../middlewares/authMiddleware.js';
+import { validateInterviewSchedule, validateObjectId } from '../middlewares/validationMiddleware.js';
 
 const router = Router();
 
@@ -38,6 +39,7 @@ router.get(
   '/session/:id',
   protect,
   authorize('candidate', 'admin'),
+  validateObjectId('id'),
   getInterviewSession
 );
 
@@ -45,6 +47,7 @@ router.post(
   '/session/:id/answer',
   protect,
   authorize('candidate', 'admin'),
+  validateObjectId('id'),
   submitAnswer
 );
 
@@ -52,6 +55,7 @@ router.post(
   '/session/:id/complete',
   protect,
   authorize('candidate', 'admin'),
+  validateObjectId('id'),
   completeSession
 );
 
@@ -64,6 +68,7 @@ router.post(
   '/schedule',
   protect,
   authorize('recruiter', 'admin'),
+  validateInterviewSchedule,
   scheduleInterview
 );
 
@@ -87,6 +92,7 @@ router.get(
 router.get(
   '/scheduled/:id',
   protect,
+  validateObjectId('id'),
   getInterviewById
 );
 
@@ -95,6 +101,7 @@ router.patch(
   '/scheduled/:id',
   protect,
   authorize('recruiter', 'admin'),
+  validateObjectId('id'),
   updateInterviewStatus
 );
 

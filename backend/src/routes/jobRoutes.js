@@ -12,6 +12,7 @@ import {
   getSavedJobIds,
 } from '../controllers/jobController.js';
 import { protect, authorize } from '../middlewares/authMiddleware.js';
+import { validateJobPayload, validateObjectId } from '../middlewares/validationMiddleware.js';
 
 const router = Router();
 
@@ -27,6 +28,7 @@ router.post(
   '/',
   protect,
   authorize('recruiter', 'admin'),
+  validateJobPayload,
   createJob
 );
 
@@ -34,6 +36,8 @@ router.put(
   '/:id',
   protect,
   authorize('recruiter', 'admin'),
+  validateObjectId('id'),
+  validateJobPayload,
   updateJob
 );
 
@@ -41,6 +45,7 @@ router.delete(
   '/:id',
   protect,
   authorize('recruiter', 'admin'),
+  validateObjectId('id'),
   deleteJob
 );
 
@@ -48,6 +53,7 @@ router.patch(
   '/:id/status',
   protect,
   authorize('recruiter', 'admin'),
+  validateObjectId('id'),
   toggleJobStatus
 );
 
@@ -70,11 +76,12 @@ router.post(
   '/:id/save',
   protect,
   authorize('candidate', 'admin'),
+  validateObjectId('id'),
   toggleSaveJob
 );
 
 // 3. Public browsing & details routes
 router.get('/', getJobs);
-router.get('/:id', getJobById);
+router.get('/:id', validateObjectId('id'), getJobById);
 
 export default router;

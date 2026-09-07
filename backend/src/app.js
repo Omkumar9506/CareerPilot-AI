@@ -19,6 +19,7 @@ import roadmapRoutes from './routes/roadmapRoutes.js';
 import dashboardRoutes from './routes/dashboardRoutes.js';
 import adminRoutes from './routes/adminRoutes.js';
 import { notFoundHandler, errorHandler } from './middlewares/errorMiddleware.js';
+import { sanitizeRequestMiddleware } from './middlewares/sanitizeMiddleware.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -41,7 +42,7 @@ app.use(
 // 3. Rate Limiting for API protection
 const apiLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 200, // Limit each IP to 200 requests per windowMs
+  max: 300, // Limit each IP to 300 requests per windowMs
   standardHeaders: true,
   legacyHeaders: false,
   message: {
@@ -57,10 +58,13 @@ if (env.NODE_ENV !== 'test') {
   app.use(morgan(env.NODE_ENV === 'development' ? 'dev' : 'combined'));
 }
 
-// 5. Body Parsers & Static Files
+// 5. Body Parsers & Security Sanitization
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 app.use('/uploads', express.static(path.resolve(__dirname, '../uploads')));
+
+// Sanitize all incoming requests against NoSQL injection and XSS
+app.use('/api', sanitizeRequestMiddleware);
 
 // 6. Root & Health Check Routes
 app.get('/', (req, res) => {

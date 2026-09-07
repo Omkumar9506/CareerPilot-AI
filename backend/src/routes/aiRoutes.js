@@ -5,6 +5,8 @@ import {
   getAnalysisById,
 } from '../controllers/aiController.js';
 import { authorize, protect } from '../middlewares/authMiddleware.js';
+import { aiLimiter } from '../middlewares/rateLimitMiddleware.js';
+import { validateObjectId } from '../middlewares/validationMiddleware.js';
 
 const router = express.Router();
 
@@ -12,8 +14,8 @@ const router = express.Router();
 router.use(protect);
 router.use(authorize('candidate'));
 
-router.post('/analyze-resume', analyzeResume);
+router.post('/analyze-resume', aiLimiter, analyzeResume);
 router.get('/analyses', getMyAnalyses);
-router.get('/analyses/:id', getAnalysisById);
+router.get('/analyses/:id', validateObjectId('id'), getAnalysisById);
 
 export default router;

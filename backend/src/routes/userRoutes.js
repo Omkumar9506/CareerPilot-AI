@@ -7,6 +7,7 @@ import {
   getRecruiterProfileById,
 } from '../controllers/userProfileController.js';
 import { protect, authorize } from '../middlewares/authMiddleware.js';
+import { validateObjectId } from '../middlewares/validationMiddleware.js';
 
 const router = Router();
 
@@ -24,10 +25,11 @@ router.get(
   '/profile/candidate/:id',
   protect,
   authorize('recruiter', 'admin'),
+  validateObjectId('id'),
   getCandidateProfileById
 );
 
 // Public inspection of recruiter company profile
-router.get('/profile/recruiter/:id', getRecruiterProfileById);
+router.get('/profile/recruiter/:id', validateObjectId('id'), getRecruiterProfileById);
 
 export default router;

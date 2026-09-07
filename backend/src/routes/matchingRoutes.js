@@ -5,6 +5,7 @@ import {
   getTopCandidatesForJob,
 } from '../controllers/matchingController.js';
 import { protect, authorize } from '../middlewares/authMiddleware.js';
+import { validateObjectId } from '../middlewares/validationMiddleware.js';
 
 const router = Router();
 
@@ -21,6 +22,7 @@ router.get(
   '/job/:jobId',
   protect,
   authorize('candidate', 'admin'),
+  validateObjectId('jobId'),
   getJobMatchDetails
 );
 
@@ -29,6 +31,7 @@ router.get(
   '/recruiter/job/:jobId/top-candidates',
   protect,
   authorize('recruiter', 'admin'),
+  validateObjectId('jobId'),
   getTopCandidatesForJob
 );
 
