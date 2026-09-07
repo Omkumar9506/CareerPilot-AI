@@ -20,6 +20,7 @@ import { RecruiterInterviewsPage } from './pages/RecruiterInterviewsPage';
 import { CandidateInterviewsPage } from './pages/CandidateInterviewsPage';
 import { CandidateDashboardPage } from './pages/CandidateDashboardPage';
 import { RecruiterDashboardPage } from './pages/RecruiterDashboardPage';
+import { AdminDashboardPage } from './pages/AdminDashboardPage';
 import { ProtectedRoute } from './components/common/ProtectedRoute';
 
 function App() {
@@ -124,6 +125,16 @@ function App() {
               element={
                 <ProtectedRoute allowedRoles={['candidate', 'admin']}>
                   <CandidateInterviewsPage />
+                </ProtectedRoute>
+              }
+            />
+
+            {/* Admin Platform & Moderation Dashboard */}
+            <Route
+              path="admin/dashboard"
+              element={
+                <ProtectedRoute allowedRoles={['admin']}>
+                  <AdminDashboardPage />
                 </ProtectedRoute>
               }
             />

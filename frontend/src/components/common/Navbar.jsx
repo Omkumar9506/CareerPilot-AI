@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Compass, Sparkles, Briefcase, Bot, Menu, X, ArrowRight, LogOut, User, Users, FileText, TrendingUp, Calendar, LayoutDashboard } from 'lucide-react';
+import { Compass, Sparkles, Briefcase, Bot, Menu, X, ArrowRight, LogOut, User, Users, FileText, TrendingUp, Calendar, LayoutDashboard, ShieldAlert } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 
 export const Navbar = () => {
@@ -17,9 +17,12 @@ export const Navbar = () => {
       href: '/jobs',
       icon: Briefcase,
     },
+    ...(user?.role === 'admin'
+      ? [{ name: 'Admin Panel', href: '/admin/dashboard', icon: ShieldAlert }]
+      : []),
     ...(user?.role === 'recruiter' || user?.role === 'admin'
       ? [
-          { name: 'Dashboard', href: '/recruiter/dashboard', icon: LayoutDashboard },
+          { name: 'Recruiter Hub', href: '/recruiter/dashboard', icon: LayoutDashboard },
           { name: 'Manage Jobs', href: '/recruiter/jobs', icon: Briefcase },
           { name: 'Applicants', href: '/recruiter/applicants', icon: Users },
           { name: 'Interviews', href: '/recruiter/interviews', icon: Calendar },

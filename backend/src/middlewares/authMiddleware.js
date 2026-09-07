@@ -32,6 +32,10 @@ export const protect = asyncHandler(async (req, res, next) => {
       throw new ApiError(401, 'Authentication failed: The user belonging to this token no longer exists.');
     }
 
+    if (user.isActive === false) {
+      throw new ApiError(403, 'Your account has been deactivated by an administrator.');
+    }
+
     req.user = user;
     next();
   } catch (error) {
