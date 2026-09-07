@@ -18,6 +18,7 @@ import { RecruiterApplicantsPage } from './pages/RecruiterApplicantsPage';
 import { ResumeUploadPage } from './pages/ResumeUploadPage';
 import { RecruiterInterviewsPage } from './pages/RecruiterInterviewsPage';
 import { CandidateInterviewsPage } from './pages/CandidateInterviewsPage';
+import { CandidateDashboardPage } from './pages/CandidateDashboardPage';
 import { ProtectedRoute } from './components/common/ProtectedRoute';
 
 function App() {
@@ -42,6 +43,16 @@ function App() {
               element={
                 <ProtectedRoute>
                   <ProfileRouterPage />
+                </ProtectedRoute>
+              }
+            />
+
+            {/* Candidate Dashboard */}
+            <Route
+              path="dashboard"
+              element={
+                <ProtectedRoute allowedRoles={['candidate', 'admin']}>
+                  <CandidateDashboardPage />
                 </ProtectedRoute>
               }
             />

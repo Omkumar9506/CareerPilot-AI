@@ -96,7 +96,7 @@ export const updateCandidateProfile = asyncHandler(async (req, res) => {
   const profile = await JobSeekerProfile.findOneAndUpdate(
     { user: userId },
     { $set: profileFields },
-    { new: true, upsert: true, runValidators: true }
+    { returnDocument: 'after', upsert: true, runValidators: true }
   );
 
   const updatedUser = await User.findById(userId);

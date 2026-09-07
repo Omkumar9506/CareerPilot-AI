@@ -1,4 +1,5 @@
 import Job from '../models/Job.js';
+import SavedJob from '../models/SavedJob.js';
 import RecruiterProfile from '../models/RecruiterProfile.js';
 import { ApiError } from '../utils/ApiError.js';
 import { ApiResponse } from '../utils/ApiResponse.js';
@@ -301,3 +302,71 @@ export const toggleJobStatus = asyncHandler(async (req, res) => {
 
   return res.status(200).json(new ApiResponse(200, { job }, `Job marked as ${status}`));
 });
+
+/**
+ * @route   POST /api/jobs/:id/save
+ * @desc    Toggle saving / bookmarking a job for candidate
+ * @access  Private (Candidate / Admin)
+ */
+export const toggleSaveJob = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  const userId = req.user._id;
+
+  const job = await Job.findById(id);
+  if (!job) {
+    throw new ApiError(404, 'Job not found');
+  }
+
+  const existing = await SavedJob.findOne({ user: userId, job: id });
+  if (existing) {
+    await SavedJob.deleteOne({ _id: existing._id });
+    return res.status(200).json(
+      new ApiResponse(200, { isSaved: false, jobId: id }, 'Job removed from saved jobs')
+    );
+  }
+
+  const saved = await SavedJob.create({ user: userId, job: id });
+  return res.status(201).json(
+    new ApiResponse(201, { isSaved: true, savedJob: saved }, 'Job saved successfully')
+  );
+});
+
+/**
+ * @route   GET /api/jobs/saved
+ * @desc    Get all saved / bookmarked jobs for candidate
+ * @access  Private (Candidate / Admin)
+ */
+export const getSavedJobs = asyncHandler(async (req, res) => {
+  const userId = req.user._id;
+  const savedJobs = await SavedJob.find({ user: userId })
+    .populate({
+      path: 'job',
+      populate: { path: 'recruiter', select: 'name email' },
+    })
+    .sort({ createdAt: -1 });
+
+  const validSavedJobs = savedJobs.filter((item) => item.job !== null);
+
+  return res.status(200).json(
+    new ApiResponse(
+      200,
+      { count: validSavedJobs.length, savedJobs: validSavedJobs },
+      'Saved jobs retrieved successfully'
+    )
+  );
+});
+
+/**
+ * @route   GET /api/jobs/saved/ids
+ * @desc    Get array of saved job IDs for quick bookmark state in UI
+ * @access  Private (Candidate / Admin)
+ */
+export const getSavedJobIds = asyncHandler(async (req, res) => {
+  const userId = req.user._id;
+  const saved = await SavedJob.find({ user: userId }).select('job');
+  const savedJobIds = saved.map((s) => s.job.toString());
+  return res.status(200).json(
+    new ApiResponse(200, { savedJobIds }, 'Saved job IDs retrieved')
+  );
+});
+

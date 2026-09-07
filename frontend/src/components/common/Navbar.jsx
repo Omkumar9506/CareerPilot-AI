@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Compass, Sparkles, Briefcase, Bot, Menu, X, ArrowRight, LogOut, User, Users, FileText, TrendingUp, Calendar } from 'lucide-react';
+import { Compass, Sparkles, Briefcase, Bot, Menu, X, ArrowRight, LogOut, User, Users, FileText, TrendingUp, Calendar, LayoutDashboard } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 
 export const Navbar = () => {
@@ -9,6 +9,9 @@ export const Navbar = () => {
   const { user, isAuthenticated, logout } = useAuth();
 
   const navLinks = [
+    ...(isAuthenticated && user?.role === 'candidate'
+      ? [{ name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard }]
+      : []),
     {
       name: isAuthenticated && user?.role === 'candidate' ? 'Jobs & AI Matches' : 'Browse Jobs',
       href: '/jobs',

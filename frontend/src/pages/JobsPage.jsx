@@ -18,7 +18,8 @@ import {
   CheckCircle2,
   AlertCircle,
   TrendingUp,
-  Cpu
+  Cpu,
+  Bookmark
 } from 'lucide-react';
 import api from '../services/api';
 import { useAuth } from '../context/AuthContext';
@@ -29,6 +30,7 @@ export const JobsPage = () => {
 
   const [activeTab, setActiveTab] = useState('all'); // 'all' | 'recommended'
   const [jobs, setJobs] = useState([]);
+  const [savedJobIds, setSavedJobIds] = useState(new Set());
   const [pagination, setPagination] = useState({ page: 1, totalPages: 1, total: 0 });
   const [loading, setLoading] = useState(true);
 
@@ -106,6 +108,40 @@ export const JobsPage = () => {
   useEffect(() => {
     fetchJobs(1);
   }, [activeTab, selectedWorkplace, selectedExperience, selectedEmployment, sort, minMatchScore]);
+
+  useEffect(() => {
+    if (isCandidate) {
+      api.get('/jobs/saved/ids')
+        .then((res) => {
+          if (res.success && res.data?.savedJobIds) {
+            setSavedJobIds(new Set(res.data.savedJobIds));
+          }
+        })
+        .catch((err) => console.error('Error fetching saved job IDs:', err));
+    }
+  }, [isCandidate]);
+
+  const handleToggleSave = async (jobId, e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (!isAuthenticated) return;
+    try {
+      const res = await api.post(`/jobs/${jobId}/save`);
+      if (res.success) {
+        setSavedJobIds((prev) => {
+          const next = new Set(prev);
+          if (res.data.isSaved) {
+            next.add(jobId);
+          } else {
+            next.delete(jobId);
+          }
+          return next;
+        });
+      }
+    } catch (err) {
+      console.error('Failed to toggle save job:', err);
+    }
+  };
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
@@ -470,17 +506,33 @@ export const JobsPage = () => {
                         </div>
                       </div>
 
-                      <span
-                        className={`text-[10px] font-bold px-2 py-0.5 rounded-full border shrink-0 ${
-                          job.workplaceType === 'Remote'
-                            ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20'
-                            : job.workplaceType === 'Hybrid'
-                            ? 'bg-cyber-500/10 text-cyber-400 border-cyber-500/20'
-                            : 'bg-slate-800 text-slate-400 border-slate-700'
-                        }`}
-                      >
-                        {job.workplaceType}
-                      </span>
+                      <div className="flex items-center gap-1.5 shrink-0">
+                        <span
+                          className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${
+                            job.workplaceType === 'Remote'
+                              ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20'
+                              : job.workplaceType === 'Hybrid'
+                              ? 'bg-cyber-500/10 text-cyber-400 border-cyber-500/20'
+                              : 'bg-slate-800 text-slate-400 border-slate-700'
+                          }`}
+                        >
+                          {job.workplaceType}
+                        </span>
+                        {isCandidate && (
+                          <button
+                            type="button"
+                            onClick={(e) => handleToggleSave(job._id, e)}
+                            title={savedJobIds.has(job._id) ? 'Remove from saved' : 'Save job'}
+                            className="p-1.5 rounded-lg bg-slate-850 hover:bg-slate-800 text-slate-400 hover:text-amber-400 border border-slate-750 transition"
+                          >
+                            <Bookmark
+                              className={`w-3.5 h-3.5 ${
+                                savedJobIds.has(job._id) ? 'fill-amber-400 text-amber-400' : ''
+                              }`}
+                            />
+                          </button>
+                        )}
+                      </div>
                     </div>
 
                     {/* AI Match Badge when present */}

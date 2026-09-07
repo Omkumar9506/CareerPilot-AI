@@ -16,6 +16,7 @@ import aiRoutes from './routes/aiRoutes.js';
 import matchingRoutes from './routes/matchingRoutes.js';
 import interviewRoutes from './routes/interviewRoutes.js';
 import roadmapRoutes from './routes/roadmapRoutes.js';
+import dashboardRoutes from './routes/dashboardRoutes.js';
 import { notFoundHandler, errorHandler } from './middlewares/errorMiddleware.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -80,6 +81,7 @@ app.use('/api/ai', aiRoutes);
 app.use('/api/matches', matchingRoutes);
 app.use('/api/interviews', interviewRoutes);
 app.use('/api/roadmaps', roadmapRoutes);
+app.use('/api/dashboard', dashboardRoutes);
 
 // 7. Error Handling Pipeline
 app.use(notFoundHandler);

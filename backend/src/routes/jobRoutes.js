@@ -7,12 +7,15 @@ import {
   deleteJob,
   getMyPostedJobs,
   toggleJobStatus,
+  toggleSaveJob,
+  getSavedJobs,
+  getSavedJobIds,
 } from '../controllers/jobController.js';
 import { protect, authorize } from '../middlewares/authMiddleware.js';
 
 const router = Router();
 
-// Recruiter specific management routes (must precede /:id)
+// 1. Recruiter specific management routes (must precede /:id)
 router.get(
   '/recruiter/my-jobs',
   protect,
@@ -48,7 +51,29 @@ router.patch(
   toggleJobStatus
 );
 
-// Public browsing & details routes
+// 2. Candidate Saved / Bookmarked Jobs routes (must precede /:id)
+router.get(
+  '/saved',
+  protect,
+  authorize('candidate', 'admin'),
+  getSavedJobs
+);
+
+router.get(
+  '/saved/ids',
+  protect,
+  authorize('candidate', 'admin'),
+  getSavedJobIds
+);
+
+router.post(
+  '/:id/save',
+  protect,
+  authorize('candidate', 'admin'),
+  toggleSaveJob
+);
+
+// 3. Public browsing & details routes
 router.get('/', getJobs);
 router.get('/:id', getJobById);
 
