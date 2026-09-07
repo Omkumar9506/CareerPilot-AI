@@ -19,6 +19,7 @@ export const Navbar = () => {
     },
     ...(user?.role === 'recruiter' || user?.role === 'admin'
       ? [
+          { name: 'Dashboard', href: '/recruiter/dashboard', icon: LayoutDashboard },
           { name: 'Manage Jobs', href: '/recruiter/jobs', icon: Briefcase },
           { name: 'Applicants', href: '/recruiter/applicants', icon: Users },
           { name: 'Interviews', href: '/recruiter/interviews', icon: Calendar },

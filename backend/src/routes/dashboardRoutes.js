@@ -1,5 +1,8 @@
 import { Router } from 'express';
-import { getCandidateDashboard } from '../controllers/dashboardController.js';
+import {
+  getCandidateDashboard,
+  getRecruiterDashboard,
+} from '../controllers/dashboardController.js';
 import { protect, authorize } from '../middlewares/authMiddleware.js';
 
 const router = Router();
@@ -10,6 +13,14 @@ router.get(
   protect,
   authorize('candidate', 'admin'),
   getCandidateDashboard
+);
+
+// Recruiter Dashboard Metrics & Hiring Funnel
+router.get(
+  '/recruiter',
+  protect,
+  authorize('recruiter', 'admin'),
+  getRecruiterDashboard
 );
 
 export default router;

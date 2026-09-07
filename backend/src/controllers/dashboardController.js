@@ -6,7 +6,8 @@ import Interview from '../models/Interview.js';
 import AIAnalysis from '../models/AIAnalysis.js';
 import Job from '../models/Job.js';
 import CareerRoadmap from '../models/CareerRoadmap.js';
-import { rankJobsForCandidate } from '../services/matchingService.js';
+import RecruiterProfile from '../models/RecruiterProfile.js';
+import { rankJobsForCandidate, calculateJobMatch } from '../services/matchingService.js';
 import { ApiResponse } from '../utils/ApiResponse.js';
 import { asyncHandler } from '../utils/asyncHandler.js';
 
@@ -283,3 +284,203 @@ export const getCandidateDashboard = asyncHandler(async (req, res) => {
     )
   );
 });
+
+/**
+ * @route   GET /api/dashboard/recruiter
+ * @desc    Aggregate all recruiter dashboard metrics (KPIs, recruitment funnel, interview schedules, vacancy analytics)
+ * @access  Private (Recruiter / Admin)
+ */
+export const getRecruiterDashboard = asyncHandler(async (req, res) => {
+  const recruiterId = req.user._id;
+
+  // 1. Fetch Recruiter Profile & Company Details
+  const [recruiterUser, recruiterProfile] = await Promise.all([
+    User.findById(recruiterId).select('name email avatar company role createdAt'),
+    RecruiterProfile.findOne({ user: recruiterId }),
+  ]);
+
+  // 2. Fetch Recruiter Jobs
+  const jobs = await Job.find({ recruiter: recruiterId }).sort({ createdAt: -1 });
+  const totalJobs = jobs.length;
+  const activeJobs = jobs.filter((j) => j.status === 'Active');
+  const closedJobs = jobs.filter((j) => j.status === 'Closed');
+  const draftJobs = jobs.filter((j) => j.status === 'Draft');
+
+  // 3. Fetch Applications across recruiter's jobs
+  const jobIds = jobs.map((j) => j._id);
+  const applications = await Application.find({ job: { $in: jobIds } })
+    .populate('candidate', 'name email avatar')
+    .populate('job', 'title location workplaceType salary')
+    .sort({ appliedAt: -1 });
+
+  const totalApplicants = applications.length;
+
+  // Stages breakdown
+  const counts = {
+    applied: applications.filter((a) => a.status === 'Applied').length,
+    underReview: applications.filter((a) => a.status === 'Under Review').length,
+    shortlisted: applications.filter((a) => a.status === 'Shortlisted').length,
+    interview: applications.filter((a) => a.status === 'Interview').length,
+    selected: applications.filter((a) => a.status === 'Selected').length,
+    rejected: applications.filter((a) => a.status === 'Rejected').length,
+  };
+
+  // Funnel Data for Chart
+  const recruitmentFunnel = [
+    { stage: 'Applied', count: counts.applied, color: '#38bdf8' },
+    { stage: 'Under Review', count: counts.underReview, color: '#818cf8' },
+    { stage: 'Shortlisted', count: counts.shortlisted, color: '#a855f7' },
+    { stage: 'Interview', count: counts.interview, color: '#06b6d4' },
+    { stage: 'Selected', count: counts.selected, color: '#10b981' },
+    { stage: 'Rejected', count: counts.rejected, color: '#f43f5e' },
+  ];
+
+  // Conversion rates
+  const shortlistRate = totalApplicants > 0 ? Math.round(((counts.shortlisted + counts.interview + counts.selected) / totalApplicants) * 100) : 0;
+  const hireRate = totalApplicants > 0 ? Math.round((counts.selected / totalApplicants) * 100) : 0;
+
+  // 4. Interviews Metrics
+  const todayStart = new Date();
+  todayStart.setHours(0, 0, 0, 0);
+
+  const [allInterviews, upcomingInterviews] = await Promise.all([
+    Interview.find({ recruiter: recruiterId }),
+    Interview.find({
+      recruiter: recruiterId,
+      date: { $gte: todayStart },
+      status: { $in: ['Scheduled', 'Rescheduled'] },
+    })
+      .populate('candidate', 'name email avatar')
+      .populate('job', 'title location workplaceType')
+      .sort({ date: 1, time: 1 })
+      .limit(4),
+  ]);
+
+  const interviewStats = {
+    totalScheduled: allInterviews.length,
+    upcoming: upcomingInterviews.length,
+    completed: allInterviews.filter((i) => i.status === 'Completed').length,
+    cancelled: allInterviews.filter((i) => i.status === 'Cancelled').length,
+    rescheduled: allInterviews.filter((i) => i.status === 'Rescheduled').length,
+  };
+
+  // 5. Active Vacancies Performance
+  const jobApplicantMap = {};
+  applications.forEach((app) => {
+    const jId = app.job?._id?.toString() || app.job?.toString();
+    if (jId) {
+      jobApplicantMap[jId] = (jobApplicantMap[jId] || 0) + 1;
+    }
+  });
+
+  const activeVacanciesPerformance = activeJobs.map((job) => ({
+    _id: job._id,
+    title: job.title,
+    location: job.location,
+    workplaceType: job.workplaceType,
+    salary: job.salary,
+    createdAt: job.createdAt,
+    applicantsCount: jobApplicantMap[job._id.toString()] || 0,
+  }));
+
+  // 6. Recent Applicants stream with AI compatibility matching
+  const recentApps = applications.slice(0, 6);
+  const candidateIds = recentApps.map((a) => a.candidate?._id).filter(Boolean);
+  const candidateProfiles = await JobSeekerProfile.find({ user: { $in: candidateIds } });
+  const profileMap = new Map();
+  candidateProfiles.forEach((p) => profileMap.set(p.user.toString(), p));
+
+  const recentApplicants = recentApps.map((app) => {
+    let aiMatch = null;
+    const candIdStr = app.candidate?._id?.toString();
+    const profile = candIdStr ? profileMap.get(candIdStr) : null;
+    if (profile && app.job) {
+      aiMatch = calculateJobMatch(profile, app.job);
+    }
+    return {
+      _id: app._id,
+      candidate: app.candidate,
+      job: app.job,
+      status: app.status,
+      appliedAt: app.appliedAt,
+      aiMatch: aiMatch ? {
+        score: aiMatch.matchScore,
+        level: aiMatch.matchLevel,
+        badgeColor: aiMatch.badgeColor,
+        matchedSkills: aiMatch.matchedSkills || [],
+      } : null,
+    };
+  });
+
+  // 7. Recruiter Actionable Tips & Insights
+  const recruiterInsights = [];
+  if (counts.applied > 0) {
+    recruiterInsights.push({
+      type: 'pending_review',
+      priority: 'high',
+      title: `${counts.applied} Unreviewed Applicants`,
+      description: `You have new submissions waiting for initial screening. Prompt response times increase candidate acceptance rates by 45%.`,
+      actionLabel: 'Screen Applicants',
+      actionUrl: '/recruiter/applicants',
+    });
+  }
+
+  if (upcomingInterviews.length > 0) {
+    const nextCall = upcomingInterviews[0];
+    recruiterInsights.push({
+      type: 'interview',
+      priority: 'critical',
+      title: `Upcoming Video Interview`,
+      description: `Meeting with ${nextCall.candidate?.name || 'candidate'} for "${nextCall.job?.title}" at ${nextCall.time}.`,
+      actionLabel: 'View Schedule',
+      actionUrl: '/recruiter/interviews',
+    });
+  }
+
+  if (activeJobs.length === 0) {
+    recruiterInsights.push({
+      type: 'jobs',
+      priority: 'medium',
+      title: 'No Active Vacancies',
+      description: 'Create a new job posting to attract top talent and receive AI compatibility rankings.',
+      actionLabel: 'Post New Job',
+      actionUrl: '/recruiter/jobs',
+    });
+  }
+
+  return res.status(200).json(
+    new ApiResponse(
+      200,
+      {
+        recruiter: {
+          name: recruiterUser?.name || 'Recruiter',
+          email: recruiterUser?.email || '',
+          company: recruiterUser?.company || recruiterProfile?.companyName || 'Recruitment Partner',
+          headline: recruiterProfile?.headline || '',
+        },
+        kpis: {
+          totalJobs,
+          activeJobs: activeJobs.length,
+          closedJobs: closedJobs.length,
+          draftJobs: draftJobs.length,
+          totalApplicants,
+          shortlisted: counts.shortlisted,
+          interviews: counts.interview,
+          selected: counts.selected,
+          underReview: counts.underReview,
+          rejected: counts.rejected,
+          shortlistRate,
+          hireRate,
+        },
+        recruitmentFunnel,
+        interviewStats,
+        upcomingInterviews,
+        activeVacanciesPerformance,
+        recentApplicants,
+        recruiterInsights,
+      },
+      'Recruiter dashboard metrics retrieved successfully'
+    )
+  );
+});
+
