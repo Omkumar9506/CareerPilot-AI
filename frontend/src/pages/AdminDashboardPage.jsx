@@ -45,10 +45,8 @@ import {
   Legend,
 } from 'recharts';
 import api from '../services/api';
-import { useChartTheme } from '../hooks/useChartTheme';
 
 export const AdminDashboardPage = () => {
-  const chartTheme = useChartTheme();
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -248,46 +246,46 @@ export const AdminDashboardPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 py-8 px-4 sm:px-6 lg:px-8 transition-colors duration-200">
+    <div className="min-h-screen bg-slate-950 text-slate-100 py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto space-y-8">
         
         {/* Banner Alert Messages */}
         {actionSuccessMsg && (
-          <div className="flex items-center gap-3 p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-700 dark:text-emerald-300 animate-fadeIn">
+          <div className="flex items-center gap-3 p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 animate-fadeIn">
             <Check className="w-5 h-5 flex-shrink-0" />
             <span className="text-sm font-medium">{actionSuccessMsg}</span>
           </div>
         )}
         {actionErrorMsg && (
-          <div className="flex items-center gap-3 p-4 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-700 dark:text-rose-300 animate-fadeIn">
+          <div className="flex items-center gap-3 p-4 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-300 animate-fadeIn">
             <AlertTriangle className="w-5 h-5 flex-shrink-0" />
             <span className="text-sm font-medium">{actionErrorMsg}</span>
           </div>
         )}
 
         {/* Dashboard Header */}
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 border-b border-slate-200 dark:border-slate-800/80 pb-6">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 border-b border-slate-800/80 pb-6">
           <div>
-            <div className="flex items-center gap-2 text-rose-600 dark:text-rose-400 text-sm font-semibold tracking-wider uppercase mb-1">
+            <div className="flex items-center gap-2 text-rose-400 text-sm font-semibold tracking-wider uppercase mb-1">
               <ShieldAlert className="w-4 h-4" />
               <span>Platform Administration</span>
             </div>
-            <h1 className="text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white sm:text-4xl">
+            <h1 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
               Admin Moderation Center
             </h1>
-            <p className="text-slate-600 dark:text-slate-400 mt-1 text-sm sm:text-base">
+            <p className="text-slate-400 mt-1 text-sm sm:text-base">
               Monitor platform metrics, manage user permissions, and enforce job posting compliance.
             </p>
           </div>
 
           {/* Navigation Tab Pills */}
-          <div className="flex items-center gap-1.5 p-1.5 bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 rounded-xl shadow-sm">
+          <div className="flex items-center gap-1.5 p-1.5 bg-slate-900/90 border border-slate-800 rounded-xl">
             <button
               onClick={() => setActiveTab('overview')}
               className={`px-4 py-2 rounded-lg text-sm font-medium transition-all flex items-center gap-2 ${
                 activeTab === 'overview'
                   ? 'bg-brand-600 text-white shadow-lg shadow-brand-600/20'
-                  : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100 dark:text-slate-400 dark:hover:text-slate-200 dark:hover:bg-slate-800/50'
+                  : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/50'
               }`}
             >
               <Activity className="w-4 h-4" />
@@ -298,7 +296,7 @@ export const AdminDashboardPage = () => {
               className={`px-4 py-2 rounded-lg text-sm font-medium transition-all flex items-center gap-2 ${
                 activeTab === 'users'
                   ? 'bg-brand-600 text-white shadow-lg shadow-brand-600/20'
-                  : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100 dark:text-slate-400 dark:hover:text-slate-200 dark:hover:bg-slate-800/50'
+                  : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/50'
               }`}
             >
               <Users className="w-4 h-4" />
@@ -309,7 +307,7 @@ export const AdminDashboardPage = () => {
               className={`px-4 py-2 rounded-lg text-sm font-medium transition-all flex items-center gap-2 ${
                 activeTab === 'jobs'
                   ? 'bg-brand-600 text-white shadow-lg shadow-brand-600/20'
-                  : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100 dark:text-slate-400 dark:hover:text-slate-200 dark:hover:bg-slate-800/50'
+                  : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/50'
               }`}
             >
               <Briefcase className="w-4 h-4" />
@@ -344,60 +342,60 @@ export const AdminDashboardPage = () => {
                 
                 {/* KPI Metrics Cards */}
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-                  <div className="p-4 rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800/80 hover:border-slate-300 dark:hover:border-slate-700 shadow-sm transition">
-                    <div className="flex items-center justify-between text-slate-500 dark:text-slate-400 mb-2">
+                  <div className="p-4 rounded-2xl bg-slate-900/60 border border-slate-800/80 hover:border-slate-700 transition">
+                    <div className="flex items-center justify-between text-slate-400 mb-2">
                       <span className="text-xs font-semibold uppercase tracking-wider">Total Users</span>
-                      <Users className="w-4 h-4 text-brand-600 dark:text-brand-400" />
+                      <Users className="w-4 h-4 text-brand-400" />
                     </div>
-                    <div className="text-2xl font-black text-slate-900 dark:text-white">{stats?.kpis?.totalUsers || 0}</div>
-                    <div className="text-[11px] text-emerald-600 dark:text-emerald-400 mt-1 flex items-center gap-1 font-medium">
+                    <div className="text-2xl font-black text-white">{stats?.kpis?.totalUsers || 0}</div>
+                    <div className="text-[11px] text-emerald-400 mt-1 flex items-center gap-1">
                       <span>{stats?.kpis?.activeUsers || 0} active</span>
                     </div>
                   </div>
 
-                  <div className="p-4 rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800/80 hover:border-slate-300 dark:hover:border-slate-700 shadow-sm transition">
-                    <div className="flex items-center justify-between text-slate-500 dark:text-slate-400 mb-2">
+                  <div className="p-4 rounded-2xl bg-slate-900/60 border border-slate-800/80 hover:border-slate-700 transition">
+                    <div className="flex items-center justify-between text-slate-400 mb-2">
                       <span className="text-xs font-semibold uppercase tracking-wider">Candidates</span>
-                      <UserCheck className="w-4 h-4 text-cyan-600 dark:text-cyan-400" />
+                      <UserCheck className="w-4 h-4 text-cyan-400" />
                     </div>
-                    <div className="text-2xl font-black text-slate-900 dark:text-white">{stats?.kpis?.totalCandidates || 0}</div>
-                    <div className="text-[11px] text-slate-500 dark:text-slate-400 mt-1 font-medium">Talent seekers</div>
+                    <div className="text-2xl font-black text-white">{stats?.kpis?.totalCandidates || 0}</div>
+                    <div className="text-[11px] text-slate-400 mt-1">Talent seekers</div>
                   </div>
 
-                  <div className="p-4 rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800/80 hover:border-slate-300 dark:hover:border-slate-700 shadow-sm transition">
-                    <div className="flex items-center justify-between text-slate-500 dark:text-slate-400 mb-2">
+                  <div className="p-4 rounded-2xl bg-slate-900/60 border border-slate-800/80 hover:border-slate-700 transition">
+                    <div className="flex items-center justify-between text-slate-400 mb-2">
                       <span className="text-xs font-semibold uppercase tracking-wider">Recruiters</span>
-                      <Building className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
+                      <Building className="w-4 h-4 text-indigo-400" />
                     </div>
-                    <div className="text-2xl font-black text-slate-900 dark:text-white">{stats?.kpis?.totalRecruiters || 0}</div>
-                    <div className="text-[11px] text-slate-500 dark:text-slate-400 mt-1 font-medium">Company managers</div>
+                    <div className="text-2xl font-black text-white">{stats?.kpis?.totalRecruiters || 0}</div>
+                    <div className="text-[11px] text-slate-400 mt-1">Company managers</div>
                   </div>
 
-                  <div className="p-4 rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800/80 hover:border-slate-300 dark:hover:border-slate-700 shadow-sm transition">
-                    <div className="flex items-center justify-between text-slate-500 dark:text-slate-400 mb-2">
+                  <div className="p-4 rounded-2xl bg-slate-900/60 border border-slate-800/80 hover:border-slate-700 transition">
+                    <div className="flex items-center justify-between text-slate-400 mb-2">
                       <span className="text-xs font-semibold uppercase tracking-wider">Total Jobs</span>
-                      <Briefcase className="w-4 h-4 text-amber-600 dark:text-amber-400" />
+                      <Briefcase className="w-4 h-4 text-amber-400" />
                     </div>
-                    <div className="text-2xl font-black text-slate-900 dark:text-white">{stats?.kpis?.totalJobs || 0}</div>
-                    <div className="text-[11px] text-amber-600 dark:text-amber-400 mt-1 font-medium">{stats?.kpis?.activeJobs || 0} active postings</div>
+                    <div className="text-2xl font-black text-white">{stats?.kpis?.totalJobs || 0}</div>
+                    <div className="text-[11px] text-amber-400 mt-1">{stats?.kpis?.activeJobs || 0} active postings</div>
                   </div>
 
-                  <div className="p-4 rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800/80 hover:border-slate-300 dark:hover:border-slate-700 shadow-sm transition">
-                    <div className="flex items-center justify-between text-slate-500 dark:text-slate-400 mb-2">
+                  <div className="p-4 rounded-2xl bg-slate-900/60 border border-slate-800/80 hover:border-slate-700 transition">
+                    <div className="flex items-center justify-between text-slate-400 mb-2">
                       <span className="text-xs font-semibold uppercase tracking-wider">Applications</span>
-                      <FileCheck className="w-4 h-4 text-purple-600 dark:text-purple-400" />
+                      <FileCheck className="w-4 h-4 text-purple-400" />
                     </div>
-                    <div className="text-2xl font-black text-slate-900 dark:text-white">{stats?.kpis?.totalApplications || 0}</div>
-                    <div className="text-[11px] text-purple-600 dark:text-purple-400 mt-1 font-medium">Talent submissions</div>
+                    <div className="text-2xl font-black text-white">{stats?.kpis?.totalApplications || 0}</div>
+                    <div className="text-[11px] text-purple-400 mt-1">Talent submissions</div>
                   </div>
 
-                  <div className="p-4 rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800/80 hover:border-slate-300 dark:hover:border-slate-700 shadow-sm transition">
-                    <div className="flex items-center justify-between text-slate-500 dark:text-slate-400 mb-2">
+                  <div className="p-4 rounded-2xl bg-slate-900/60 border border-slate-800/80 hover:border-slate-700 transition">
+                    <div className="flex items-center justify-between text-slate-400 mb-2">
                       <span className="text-xs font-semibold uppercase tracking-wider">Interviews</span>
-                      <Calendar className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+                      <Calendar className="w-4 h-4 text-emerald-400" />
                     </div>
-                    <div className="text-2xl font-black text-slate-900 dark:text-white">{stats?.kpis?.totalInterviews || 0}</div>
-                    <div className="text-[11px] text-emerald-600 dark:text-emerald-400 mt-1 font-medium">{stats?.kpis?.upcomingInterviews || 0} scheduled</div>
+                    <div className="text-2xl font-black text-white">{stats?.kpis?.totalInterviews || 0}</div>
+                    <div className="text-[11px] text-emerald-400 mt-1">{stats?.kpis?.upcomingInterviews || 0} scheduled</div>
                   </div>
                 </div>
 
@@ -405,13 +403,13 @@ export const AdminDashboardPage = () => {
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                   
                   {/* Platform Growth Trend (AreaChart) */}
-                  <div className="lg:col-span-2 p-6 rounded-2xl bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 shadow-sm">
+                  <div className="lg:col-span-2 p-6 rounded-2xl bg-slate-900/50 border border-slate-800">
                     <div className="flex items-center justify-between mb-6">
                       <div>
-                        <h2 className="text-lg font-bold text-slate-900 dark:text-white">Platform Growth & Activity</h2>
-                        <p className="text-xs text-slate-500 dark:text-slate-400">Monthly new user registrations vs applications</p>
+                        <h2 className="text-lg font-bold text-white">Platform Growth & Activity</h2>
+                        <p className="text-xs text-slate-400">Monthly new user registrations vs applications</p>
                       </div>
-                      <span className="px-2.5 py-1 text-xs rounded-lg bg-brand-500/10 border border-brand-500/20 text-brand-600 dark:text-brand-400 font-semibold">
+                      <span className="px-2.5 py-1 text-xs rounded-lg bg-brand-500/10 border border-brand-500/20 text-brand-400 font-medium">
                         Last 6 Months
                       </span>
                     </div>
@@ -421,28 +419,31 @@ export const AdminDashboardPage = () => {
                         <AreaChart data={stats?.platformGrowth || []} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
                           <defs>
                             <linearGradient id="userGrad" x1="0" y1="0" x2="0" y2="1">
-                              <stop offset="5%" stopColor="#0284c7" stopOpacity={0.4} />
-                              <stop offset="95%" stopColor="#0284c7" stopOpacity={0.0} />
+                              <stop offset="5%" stopColor="#38bdf8" stopOpacity={0.4} />
+                              <stop offset="95%" stopColor="#38bdf8" stopOpacity={0.0} />
                             </linearGradient>
                             <linearGradient id="appGrad" x1="0" y1="0" x2="0" y2="1">
-                              <stop offset="5%" stopColor="#9333ea" stopOpacity={0.4} />
-                              <stop offset="95%" stopColor="#9333ea" stopOpacity={0.0} />
+                              <stop offset="5%" stopColor="#a855f7" stopOpacity={0.4} />
+                              <stop offset="95%" stopColor="#a855f7" stopOpacity={0.0} />
                             </linearGradient>
                           </defs>
-                          <CartesianGrid strokeDasharray="3 3" stroke={chartTheme.gridStroke} />
-                          <XAxis dataKey="month" stroke={chartTheme.axisStroke} tick={{ fill: chartTheme.tickFill }} fontSize={12} tickLine={false} />
-                          <YAxis stroke={chartTheme.axisStroke} tick={{ fill: chartTheme.tickFill }} fontSize={12} tickLine={false} />
+                          <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
+                          <XAxis dataKey="month" stroke="#64748b" fontSize={12} tickLine={false} />
+                          <YAxis stroke="#64748b" fontSize={12} tickLine={false} />
                           <Tooltip
-                            contentStyle={chartTheme.tooltipContentStyle}
-                            itemStyle={chartTheme.tooltipItemStyle}
-                            labelStyle={chartTheme.tooltipLabelStyle}
+                            contentStyle={{
+                              backgroundColor: '#0f172a',
+                              borderColor: '#334155',
+                              borderRadius: '0.75rem',
+                              color: '#f8fafc',
+                            }}
                           />
-                          <Legend wrapperStyle={{ color: chartTheme.tickFill }} />
+                          <Legend />
                           <Area
                             type="monotone"
                             dataKey="newUsers"
                             name="New Users"
-                            stroke="#0284c7"
+                            stroke="#38bdf8"
                             strokeWidth={2}
                             fillOpacity={1}
                             fill="url(#userGrad)"
@@ -451,7 +452,7 @@ export const AdminDashboardPage = () => {
                             type="monotone"
                             dataKey="applications"
                             name="Applications"
-                            stroke="#9333ea"
+                            stroke="#a855f7"
                             strokeWidth={2}
                             fillOpacity={1}
                             fill="url(#appGrad)"
@@ -462,10 +463,10 @@ export const AdminDashboardPage = () => {
                   </div>
 
                   {/* Role Breakdown Distribution (Pie/Donut) */}
-                  <div className="p-6 rounded-2xl bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-between">
+                  <div className="p-6 rounded-2xl bg-slate-900/50 border border-slate-800 flex flex-col justify-between">
                     <div>
-                      <h2 className="text-lg font-bold text-slate-900 dark:text-white mb-1">User Ecosystem</h2>
-                      <p className="text-xs text-slate-500 dark:text-slate-400 mb-6">Distribution across roles</p>
+                      <h2 className="text-lg font-bold text-white mb-1">User Ecosystem</h2>
+                      <p className="text-xs text-slate-400 mb-6">Distribution across roles</p>
                       
                       <div className="h-56 w-full flex items-center justify-center">
                         <ResponsiveContainer width="100%" height="100%">
@@ -484,31 +485,34 @@ export const AdminDashboardPage = () => {
                               ))}
                             </Pie>
                             <Tooltip
-                              contentStyle={chartTheme.tooltipContentStyle}
-                              itemStyle={chartTheme.tooltipItemStyle}
-                              labelStyle={chartTheme.tooltipLabelStyle}
+                              contentStyle={{
+                                backgroundColor: '#0f172a',
+                                borderColor: '#334155',
+                                borderRadius: '0.75rem',
+                                color: '#f8fafc',
+                              }}
                             />
                           </PieChart>
                         </ResponsiveContainer>
                       </div>
                     </div>
 
-                    <div className="grid grid-cols-3 gap-2 pt-4 border-t border-slate-200 dark:border-slate-800/80 text-center">
+                    <div className="grid grid-cols-3 gap-2 pt-4 border-t border-slate-800/80 text-center">
                       <div>
-                        <div className="text-xs text-slate-500 dark:text-slate-400">Seekers</div>
-                        <div className="text-base font-bold text-sky-600 dark:text-sky-400">
+                        <div className="text-xs text-slate-400">Seekers</div>
+                        <div className="text-base font-bold text-sky-400">
                           {stats?.kpis?.totalCandidates || 0}
                         </div>
                       </div>
                       <div>
-                        <div className="text-xs text-slate-500 dark:text-slate-400">Recruiters</div>
-                        <div className="text-base font-bold text-indigo-600 dark:text-indigo-400">
+                        <div className="text-xs text-slate-400">Recruiters</div>
+                        <div className="text-base font-bold text-indigo-400">
                           {stats?.kpis?.totalRecruiters || 0}
                         </div>
                       </div>
                       <div>
-                        <div className="text-xs text-slate-500 dark:text-slate-400">Admins</div>
-                        <div className="text-base font-bold text-amber-600 dark:text-amber-400">
+                        <div className="text-xs text-slate-400">Admins</div>
+                        <div className="text-base font-bold text-amber-400">
                           {stats?.kpis?.totalAdmins || 0}
                         </div>
                       </div>
@@ -517,26 +521,29 @@ export const AdminDashboardPage = () => {
                 </div>
 
                 {/* Application Funnel Stages (BarChart) */}
-                <div className="p-6 rounded-2xl bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 shadow-sm">
+                <div className="p-6 rounded-2xl bg-slate-900/50 border border-slate-800">
                   <div className="flex items-center justify-between mb-4">
                     <div>
-                      <h2 className="text-lg font-bold text-slate-900 dark:text-white">Application Pipeline Velocity</h2>
-                      <p className="text-xs text-slate-500 dark:text-slate-400">Platform-wide application status stages</p>
+                      <h2 className="text-lg font-bold text-white">Application Pipeline Velocity</h2>
+                      <p className="text-xs text-slate-400">Platform-wide application status stages</p>
                     </div>
                   </div>
 
                   <div className="h-56 w-full">
                     <ResponsiveContainer width="100%" height="100%">
                       <BarChart data={stats?.applicationStatusDistribution || []} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
-                        <CartesianGrid strokeDasharray="3 3" stroke={chartTheme.gridStroke} />
-                        <XAxis dataKey="stage" stroke={chartTheme.axisStroke} tick={{ fill: chartTheme.tickFill }} fontSize={12} tickLine={false} />
-                        <YAxis stroke={chartTheme.axisStroke} tick={{ fill: chartTheme.tickFill }} fontSize={12} tickLine={false} />
+                        <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
+                        <XAxis dataKey="stage" stroke="#64748b" fontSize={12} tickLine={false} />
+                        <YAxis stroke="#64748b" fontSize={12} tickLine={false} />
                         <Tooltip
-                          contentStyle={chartTheme.tooltipContentStyle}
-                          itemStyle={chartTheme.tooltipItemStyle}
-                          labelStyle={chartTheme.tooltipLabelStyle}
+                          contentStyle={{
+                            backgroundColor: '#0f172a',
+                            borderColor: '#334155',
+                            borderRadius: '0.75rem',
+                            color: '#f8fafc',
+                          }}
                         />
-                        <Bar dataKey="count" fill="#0284c7" radius={[6, 6, 0, 0]}>
+                        <Bar dataKey="count" fill="#38bdf8" radius={[6, 6, 0, 0]}>
                           {(stats?.applicationStatusDistribution || []).map((entry, index) => (
                             <Cell key={`bar-${index}`} fill={entry.color} />
                           ))}
@@ -547,37 +554,37 @@ export const AdminDashboardPage = () => {
                 </div>
 
                 {/* Subsystem Health Status Banner */}
-                <div className="p-5 rounded-2xl bg-white dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800/80 shadow-sm">
-                  <h3 className="text-sm font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-3 flex items-center gap-2">
-                    <Shield className="w-4 h-4 text-brand-600 dark:text-brand-400" />
+                <div className="p-5 rounded-2xl bg-slate-900/40 border border-slate-800/80">
+                  <h3 className="text-sm font-semibold uppercase tracking-wider text-slate-400 mb-3 flex items-center gap-2">
+                    <Shield className="w-4 h-4 text-brand-400" />
                     Subsystem Diagnostics & Architecture
                   </h3>
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-xs">
-                    <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800">
-                      <div className="text-slate-500 dark:text-slate-400 mb-1">Database Engine</div>
-                      <div className="font-semibold text-emerald-600 dark:text-emerald-400 flex items-center gap-1.5">
-                        <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                    <div className="p-3 rounded-xl bg-slate-950/60 border border-slate-800">
+                      <div className="text-slate-400 mb-1">Database Engine</div>
+                      <div className="font-semibold text-emerald-400 flex items-center gap-1.5">
+                        <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
                         {stats?.systemHealth?.database}
                       </div>
                     </div>
-                    <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800">
-                      <div className="text-slate-500 dark:text-slate-400 mb-1">File Storage</div>
-                      <div className="font-semibold text-emerald-600 dark:text-emerald-400 flex items-center gap-1.5">
-                        <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
+                    <div className="p-3 rounded-xl bg-slate-950/60 border border-slate-800">
+                      <div className="text-slate-400 mb-1">File Storage</div>
+                      <div className="font-semibold text-emerald-400 flex items-center gap-1.5">
+                        <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
                         {stats?.systemHealth?.storage}
                       </div>
                     </div>
-                    <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800">
-                      <div className="text-slate-500 dark:text-slate-400 mb-1">AI Intelligence</div>
-                      <div className="font-semibold text-brand-600 dark:text-brand-400 flex items-center gap-1.5">
-                        <Sparkles className="w-3.5 h-3.5 text-brand-600 dark:text-brand-400" />
+                    <div className="p-3 rounded-xl bg-slate-950/60 border border-slate-800">
+                      <div className="text-slate-400 mb-1">AI Intelligence</div>
+                      <div className="font-semibold text-brand-400 flex items-center gap-1.5">
+                        <Sparkles className="w-3.5 h-3.5 text-brand-400" />
                         {stats?.systemHealth?.aiEngine}
                       </div>
                     </div>
-                    <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800">
-                      <div className="text-slate-500 dark:text-slate-400 mb-1">Dispatch Gateway</div>
-                      <div className="font-semibold text-indigo-600 dark:text-indigo-400 flex items-center gap-1.5">
-                        <span className="w-2 h-2 rounded-full bg-indigo-500"></span>
+                    <div className="p-3 rounded-xl bg-slate-950/60 border border-slate-800">
+                      <div className="text-slate-400 mb-1">Dispatch Gateway</div>
+                      <div className="font-semibold text-indigo-400 flex items-center gap-1.5">
+                        <span className="w-2 h-2 rounded-full bg-indigo-400"></span>
                         {stats?.systemHealth?.mailer}
                       </div>
                     </div>
@@ -600,7 +607,7 @@ export const AdminDashboardPage = () => {
                       placeholder="Search users by name or email..."
                       value={userSearch}
                       onChange={(e) => setUserSearch(e.target.value)}
-                      className="w-full pl-10 pr-4 py-2.5 bg-white dark:bg-slate-900/80 border border-slate-300 dark:border-slate-800 rounded-xl text-sm text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition"
+                      className="w-full pl-10 pr-4 py-2.5 bg-slate-900/80 border border-slate-800 rounded-xl text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-brand-500 transition"
                     />
                   </form>
 
@@ -611,7 +618,7 @@ export const AdminDashboardPage = () => {
                         setUserRoleFilter(e.target.value);
                         setUserPage(1);
                       }}
-                      className="bg-white dark:bg-slate-900/80 border border-slate-300 dark:border-slate-800 rounded-xl px-3 py-2.5 text-sm text-slate-700 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500"
+                      className="bg-slate-900/80 border border-slate-800 rounded-xl px-3 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-brand-500"
                     >
                       <option value="">All Roles</option>
                       <option value="candidate">Candidates</option>
@@ -625,7 +632,7 @@ export const AdminDashboardPage = () => {
                         setUserStatusFilter(e.target.value);
                         setUserPage(1);
                       }}
-                      className="bg-white dark:bg-slate-900/80 border border-slate-300 dark:border-slate-800 rounded-xl px-3 py-2.5 text-sm text-slate-700 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500"
+                      className="bg-slate-900/80 border border-slate-800 rounded-xl px-3 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-brand-500"
                     >
                       <option value="">All Statuses</option>
                       <option value="active">Active Only</option>
@@ -634,7 +641,7 @@ export const AdminDashboardPage = () => {
 
                     <button
                       onClick={fetchUsers}
-                      className="p-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-800 text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition shadow-sm"
+                      className="p-2.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-400 hover:text-white transition"
                       title="Refresh users"
                     >
                       <RefreshCw className="w-4 h-4" />
@@ -643,10 +650,10 @@ export const AdminDashboardPage = () => {
                 </div>
 
                 {/* Users Directory Table */}
-                <div className="overflow-hidden rounded-2xl bg-white dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800/80 shadow-sm">
+                <div className="overflow-hidden rounded-2xl bg-slate-900/40 border border-slate-800/80">
                   <div className="overflow-x-auto">
-                    <table className="w-full text-left text-sm text-slate-600 dark:text-slate-300">
-                      <thead className="bg-slate-50 dark:bg-slate-900/80 text-xs uppercase tracking-wider text-slate-600 dark:text-slate-400 border-b border-slate-200 dark:border-slate-800">
+                    <table className="w-full text-left text-sm text-slate-300">
+                      <thead className="bg-slate-900/80 text-xs uppercase tracking-wider text-slate-400 border-b border-slate-800">
                         <tr>
                           <th className="px-6 py-4">User</th>
                           <th className="px-6 py-4">Role</th>
@@ -655,31 +662,31 @@ export const AdminDashboardPage = () => {
                           <th className="px-6 py-4 text-right">Moderation Actions</th>
                         </tr>
                       </thead>
-                      <tbody className="divide-y divide-slate-200 dark:divide-slate-800/60">
+                      <tbody className="divide-y divide-slate-800/60">
                         {usersLoading ? (
                           <tr>
-                            <td colSpan="5" className="px-6 py-12 text-center text-slate-500 dark:text-slate-400">
-                              <RefreshCw className="w-6 h-6 animate-spin mx-auto mb-2 text-brand-500" />
+                            <td colSpan="5" className="px-6 py-12 text-center text-slate-400">
+                              <RefreshCw className="w-6 h-6 animate-spin mx-auto mb-2 text-brand-400" />
                               Loading user directory...
                             </td>
                           </tr>
                         ) : users.length === 0 ? (
                           <tr>
-                            <td colSpan="5" className="px-6 py-12 text-center text-slate-500 dark:text-slate-400">
+                            <td colSpan="5" className="px-6 py-12 text-center text-slate-400">
                               No users match the search criteria.
                             </td>
                           </tr>
                         ) : (
                           users.map((u) => (
-                            <tr key={u._id} className="hover:bg-slate-50 dark:hover:bg-slate-850/50 transition">
+                            <tr key={u._id} className="hover:bg-slate-850/50 transition">
                               <td className="px-6 py-4">
                                 <div className="flex items-center gap-3">
-                                  <div className="w-9 h-9 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center font-bold text-xs text-brand-600 dark:text-brand-300 border border-slate-200 dark:border-slate-700 uppercase">
+                                  <div className="w-9 h-9 rounded-full bg-slate-800 flex items-center justify-center font-bold text-xs text-brand-300 border border-slate-700 uppercase">
                                     {u.name?.slice(0, 2) || 'U'}
                                   </div>
                                   <div>
-                                    <div className="font-semibold text-slate-900 dark:text-white">{u.name}</div>
-                                    <div className="text-xs text-slate-500 dark:text-slate-400">{u.email}</div>
+                                    <div className="font-semibold text-white">{u.name}</div>
+                                    <div className="text-xs text-slate-400">{u.email}</div>
                                   </div>
                                 </div>
                               </td>
@@ -688,29 +695,29 @@ export const AdminDashboardPage = () => {
                                 <select
                                   value={u.role}
                                   onChange={(e) => handleUpdateRole(u._id, e.target.value)}
-                                  className="bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700/80 rounded-lg px-2 py-1 text-xs text-slate-800 dark:text-slate-200 focus:outline-none focus:border-brand-500 font-medium"
+                                  className="bg-slate-900 border border-slate-700/80 rounded-lg px-2 py-1 text-xs text-slate-200 focus:outline-none focus:border-brand-500 font-medium"
                                 >
-                                  <option value="candidate" className="bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200">Candidate</option>
-                                  <option value="recruiter" className="bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200">Recruiter</option>
-                                  <option value="admin" className="bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200">Admin</option>
+                                  <option value="candidate">Candidate</option>
+                                  <option value="recruiter">Recruiter</option>
+                                  <option value="admin">Admin</option>
                                 </select>
                               </td>
 
                               <td className="px-6 py-4">
                                 {u.isActive !== false ? (
-                                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
+                                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
                                     <CheckCircle2 className="w-3.5 h-3.5" />
                                     Active
                                   </span>
                                 ) : (
-                                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-rose-500/10 text-rose-600 dark:text-rose-400 border border-rose-500/20">
+                                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-rose-500/10 text-rose-400 border border-rose-500/20">
                                     <XCircle className="w-3.5 h-3.5" />
                                     Deactivated
                                   </span>
                                 )}
                               </td>
 
-                              <td className="px-6 py-4 text-xs text-slate-500 dark:text-slate-400">
+                              <td className="px-6 py-4 text-xs text-slate-400">
                                 {new Date(u.createdAt).toLocaleDateString()}
                               </td>
 
@@ -720,8 +727,8 @@ export const AdminDashboardPage = () => {
                                     onClick={() => handleToggleUserStatus(u._id, u.isActive !== false)}
                                     className={`px-2.5 py-1.5 rounded-lg text-xs font-semibold transition flex items-center gap-1.5 ${
                                       u.isActive !== false
-                                        ? 'bg-amber-500/10 hover:bg-amber-500/20 text-amber-700 dark:text-amber-300 border border-amber-500/30'
-                                        : 'bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30'
+                                        ? 'bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 border border-amber-500/30'
+                                        : 'bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 border border-emerald-500/30'
                                     }`}
                                     title={u.isActive !== false ? 'Deactivate account' : 'Reactivate account'}
                                   >
@@ -740,7 +747,7 @@ export const AdminDashboardPage = () => {
 
                                   <button
                                     onClick={() => handleDeleteUser(u._id, u.name)}
-                                    className="p-1.5 rounded-lg text-rose-600 dark:text-rose-400 hover:text-rose-700 dark:hover:text-rose-200 hover:bg-rose-500/10 border border-rose-500/20 transition"
+                                    className="p-1.5 rounded-lg text-rose-400 hover:text-rose-200 hover:bg-rose-500/10 border border-rose-500/20 transition"
                                     title="Delete User"
                                   >
                                     <Trash2 className="w-3.5 h-3.5" />
@@ -756,20 +763,20 @@ export const AdminDashboardPage = () => {
 
                   {/* Pagination Footer */}
                   {userTotalPages > 1 && (
-                    <div className="flex items-center justify-between px-6 py-4 border-t border-slate-200 dark:border-slate-800/80 text-xs text-slate-500 dark:text-slate-400">
+                    <div className="flex items-center justify-between px-6 py-4 border-t border-slate-800/80 text-xs text-slate-400">
                       <span>Page {userPage} of {userTotalPages}</span>
                       <div className="flex items-center gap-2">
                         <button
                           disabled={userPage <= 1}
                           onClick={() => setUserPage((p) => Math.max(1, p - 1))}
-                          className="p-1.5 rounded-lg border border-slate-300 dark:border-slate-800 disabled:opacity-30 hover:bg-slate-100 dark:hover:bg-slate-800 transition"
+                          className="p-1.5 rounded-lg border border-slate-800 disabled:opacity-30 hover:bg-slate-800 transition"
                         >
                           <ChevronLeft className="w-4 h-4" />
                         </button>
                         <button
                           disabled={userPage >= userTotalPages}
                           onClick={() => setUserPage((p) => Math.min(userTotalPages, p + 1))}
-                          className="p-1.5 rounded-lg border border-slate-300 dark:border-slate-800 disabled:opacity-30 hover:bg-slate-100 dark:hover:bg-slate-800 transition"
+                          className="p-1.5 rounded-lg border border-slate-800 disabled:opacity-30 hover:bg-slate-800 transition"
                         >
                           <ChevronRight className="w-4 h-4" />
                         </button>
@@ -794,7 +801,7 @@ export const AdminDashboardPage = () => {
                       placeholder="Search jobs by title or company..."
                       value={jobSearch}
                       onChange={(e) => setJobSearch(e.target.value)}
-                      className="w-full pl-10 pr-4 py-2.5 bg-white dark:bg-slate-900/80 border border-slate-300 dark:border-slate-800 rounded-xl text-sm text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition"
+                      className="w-full pl-10 pr-4 py-2.5 bg-slate-900/80 border border-slate-800 rounded-xl text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-brand-500 transition"
                     />
                   </form>
 
@@ -805,7 +812,7 @@ export const AdminDashboardPage = () => {
                         setJobStatusFilter(e.target.value);
                         setJobPage(1);
                       }}
-                      className="bg-white dark:bg-slate-900/80 border border-slate-300 dark:border-slate-800 rounded-xl px-3 py-2.5 text-sm text-slate-700 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500"
+                      className="bg-slate-900/80 border border-slate-800 rounded-xl px-3 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-brand-500"
                     >
                       <option value="">All Statuses</option>
                       <option value="Active">Active</option>
@@ -815,7 +822,7 @@ export const AdminDashboardPage = () => {
 
                     <button
                       onClick={fetchJobs}
-                      className="p-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-800 text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition shadow-sm"
+                      className="p-2.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-400 hover:text-white transition"
                       title="Refresh job listings"
                     >
                       <RefreshCw className="w-4 h-4" />
@@ -824,10 +831,10 @@ export const AdminDashboardPage = () => {
                 </div>
 
                 {/* Job Listings Moderation Table */}
-                <div className="overflow-hidden rounded-2xl bg-white dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800/80 shadow-sm">
+                <div className="overflow-hidden rounded-2xl bg-slate-900/40 border border-slate-800/80">
                   <div className="overflow-x-auto">
-                    <table className="w-full text-left text-sm text-slate-600 dark:text-slate-300">
-                      <thead className="bg-slate-50 dark:bg-slate-900/80 text-xs uppercase tracking-wider text-slate-600 dark:text-slate-400 border-b border-slate-200 dark:border-slate-800">
+                    <table className="w-full text-left text-sm text-slate-300">
+                      <thead className="bg-slate-900/80 text-xs uppercase tracking-wider text-slate-400 border-b border-slate-800">
                         <tr>
                           <th className="px-6 py-4">Job Title & Company</th>
                           <th className="px-6 py-4">Workplace</th>
@@ -836,53 +843,53 @@ export const AdminDashboardPage = () => {
                           <th className="px-6 py-4 text-right">Moderation Actions</th>
                         </tr>
                       </thead>
-                      <tbody className="divide-y divide-slate-200 dark:divide-slate-800/60">
+                      <tbody className="divide-y divide-slate-800/60">
                         {jobsLoading ? (
                           <tr>
-                            <td colSpan="5" className="px-6 py-12 text-center text-slate-500 dark:text-slate-400">
-                              <RefreshCw className="w-6 h-6 animate-spin mx-auto mb-2 text-brand-500" />
+                            <td colSpan="5" className="px-6 py-12 text-center text-slate-400">
+                              <RefreshCw className="w-6 h-6 animate-spin mx-auto mb-2 text-brand-400" />
                               Loading job listings...
                             </td>
                           </tr>
                         ) : jobs.length === 0 ? (
                           <tr>
-                            <td colSpan="5" className="px-6 py-12 text-center text-slate-500 dark:text-slate-400">
+                            <td colSpan="5" className="px-6 py-12 text-center text-slate-400">
                               No jobs match the search criteria.
                             </td>
                           </tr>
                         ) : (
                           jobs.map((j) => (
-                            <tr key={j._id} className="hover:bg-slate-50 dark:hover:bg-slate-850/50 transition">
+                            <tr key={j._id} className="hover:bg-slate-850/50 transition">
                               <td className="px-6 py-4">
                                 <div>
                                   <Link
                                     to={`/jobs/${j._id}`}
-                                    className="font-semibold text-slate-900 dark:text-white hover:text-brand-600 dark:hover:text-brand-400 transition flex items-center gap-1.5"
+                                    className="font-semibold text-white hover:text-brand-400 transition flex items-center gap-1.5"
                                   >
                                     <span>{j.title}</span>
-                                    <ArrowUpRight className="w-3.5 h-3.5 text-slate-400 dark:text-slate-500" />
+                                    <ArrowUpRight className="w-3.5 h-3.5 text-slate-500" />
                                   </Link>
-                                  <div className="text-xs text-slate-500 dark:text-slate-400 flex items-center gap-2 mt-0.5">
+                                  <div className="text-xs text-slate-400 flex items-center gap-2 mt-0.5">
                                     <span>{j.company}</span>
                                     <span>•</span>
                                     <span className="flex items-center gap-1">
-                                      <MapPin className="w-3 h-3 text-slate-400 dark:text-slate-500" />
+                                      <MapPin className="w-3 h-3 text-slate-500" />
                                       {j.location}
                                     </span>
                                   </div>
                                 </div>
                               </td>
 
-                              <td className="px-6 py-4 text-xs text-slate-500 dark:text-slate-400">
-                                <span className="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-medium">
+                              <td className="px-6 py-4 text-xs text-slate-400">
+                                <span className="px-2 py-0.5 rounded bg-slate-800 border border-slate-700 text-slate-300">
                                   {j.workplaceType || 'On-site'}
                                 </span>
                               </td>
 
                               <td className="px-6 py-4">
                                 <div className="text-xs">
-                                  <div className="font-medium text-slate-800 dark:text-slate-200">{j.recruiter?.name || 'Recruiter'}</div>
-                                  <div className="text-slate-400 dark:text-slate-500">{j.recruiter?.email || ''}</div>
+                                  <div className="font-medium text-slate-200">{j.recruiter?.name || 'Recruiter'}</div>
+                                  <div className="text-slate-500">{j.recruiter?.email || ''}</div>
                                 </div>
                               </td>
 
@@ -892,22 +899,22 @@ export const AdminDashboardPage = () => {
                                   onChange={(e) => handleToggleJobStatus(j._id, e.target.value)}
                                   className={`border rounded-lg px-2 py-1 text-xs font-semibold focus:outline-none transition ${
                                     j.status === 'Active'
-                                      ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-600 dark:text-emerald-400'
+                                      ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-400'
                                       : j.status === 'Closed'
-                                      ? 'bg-rose-500/10 border-rose-500/30 text-rose-600 dark:text-rose-400'
-                                      : 'bg-amber-500/10 border-amber-500/30 text-amber-600 dark:text-amber-400'
+                                      ? 'bg-rose-500/10 border-rose-500/30 text-rose-400'
+                                      : 'bg-amber-500/10 border-amber-500/30 text-amber-400'
                                   }`}
                                 >
-                                  <option value="Active" className="bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200">Active</option>
-                                  <option value="Closed" className="bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200">Closed</option>
-                                  <option value="Draft" className="bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200">Draft</option>
+                                  <option value="Active" className="bg-slate-900 text-slate-200">Active</option>
+                                  <option value="Closed" className="bg-slate-900 text-slate-200">Closed</option>
+                                  <option value="Draft" className="bg-slate-900 text-slate-200">Draft</option>
                                 </select>
                               </td>
 
                               <td className="px-6 py-4 text-right">
                                 <button
                                   onClick={() => handleDeleteJob(j._id, j.title)}
-                                  className="p-1.5 rounded-lg text-rose-600 dark:text-rose-400 hover:text-rose-700 dark:hover:text-rose-200 hover:bg-rose-500/10 border border-rose-500/20 transition"
+                                  className="p-1.5 rounded-lg text-rose-400 hover:text-rose-200 hover:bg-rose-500/10 border border-rose-500/20 transition"
                                   title="Delete Job"
                                 >
                                   <Trash2 className="w-4 h-4" />
@@ -922,20 +929,20 @@ export const AdminDashboardPage = () => {
 
                   {/* Pagination Footer */}
                   {jobTotalPages > 1 && (
-                    <div className="flex items-center justify-between px-6 py-4 border-t border-slate-200 dark:border-slate-800/80 text-xs text-slate-500 dark:text-slate-400">
+                    <div className="flex items-center justify-between px-6 py-4 border-t border-slate-800/80 text-xs text-slate-400">
                       <span>Page {jobPage} of {jobTotalPages}</span>
                       <div className="flex items-center gap-2">
                         <button
                           disabled={jobPage <= 1}
                           onClick={() => setJobPage((p) => Math.max(1, p - 1))}
-                          className="p-1.5 rounded-lg border border-slate-300 dark:border-slate-800 disabled:opacity-30 hover:bg-slate-100 dark:hover:bg-slate-800 transition"
+                          className="p-1.5 rounded-lg border border-slate-800 disabled:opacity-30 hover:bg-slate-800 transition"
                         >
                           <ChevronLeft className="w-4 h-4" />
                         </button>
                         <button
                           disabled={jobPage >= jobTotalPages}
                           onClick={() => setJobPage((p) => Math.min(jobTotalPages, p + 1))}
-                          className="p-1.5 rounded-lg border border-slate-300 dark:border-slate-800 disabled:opacity-30 hover:bg-slate-100 dark:hover:bg-slate-800 transition"
+                          className="p-1.5 rounded-lg border border-slate-800 disabled:opacity-30 hover:bg-slate-800 transition"
                         >
                           <ChevronRight className="w-4 h-4" />
                         </button>

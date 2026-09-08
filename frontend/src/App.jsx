@@ -1,7 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
-import { ThemeProvider } from './context/ThemeContext';
 import { PublicLayout } from './components/layout/PublicLayout';
 import { HomePage } from './pages/HomePage';
 import { JobsPage } from './pages/JobsPage';
@@ -26,127 +25,125 @@ import { ProtectedRoute } from './components/common/ProtectedRoute';
 
 function App() {
   return (
-    <ThemeProvider>
-      <AuthProvider>
-        <BrowserRouter>
-          <Routes>
-            {/* Public & Protected Layout */}
-            <Route path="/" element={<PublicLayout />}>
-              <Route index element={<HomePage />} />
-              <Route path="jobs" element={<JobsPage />} />
-              <Route path="jobs/:id" element={<JobDetailsPage />} />
-              <Route path="resume-analyzer" element={<ResumeAnalyzerPage />} />
-              <Route path="mock-interview" element={<MockInterviewPage />} />
-              <Route path="roadmap" element={<RoadmapPage />} />
-              <Route path="login" element={<LoginPage />} />
-              <Route path="register" element={<RegisterPage />} />
-              
-              {/* Protected Profile Route */}
-              <Route
-                path="profile"
-                element={
-                  <ProtectedRoute>
-                    <ProfileRouterPage />
-                  </ProtectedRoute>
-                }
-              />
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          {/* Public & Protected Layout */}
+          <Route path="/" element={<PublicLayout />}>
+            <Route index element={<HomePage />} />
+            <Route path="jobs" element={<JobsPage />} />
+            <Route path="jobs/:id" element={<JobDetailsPage />} />
+            <Route path="resume-analyzer" element={<ResumeAnalyzerPage />} />
+            <Route path="mock-interview" element={<MockInterviewPage />} />
+            <Route path="roadmap" element={<RoadmapPage />} />
+            <Route path="login" element={<LoginPage />} />
+            <Route path="register" element={<RegisterPage />} />
+            
+            {/* Protected Profile Route */}
+            <Route
+              path="profile"
+              element={
+                <ProtectedRoute>
+                  <ProfileRouterPage />
+                </ProtectedRoute>
+              }
+            />
 
-              {/* Candidate Dashboard */}
-              <Route
-                path="dashboard"
-                element={
-                  <ProtectedRoute allowedRoles={['candidate', 'admin']}>
-                    <CandidateDashboardPage />
-                  </ProtectedRoute>
-                }
-              />
+            {/* Candidate Dashboard */}
+            <Route
+              path="dashboard"
+              element={
+                <ProtectedRoute allowedRoles={['candidate', 'admin']}>
+                  <CandidateDashboardPage />
+                </ProtectedRoute>
+              }
+            />
 
-              {/* Candidate Resume Management */}
-              <Route
-                path="resume"
-                element={
-                  <ProtectedRoute allowedRoles={['candidate', 'admin']}>
-                    <ResumeUploadPage />
-                  </ProtectedRoute>
-                }
-              />
+            {/* Candidate Resume Management */}
+            <Route
+              path="resume"
+              element={
+                <ProtectedRoute allowedRoles={['candidate', 'admin']}>
+                  <ResumeUploadPage />
+                </ProtectedRoute>
+              }
+            />
 
-              {/* Candidate Applications Tracker */}
-              <Route
-                path="applications"
-                element={
-                  <ProtectedRoute allowedRoles={['candidate', 'admin']}>
-                    <CandidateApplicationsPage />
-                  </ProtectedRoute>
-                }
-              />
+            {/* Candidate Applications Tracker */}
+            <Route
+              path="applications"
+              element={
+                <ProtectedRoute allowedRoles={['candidate', 'admin']}>
+                  <CandidateApplicationsPage />
+                </ProtectedRoute>
+              }
+            />
 
-              {/* Recruiter Dashboard */}
-              <Route
-                path="recruiter/dashboard"
-                element={
-                  <ProtectedRoute allowedRoles={['recruiter', 'admin']}>
-                    <RecruiterDashboardPage />
-                  </ProtectedRoute>
-                }
-              />
+            {/* Recruiter Dashboard */}
+            <Route
+              path="recruiter/dashboard"
+              element={
+                <ProtectedRoute allowedRoles={['recruiter', 'admin']}>
+                  <RecruiterDashboardPage />
+                </ProtectedRoute>
+              }
+            />
 
-              {/* Recruiter Job Management */}
-              <Route
-                path="recruiter/jobs"
-                element={
-                  <ProtectedRoute allowedRoles={['recruiter', 'admin']}>
-                    <RecruiterJobsPage />
-                  </ProtectedRoute>
-                }
-              />
+            {/* Recruiter Job Management */}
+            <Route
+              path="recruiter/jobs"
+              element={
+                <ProtectedRoute allowedRoles={['recruiter', 'admin']}>
+                  <RecruiterJobsPage />
+                </ProtectedRoute>
+              }
+            />
 
-              {/* Recruiter Applicant Screening */}
-              <Route
-                path="recruiter/applicants"
-                element={
-                  <ProtectedRoute allowedRoles={['recruiter', 'admin']}>
-                    <RecruiterApplicantsPage />
-                  </ProtectedRoute>
-                }
-              />
+            {/* Recruiter Applicant Screening */}
+            <Route
+              path="recruiter/applicants"
+              element={
+                <ProtectedRoute allowedRoles={['recruiter', 'admin']}>
+                  <RecruiterApplicantsPage />
+                </ProtectedRoute>
+              }
+            />
 
-              {/* Recruiter Interview Management */}
-              <Route
-                path="recruiter/interviews"
-                element={
-                  <ProtectedRoute allowedRoles={['recruiter', 'admin']}>
-                    <RecruiterInterviewsPage />
-                  </ProtectedRoute>
-                }
-              />
+            {/* Recruiter Interview Management */}
+            <Route
+              path="recruiter/interviews"
+              element={
+                <ProtectedRoute allowedRoles={['recruiter', 'admin']}>
+                  <RecruiterInterviewsPage />
+                </ProtectedRoute>
+              }
+            />
 
-              {/* Candidate Scheduled Interviews */}
-              <Route
-                path="interviews"
-                element={
-                  <ProtectedRoute allowedRoles={['candidate', 'admin']}>
-                    <CandidateInterviewsPage />
-                  </ProtectedRoute>
-                }
-              />
+            {/* Candidate Scheduled Interviews */}
+            <Route
+              path="interviews"
+              element={
+                <ProtectedRoute allowedRoles={['candidate', 'admin']}>
+                  <CandidateInterviewsPage />
+                </ProtectedRoute>
+              }
+            />
 
-              {/* Admin Platform & Moderation Dashboard */}
-              <Route
-                path="admin/dashboard"
-                element={
-                  <ProtectedRoute allowedRoles={['admin']}>
-                    <AdminDashboardPage />
-                  </ProtectedRoute>
-                }
-              />
+            {/* Admin Platform & Moderation Dashboard */}
+            <Route
+              path="admin/dashboard"
+              element={
+                <ProtectedRoute allowedRoles={['admin']}>
+                  <AdminDashboardPage />
+                </ProtectedRoute>
+              }
+            />
 
-              <Route path="*" element={<NotFoundPage />} />
-            </Route>
-          </Routes>
-        </BrowserRouter>
-      </AuthProvider>
-    </ThemeProvider>
+            <Route path="*" element={<NotFoundPage />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
 

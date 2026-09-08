@@ -224,19 +224,19 @@ export const JobsPage = () => {
 
       {/* Recommended Tab Info Banner */}
       {activeTab === 'recommended' && isCandidate && (
-        <div className="p-4 sm:p-5 rounded-2xl bg-brand-50 border border-brand-200 text-slate-900 dark:bg-gradient-to-r dark:from-brand-950/40 dark:via-indigo-950/30 dark:to-slate-900/80 dark:border-brand-500/30 dark:text-white shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-brand-950/40 via-indigo-950/30 to-slate-900/80 border border-brand-500/30 shadow-lg flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="flex items-start gap-3">
-            <div className="w-10 h-10 rounded-xl bg-brand-500/20 text-brand-600 dark:text-brand-400 flex items-center justify-center shrink-0">
+            <div className="w-10 h-10 rounded-xl bg-brand-500/20 text-brand-400 flex items-center justify-center shrink-0">
               <Cpu className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
+              <h3 className="text-sm font-bold text-white flex items-center gap-2">
                 Personalized AI Career Matches
-                <span className="text-[10px] uppercase px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 dark:bg-emerald-500/10 dark:text-emerald-400 dark:border-emerald-500/20 font-bold">
+                <span className="text-[10px] uppercase px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-bold">
                   Live Engine
                 </span>
               </h3>
-              <p className="text-xs text-slate-600 dark:text-slate-300 mt-0.5">
+              <p className="text-xs text-slate-300 mt-0.5">
                 Ranks vacancies against your profile skills ({candidateSummary?.skills?.slice(0, 4).join(', ') || 'skills'}), experience, and location fit.
               </p>
             </div>
@@ -244,11 +244,11 @@ export const JobsPage = () => {
 
           {/* Threshold filter */}
           <div className="flex items-center gap-2 shrink-0">
-            <span className="text-xs text-slate-600 dark:text-slate-400 font-medium">Match Tier:</span>
+            <span className="text-xs text-slate-400 font-medium">Match Tier:</span>
             <select
               value={minMatchScore}
               onChange={(e) => setMinMatchScore(Number(e.target.value))}
-              className="bg-white border border-slate-300 dark:bg-slate-950 dark:border-slate-700 rounded-xl px-3 py-1.5 text-xs text-brand-600 dark:text-brand-300 font-medium focus:outline-none focus:border-brand-500"
+              className="bg-slate-950 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-brand-300 font-medium focus:outline-none focus:border-brand-500"
             >
               {matchTiers.map((t) => (
                 <option key={t.value} value={t.value}>
@@ -264,33 +264,33 @@ export const JobsPage = () => {
       {activeTab === 'all' && (
         <form
           onSubmit={handleSearchSubmit}
-          className="bg-white dark:bg-slate-900/90 p-3 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm dark:shadow-2xl flex flex-col md:flex-row gap-2"
+          className="glass-card p-3 rounded-2xl border border-slate-800 shadow-2xl flex flex-col md:flex-row gap-2"
         >
-          <div className="flex-1 flex items-center px-4 bg-slate-50 dark:bg-slate-950/60 rounded-xl border border-slate-200 dark:border-slate-850">
-            <Search className="w-4 h-4 text-slate-400 mr-3" />
+          <div className="flex-1 flex items-center px-4 bg-slate-950/60 rounded-xl border border-slate-850">
+            <Search className="w-4 h-4 text-slate-500 mr-3" />
             <input
               type="text"
               placeholder="Search by job title, skill (e.g. React, Node.js), or company..."
               value={keyword}
               onChange={(e) => setKeyword(e.target.value)}
-              className="w-full py-3 bg-transparent text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none"
+              className="w-full py-3 bg-transparent text-sm text-white placeholder-slate-500 focus:outline-none"
             />
           </div>
 
-          <div className="flex-1 flex items-center px-4 bg-slate-50 dark:bg-slate-950/60 rounded-xl border border-slate-200 dark:border-slate-850">
-            <MapPin className="w-4 h-4 text-slate-400 mr-3" />
+          <div className="flex-1 flex items-center px-4 bg-slate-950/60 rounded-xl border border-slate-850">
+            <MapPin className="w-4 h-4 text-slate-500 mr-3" />
             <input
               type="text"
               placeholder="City, state, or 'Remote'..."
               value={location}
               onChange={(e) => setLocation(e.target.value)}
-              className="w-full py-3 bg-transparent text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none"
+              className="w-full py-3 bg-transparent text-sm text-white placeholder-slate-500 focus:outline-none"
             />
           </div>
 
           <button
             type="submit"
-            className="px-6 py-3 bg-gradient-to-r from-brand-600 to-indigo-600 hover:from-brand-500 hover:to-indigo-500 text-white text-sm font-semibold rounded-xl shadow-md shadow-brand-600/20 transition-all flex items-center justify-center gap-2"
+            className="px-6 py-3 bg-gradient-to-r from-brand-600 to-indigo-600 hover:from-brand-500 hover:to-indigo-500 text-white text-sm font-semibold rounded-xl shadow-lg shadow-brand-600/20 transition-all flex items-center justify-center gap-2"
           >
             <Search className="w-4 h-4" />
             Search Roles
@@ -303,7 +303,7 @@ export const JobsPage = () => {
         <div className="lg:hidden flex items-center justify-between">
           <button
             onClick={() => setMobileFilterOpen(!mobileFilterOpen)}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white border border-slate-200 text-slate-800 dark:bg-slate-900 dark:border-slate-800 text-xs font-semibold dark:text-slate-300"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900 border border-slate-800 text-xs font-semibold text-slate-300"
           >
             <SlidersHorizontal className="w-3.5 h-3.5" />
             Filters {selectedWorkplace.length + selectedExperience.length + selectedEmployment.length > 0 && `(${selectedWorkplace.length + selectedExperience.length + selectedEmployment.length})`}
@@ -320,16 +320,16 @@ export const JobsPage = () => {
           <aside
             className={`lg:block ${
               mobileFilterOpen ? 'block' : 'hidden'
-            } space-y-6 bg-white border border-slate-200 dark:bg-slate-900/80 dark:border-slate-800 text-slate-900 dark:text-white shadow-sm p-6 rounded-2xl sticky top-24`}
+            } space-y-6 glass-card p-6 rounded-2xl border border-slate-800 sticky top-24`}
           >
-            <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-4">
-              <div className="flex items-center gap-2 text-slate-900 dark:text-white text-sm font-bold">
-                <Filter className="w-4 h-4 text-brand-600 dark:text-brand-400" />
+            <div className="flex items-center justify-between border-b border-slate-800 pb-4">
+              <div className="flex items-center gap-2 text-white text-sm font-bold">
+                <Filter className="w-4 h-4 text-brand-400" />
                 Refine Search
               </div>
               <button
                 onClick={clearAllFilters}
-                className="text-xs text-slate-500 hover:text-brand-600 dark:text-slate-400 dark:hover:text-brand-400 transition-colors"
+                className="text-xs text-slate-400 hover:text-brand-400 transition-colors"
               >
                 Reset
               </button>
@@ -338,14 +338,14 @@ export const JobsPage = () => {
             <div className="space-y-6">
               {/* Workplace Type */}
               <div className="space-y-2.5">
-                <h4 className="text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase">Workplace Mode</h4>
+                <h4 className="text-xs font-semibold text-slate-300 uppercase">Workplace Mode</h4>
                 {workplaceOptions.map((opt) => (
-                  <label key={opt} className="flex items-center gap-2 text-xs text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white cursor-pointer">
+                  <label key={opt} className="flex items-center gap-2 text-xs text-slate-400 hover:text-white cursor-pointer">
                     <input
                       type="checkbox"
                       checked={selectedWorkplace.includes(opt)}
                       onChange={() => toggleArrayFilter(selectedWorkplace, setSelectedWorkplace, opt)}
-                      className="rounded border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-brand-600 focus:ring-brand-500"
+                      className="rounded border-slate-700 bg-slate-900 text-brand-500 focus:ring-brand-500"
                     />
                     <span>{opt}</span>
                   </label>
@@ -354,14 +354,14 @@ export const JobsPage = () => {
 
               {/* Experience Level */}
               <div className="space-y-2.5">
-                <h4 className="text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase">Experience Level</h4>
+                <h4 className="text-xs font-semibold text-slate-300 uppercase">Experience Level</h4>
                 {experienceOptions.map((opt) => (
-                  <label key={opt} className="flex items-center gap-2 text-xs text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white cursor-pointer">
+                  <label key={opt} className="flex items-center gap-2 text-xs text-slate-400 hover:text-white cursor-pointer">
                     <input
                       type="checkbox"
                       checked={selectedExperience.includes(opt)}
                       onChange={() => toggleArrayFilter(selectedExperience, setSelectedExperience, opt)}
-                      className="rounded border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-brand-600 focus:ring-brand-500"
+                      className="rounded border-slate-700 bg-slate-900 text-brand-500 focus:ring-brand-500"
                     />
                     <span>{opt}</span>
                   </label>
@@ -370,14 +370,14 @@ export const JobsPage = () => {
 
               {/* Employment Type */}
               <div className="space-y-2.5">
-                <h4 className="text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase">Employment Type</h4>
+                <h4 className="text-xs font-semibold text-slate-300 uppercase">Employment Type</h4>
                 {employmentOptions.map((opt) => (
-                  <label key={opt} className="flex items-center gap-2 text-xs text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white cursor-pointer">
+                  <label key={opt} className="flex items-center gap-2 text-xs text-slate-400 hover:text-white cursor-pointer">
                     <input
                       type="checkbox"
                       checked={selectedEmployment.includes(opt)}
                       onChange={() => toggleArrayFilter(selectedEmployment, setSelectedEmployment, opt)}
-                      className="rounded border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-brand-600 focus:ring-brand-500"
+                      className="rounded border-slate-700 bg-slate-900 text-brand-500 focus:ring-brand-500"
                     />
                     <span>{opt}</span>
                   </label>
@@ -385,15 +385,15 @@ export const JobsPage = () => {
               </div>
 
               {/* Min Salary Input */}
-              <div className="space-y-2 pt-2 border-t border-slate-200 dark:border-slate-800">
-                <h4 className="text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase">Min Annual Salary ($)</h4>
+              <div className="space-y-2 pt-2 border-t border-slate-800">
+                <h4 className="text-xs font-semibold text-slate-300 uppercase">Min Annual Salary ($)</h4>
                 <input
                   type="number"
                   placeholder="e.g. 80000"
                   value={minSalary}
                   onChange={(e) => setMinSalary(e.target.value)}
                   onBlur={() => fetchJobs(1)}
-                  className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg px-3 py-1.5 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-brand-500"
+                  className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-1.5 text-xs text-white focus:outline-none focus:border-brand-500"
                 />
               </div>
             </div>
@@ -404,16 +404,16 @@ export const JobsPage = () => {
         <main className={`${activeTab === 'recommended' ? 'lg:col-span-4' : 'lg:col-span-3'} space-y-6`}>
           
           {/* Results Summary & Sorting */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white dark:bg-slate-900/90 p-4 rounded-xl border border-slate-200 dark:border-slate-800 text-xs text-slate-600 dark:text-slate-400 shadow-sm">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 glass-card p-4 rounded-xl border border-slate-800 text-xs text-slate-400">
             <div>
               {activeTab === 'recommended' ? (
                 <span>
-                  Showing <span className="text-slate-900 dark:text-white font-semibold">{jobs.length}</span> high-match vacancies matching your profile
+                  Showing <span className="text-white font-semibold">{jobs.length}</span> high-match vacancies matching your profile
                 </span>
               ) : (
                 <span>
-                  Showing <span className="text-slate-900 dark:text-white font-semibold">{jobs.length}</span> of{' '}
-                  <span className="text-slate-900 dark:text-white font-semibold">{pagination.total}</span> available positions
+                  Showing <span className="text-white font-semibold">{jobs.length}</span> of{' '}
+                  <span className="text-white font-semibold">{pagination.total}</span> available positions
                 </span>
               )}
             </div>
@@ -424,7 +424,7 @@ export const JobsPage = () => {
                 <select
                   value={sort}
                   onChange={(e) => setSort(e.target.value)}
-                  className="bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg px-2.5 py-1 text-xs text-slate-800 dark:text-white focus:outline-none focus:border-brand-500"
+                  className="bg-slate-950 border border-slate-800 rounded-lg px-2.5 py-1 text-xs text-white focus:outline-none focus:border-brand-500"
                 >
                   <option value="newest">Newest First</option>
                   <option value="salary_high">Highest Salary</option>
@@ -439,7 +439,7 @@ export const JobsPage = () => {
           {loading && (
             <div className="min-h-[40vh] flex flex-col items-center justify-center gap-3">
               <Loader2 className="w-8 h-8 text-brand-500 animate-spin" />
-              <p className="text-sm text-slate-500 dark:text-slate-400">
+              <p className="text-sm text-slate-400">
                 {activeTab === 'recommended' ? 'Calculating multidimensional AI matches...' : 'Searching active opportunities...'}
               </p>
             </div>
@@ -447,14 +447,33 @@ export const JobsPage = () => {
 
           {/* Empty State */}
           {!loading && jobs.length === 0 && (
-            <div className="p-12 bg-white dark:bg-slate-900/80 rounded-2xl border border-slate-200 dark:border-slate-800 text-center space-y-4 shadow-sm">
-              <p className="text-slate-600 dark:text-slate-400 text-sm">No job opportunities matched your current search filters.</p>
-              <button
-                onClick={clearAllFilters}
-                className="px-4 py-2 bg-brand-600 text-white rounded-xl text-xs font-semibold hover:bg-brand-500 transition"
-              >
-                Clear Filters
-              </button>
+            <div className="p-12 glass-card rounded-2xl border border-slate-800 text-center space-y-4">
+              <div className="w-12 h-12 rounded-xl bg-slate-900 border border-slate-800 text-slate-500 mx-auto flex items-center justify-center">
+                <Briefcase className="w-6 h-6" />
+              </div>
+              <h3 className="text-lg font-bold text-white">
+                {activeTab === 'recommended' ? 'No High-Match Positions Found' : 'No Matching Jobs Found'}
+              </h3>
+              <p className="text-xs text-slate-400 max-w-md mx-auto">
+                {activeTab === 'recommended'
+                  ? 'Try lowering the match threshold or update your candidate profile skills to unlock more recommendations.'
+                  : 'Try broadening your search keywords, adjusting location filters, or resetting filter categories.'}
+              </p>
+              {activeTab === 'recommended' ? (
+                <button
+                  onClick={() => setMinMatchScore(0)}
+                  className="px-4 py-2 bg-brand-600 hover:bg-brand-500 text-white rounded-lg text-xs font-semibold"
+                >
+                  Show All Vacancies Ranked
+                </button>
+              ) : (
+                <button
+                  onClick={clearAllFilters}
+                  className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded-lg text-xs font-semibold"
+                >
+                  Clear Filters
+                </button>
+              )}
             </div>
           )}
 
@@ -464,7 +483,7 @@ export const JobsPage = () => {
               {jobs.map((job) => (
                 <div
                   key={job._id}
-                  className="bg-white dark:bg-slate-900/80 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 flex flex-col justify-between group relative overflow-hidden shadow-sm hover:shadow-md hover:border-brand-500/40 transition-all duration-200"
+                  className="glass-card glass-card-hover p-6 rounded-2xl border border-slate-800 flex flex-col justify-between group relative overflow-hidden"
                 >
                   {/* Subtle top accent if high match */}
                   {job.match?.matchScore >= 85 && (
@@ -476,12 +495,12 @@ export const JobsPage = () => {
                     {/* Top Row: AI Match Badge (if recommended) or Company & Workplace */}
                     <div className="flex items-start justify-between gap-3">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-brand-600 dark:text-brand-400 font-bold text-sm">
+                        <div className="w-10 h-10 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-brand-400 font-bold text-sm">
                           {job.company?.[0] || 'C'}
                         </div>
                         <div>
-                          <p className="text-xs font-semibold text-slate-500 dark:text-slate-400">{job.company}</p>
-                          <h3 className="text-base font-bold text-slate-900 dark:text-white group-hover:text-brand-600 dark:group-hover:text-brand-300 transition-colors line-clamp-1">
+                          <p className="text-xs font-semibold text-slate-400">{job.company}</p>
+                          <h3 className="text-base font-bold text-white group-hover:text-brand-300 transition-colors line-clamp-1">
                             {job.title}
                           </h3>
                         </div>
@@ -491,10 +510,10 @@ export const JobsPage = () => {
                         <span
                           className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${
                             job.workplaceType === 'Remote'
-                              ? 'bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-500/10 dark:text-emerald-400 dark:border-emerald-500/20'
+                              ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20'
                               : job.workplaceType === 'Hybrid'
-                              ? 'bg-cyan-50 text-cyan-700 border-cyan-200 dark:bg-cyber-500/10 dark:text-cyber-400 dark:border-cyber-500/20'
-                              : 'bg-slate-100 text-slate-700 border-slate-200 dark:bg-slate-800 dark:text-slate-400 dark:border-slate-700'
+                              ? 'bg-cyber-500/10 text-cyber-400 border-cyber-500/20'
+                              : 'bg-slate-800 text-slate-400 border-slate-700'
                           }`}
                         >
                           {job.workplaceType}
@@ -504,11 +523,11 @@ export const JobsPage = () => {
                             type="button"
                             onClick={(e) => handleToggleSave(job._id, e)}
                             title={savedJobIds.has(job._id) ? 'Remove from saved' : 'Save job'}
-                            className="p-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-400 hover:text-amber-500 dark:bg-slate-850 dark:hover:bg-slate-800 dark:text-slate-400 dark:hover:text-amber-400 border border-slate-200 dark:border-slate-750 transition"
+                            className="p-1.5 rounded-lg bg-slate-850 hover:bg-slate-800 text-slate-400 hover:text-amber-400 border border-slate-750 transition"
                           >
                             <Bookmark
                               className={`w-3.5 h-3.5 ${
-                                savedJobIds.has(job._id) ? 'fill-amber-500 text-amber-500' : ''
+                                savedJobIds.has(job._id) ? 'fill-amber-400 text-amber-400' : ''
                               }`}
                             />
                           </button>
@@ -518,11 +537,11 @@ export const JobsPage = () => {
 
                     {/* AI Match Badge when present */}
                     {job.match && (
-                      <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-950/80 border border-slate-200 dark:border-slate-800/80 space-y-1.5">
+                      <div className="p-2.5 rounded-xl bg-slate-950/80 border border-slate-800/80 space-y-1.5">
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-1.5">
-                            <Sparkles className="w-3.5 h-3.5 text-brand-600 dark:text-brand-400 animate-pulse" />
-                            <span className="text-xs font-bold text-slate-900 dark:text-white">
+                            <Sparkles className="w-3.5 h-3.5 text-brand-400 animate-pulse" />
+                            <span className="text-xs font-bold text-white">
                               {job.match.matchScore}% Match
                             </span>
                           </div>
@@ -532,13 +551,13 @@ export const JobsPage = () => {
                         </div>
 
                         {/* Matched skills count & gaps */}
-                        <div className="flex items-center gap-2 text-[11px] text-slate-500 dark:text-slate-400 pt-0.5">
-                          <span className="text-emerald-600 dark:text-emerald-400 flex items-center gap-1 font-medium">
+                        <div className="flex items-center gap-2 text-[11px] text-slate-400 pt-0.5">
+                          <span className="text-emerald-400 flex items-center gap-1">
                             <CheckCircle2 className="w-3 h-3" />
                             {job.match.matchedSkills?.length || 0} Matched
                           </span>
                           <span>•</span>
-                          <span>
+                          <span className="text-slate-400">
                             {job.match.missingSkills?.length > 0 ? `${job.match.missingSkills.length} to build` : 'Zero major gaps'}
                           </span>
                         </div>
@@ -546,17 +565,17 @@ export const JobsPage = () => {
                     )}
 
                     {/* Metadata Badges */}
-                    <div className="flex flex-wrap items-center gap-3 text-xs text-slate-500 dark:text-slate-400">
+                    <div className="flex flex-wrap items-center gap-3 text-xs text-slate-400">
                       <div className="flex items-center gap-1">
-                        <MapPin className="w-3.5 h-3.5 text-slate-400" />
+                        <MapPin className="w-3.5 h-3.5 text-slate-500" />
                         <span>{job.location}</span>
                       </div>
                       <div className="flex items-center gap-1">
-                        <Briefcase className="w-3.5 h-3.5 text-slate-400" />
+                        <Briefcase className="w-3.5 h-3.5 text-slate-500" />
                         <span>{job.employmentType}</span>
                       </div>
-                      <div className="flex items-center gap-1 text-emerald-600 dark:text-emerald-400 font-semibold">
-                        <DollarSign className="w-3.5 h-3.5" />
+                      <div className="flex items-center gap-1 text-emerald-400 font-medium">
+                        <DollarSign className="w-3.5 h-3.5 text-emerald-500" />
                         <span>{formatSalary(job.salary)}</span>
                       </div>
                     </div>
@@ -570,8 +589,8 @@ export const JobsPage = () => {
                             key={s}
                             className={`px-2 py-0.5 rounded text-[11px] font-medium border ${
                               isSkillMatched
-                                ? 'bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-500/10 dark:text-emerald-300 dark:border-emerald-500/30'
-                                : 'bg-slate-100 text-slate-700 border-slate-200 dark:bg-slate-900/90 dark:text-slate-300 dark:border-slate-800'
+                                ? 'bg-emerald-500/10 text-emerald-300 border-emerald-500/30'
+                                : 'bg-slate-900/90 text-slate-300 border-slate-800'
                             }`}
                           >
                             {isSkillMatched && '✓ '}{s}
@@ -579,7 +598,7 @@ export const JobsPage = () => {
                         );
                       })}
                       {job.skills?.length > 4 && (
-                        <span className="px-1.5 py-0.5 rounded bg-slate-100 text-slate-500 dark:bg-slate-900 dark:text-slate-500 text-[10px]">
+                        <span className="px-1.5 py-0.5 rounded bg-slate-900 text-slate-500 text-[10px]">
                           +{job.skills.length - 4}
                         </span>
                       )}
@@ -587,13 +606,13 @@ export const JobsPage = () => {
                   </div>
 
                   {/* Card Action */}
-                  <div className="pt-5 mt-4 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between">
-                    <span className="text-[11px] text-slate-400 dark:text-slate-500">
+                  <div className="pt-5 mt-4 border-t border-slate-800/80 flex items-center justify-between">
+                    <span className="text-[11px] text-slate-500">
                       Posted {new Date(job.createdAt).toLocaleDateString()}
                     </span>
                     <Link
                       to={`/jobs/${job._id}`}
-                      className="inline-flex items-center gap-1 text-xs font-semibold text-brand-600 dark:text-brand-400 hover:text-brand-700 dark:hover:text-brand-300 transition-colors"
+                      className="inline-flex items-center gap-1 text-xs font-semibold text-brand-400 hover:text-brand-300 transition-colors"
                     >
                       View Role & Match
                       <ArrowRight className="w-3.5 h-3.5" />
@@ -610,17 +629,17 @@ export const JobsPage = () => {
               <button
                 disabled={pagination.page <= 1}
                 onClick={() => fetchJobs(pagination.page - 1)}
-                className="p-2 rounded-lg bg-white border border-slate-200 text-slate-600 hover:bg-slate-100 dark:bg-slate-900 dark:border-slate-800 dark:text-slate-400 dark:hover:text-white disabled:opacity-40 shadow-sm"
+                className="p-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-400 hover:text-white disabled:opacity-40"
               >
                 <ChevronLeft className="w-4 h-4" />
               </button>
-              <span className="text-xs font-medium text-slate-600 dark:text-slate-400 px-3">
+              <span className="text-xs font-medium text-slate-400 px-3">
                 Page {pagination.page} of {pagination.totalPages}
               </span>
               <button
                 disabled={pagination.page >= pagination.totalPages}
                 onClick={() => fetchJobs(pagination.page + 1)}
-                className="p-2 rounded-lg bg-white border border-slate-200 text-slate-600 hover:bg-slate-100 dark:bg-slate-900 dark:border-slate-800 dark:text-slate-400 dark:hover:text-white disabled:opacity-40 shadow-sm"
+                className="p-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-400 hover:text-white disabled:opacity-40"
               >
                 <ChevronRight className="w-4 h-4" />
               </button>

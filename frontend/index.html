@@ -6,28 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CareerPilot AI — AI-Powered Job Portal & Career Management Platform</title>
     <meta name="description" content="AI-driven career acceleration: resume analyzer, smart job matching, AI mock interviews, and skill gap roadmaps." />
-    <!-- Google Fonts: Plus Jakarta Sans & Inter -->
+    <!-- Google Fonts: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- Prevent Theme Flash Script -->
-    <script>
-      (function() {
-        try {
-          var storedTheme = localStorage.getItem('careerpilot-theme');
-          var supportDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-          if (storedTheme === 'dark' || (!storedTheme && supportDark) || (storedTheme === 'system' && supportDark)) {
-            document.documentElement.classList.add('dark');
-            document.documentElement.classList.remove('light');
-          } else {
-            document.documentElement.classList.add('light');
-            document.documentElement.classList.remove('dark');
-          }
-        } catch (e) {}
-      })();
-    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   </head>
-  <body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 antialiased selection:bg-brand-500 selection:text-white min-h-screen transition-colors duration-200">
+  <body class="bg-slate-900 text-slate-100 antialiased selection:bg-brand-500 selection:text-white min-h-screen">
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
