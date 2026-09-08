@@ -4,40 +4,78 @@
 
 @layer base {
   :root {
-    --bg-primary: #070b14;
-    --bg-secondary: #0b1120;
-    --bg-card: rgba(15, 23, 42, 0.7);
-    --border-subtle: rgba(255, 255, 255, 0.08);
-    --text-primary: #f8fafc;
-    --text-secondary: #94a3b8;
-  }
-
-  /* When light mode is active in Phase 1.5 */
-  html.light {
-    --bg-primary: #f8fafc;
-    --bg-secondary: #ffffff;
-    --bg-card: rgba(255, 255, 255, 0.85);
-    --border-subtle: rgba(0, 0, 0, 0.08);
+    --background: #f8fafc;
+    --surface: #ffffff;
+    --surface-secondary: #f1f5f9;
     --text-primary: #0f172a;
     --text-secondary: #64748b;
+    --border: #e2e8f0;
+    --input: #ffffff;
+    --input-border: #cbd5e1;
+    --primary: #4f46e5;
+    --secondary: #06b6d4;
+    --success: #10b981;
+    --warning: #f59e0b;
+    --error: #ef4444;
+    --shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+  }
+
+  .dark {
+    --background: #070b14;
+    --surface: #0b1120;
+    --surface-secondary: #0f172a;
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --border: rgba(255, 255, 255, 0.08);
+    --input: #0f172a;
+    --input-border: #334155;
+    --primary: #6366f1;
+    --secondary: #22d3ee;
+    --success: #34d399;
+    --warning: #fbbf24;
+    --error: #f87171;
+    --shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.5);
   }
 
   body {
-    @apply bg-navy-950 text-slate-100 antialiased font-sans selection:bg-brand-500 selection:text-white;
+    @apply bg-slate-50 dark:bg-navy-950 text-slate-900 dark:text-slate-100 antialiased font-sans selection:bg-brand-500 selection:text-white;
     min-height: 100vh;
     overflow-x: hidden;
+  }
+
+  /* Universal Input, Textarea, and Select theme compliance */
+  input:not([type='checkbox']):not([type='radio']):not([type='range']):not([type='button']):not([type='submit']),
+  textarea,
+  select {
+    @apply bg-white dark:bg-slate-900 text-slate-900 dark:text-white border border-slate-300 dark:border-slate-700 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-brand-500 dark:focus:ring-brand-400 focus:border-transparent transition-colors;
   }
 }
 
 @layer utilities {
   .glass-card {
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(226, 232, 240, 0.9);
+    box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+  }
+
+  .dark .glass-card {
     background: rgba(11, 17, 32, 0.75);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.5);
   }
 
   .glass-card-subtle {
+    background: rgba(248, 250, 252, 0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(226, 232, 240, 0.8);
+  }
+
+  .dark .glass-card-subtle {
     background: rgba(15, 23, 42, 0.55);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
@@ -50,58 +88,170 @@
 
   .glass-card-hover:hover {
     transform: translateY(-3px);
+    border-color: rgba(99, 102, 241, 0.4);
+    box-shadow: 0 14px 28px -6px rgba(0, 0, 0, 0.08), 0 0 18px -2px rgba(99, 102, 241, 0.15);
+  }
+
+  .dark .glass-card-hover:hover {
     border-color: rgba(99, 102, 241, 0.35);
     box-shadow: 0 16px 32px -8px rgba(0, 0, 0, 0.5), 0 0 20px -3px rgba(99, 102, 241, 0.2);
   }
 
   .gradient-ai {
-    background: linear-gradient(135deg, #818cf8 0%, #a855f7 50%, #22d3ee 100%);
+    background: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #06b6d4 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 
-  .gradient-ai-subtle {
-    background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 50%, #94a3b8 100%);
+  .dark .gradient-ai {
+    background: linear-gradient(135deg, #818cf8 0%, #c084fc 50%, #22d3ee 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-  }
-
-  .gradient-border-glow {
-    position: relative;
-  }
-  .gradient-border-glow::before {
-    content: '';
-    position: absolute;
-    inset: -1px;
-    border-radius: inherit;
-    padding: 1px;
-    background: linear-gradient(135deg, rgba(99, 102, 241, 0.4), rgba(34, 211, 238, 0.3));
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    pointer-events: none;
   }
 
   .glow-radial-bg {
+    background: radial-gradient(circle at 50% 0%, rgba(99, 102, 241, 0.08) 0%, rgba(6, 182, 212, 0.03) 35%, transparent 70%);
+  }
+
+  .dark .glow-radial-bg {
     background: radial-gradient(circle at 50% 0%, rgba(99, 102, 241, 0.15) 0%, rgba(6, 182, 212, 0.05) 35%, transparent 70%);
   }
 }
 
-/* Custom modern scrollbar */
+/* Smooth global transition across themes */
+html:not(.no-theme-transition),
+html:not(.no-theme-transition) body,
+html:not(.no-theme-transition) header,
+html:not(.no-theme-transition) nav,
+html:not(.no-theme-transition) footer,
+html:not(.no-theme-transition) main,
+html:not(.no-theme-transition) aside,
+html:not(.no-theme-transition) .glass-card,
+html:not(.no-theme-transition) .glass-card-subtle {
+  transition: background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+              color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ==========================================================================
+   GLOBAL LIGHT THEME OVERRIDES FOR UN-PREFIXED SLATE/DARK UTILITIES
+   Ensures 100% readability and contrast across all pages, cards, tables, inputs
+   ========================================================================== */
+
+/* 1. Surfaces & Backgrounds in Light Mode */
+html:not(.dark) .bg-slate-900,
+html:not(.dark) .bg-slate-900\/70,
+html:not(.dark) .bg-slate-900\/80,
+html:not(.dark) .bg-slate-900\/90 {
+  background-color: #ffffff;
+}
+
+html:not(.dark) .bg-slate-950,
+html:not(.dark) .bg-slate-950\/40,
+html:not(.dark) .bg-slate-950\/60,
+html:not(.dark) .bg-slate-950\/70,
+html:not(.dark) .bg-slate-950\/80 {
+  background-color: #f8fafc;
+}
+
+html:not(.dark) .bg-slate-850,
+html:not(.dark) .bg-slate-850\/60 {
+  background-color: #f1f5f9;
+}
+
+/* Modal Backdrops */
+html:not(.dark) .bg-slate-950\/80,
+html:not(.dark) .bg-black\/60 {
+  background-color: rgba(15, 23, 42, 0.45) !important;
+}
+
+/* 2. Text in Light Mode */
+html:not(.dark) .text-white {
+  color: #0f172a !important;
+}
+
+/* Exemptions where white text is intentional on dark/colorful buttons and badges */
+html:not(.dark) button.bg-brand-600,
+html:not(.dark) button.bg-brand-500,
+html:not(.dark) button.bg-cyber-600,
+html:not(.dark) button.bg-emerald-600,
+html:not(.dark) button.bg-rose-600,
+html:not(.dark) button[class*='bg-gradient-'],
+html:not(.dark) a.bg-brand-600,
+html:not(.dark) a[class*='bg-gradient-'],
+html:not(.dark) .text-white-force {
+  color: #ffffff !important;
+}
+
+html:not(.dark) .text-slate-100,
+html:not(.dark) .text-slate-200 {
+  color: #1e293b;
+}
+
+html:not(.dark) .text-slate-300 {
+  color: #334155;
+}
+
+html:not(.dark) .text-slate-400 {
+  color: #64748b;
+}
+
+/* 3. Borders & Dividers in Light Mode */
+html:not(.dark) .border-slate-800,
+html:not(.dark) .border-slate-850,
+html:not(.dark) .border-slate-700 {
+  border-color: #e2e8f0;
+}
+
+html:not(.dark) .divide-slate-800 > :not([hidden]) ~ :not([hidden]) {
+  border-color: #e2e8f0;
+}
+
+/* 4. Tables in Light Mode */
+html:not(.dark) table {
+  color: #0f172a;
+}
+html:not(.dark) thead th {
+  background-color: #f8fafc;
+  color: #475569;
+  border-color: #e2e8f0;
+}
+html:not(.dark) tbody tr {
+  background-color: #ffffff;
+  border-color: #e2e8f0;
+}
+html:not(.dark) tbody tr:hover {
+  background-color: #f8fafc;
+}
+html:not(.dark) tbody td {
+  color: #0f172a;
+  border-color: #e2e8f0;
+}
+
+/* 5. Custom modern scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #070b14;
+  background: var(--background);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #1e293b;
+  background: #cbd5e1;
   border-radius: 4px;
 }
 
+.dark ::-webkit-scrollbar-thumb {
+  background: #1e293b;
+}
+
 ::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
   background: #334155;
 }

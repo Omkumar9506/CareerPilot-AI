@@ -3,13 +3,12 @@ import { Link, NavLink, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { Button } from '../common/Button';
 import { ApiHealthBadge } from '../common/ApiHealthBadge';
+import { ThemeToggle } from '../common/ThemeToggle';
 import {
   Sparkles,
   Search,
   Menu,
   X,
-  Sun,
-  Moon,
   ChevronRight,
   User,
   LogOut,
@@ -23,7 +22,6 @@ export const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-  const [isDarkMode, setIsDarkMode] = useState(true); // Theme preparedness for Phase 1.5
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -71,8 +69,8 @@ export const Navbar = () => {
     <header
       className={`sticky top-0 z-50 w-full transition-all duration-300 ${
         scrolled
-          ? 'bg-navy-950/85 backdrop-blur-xl border-b border-white/[0.08] shadow-lg shadow-black/20'
-          : 'bg-navy-950/60 backdrop-blur-md border-b border-white/[0.05]'
+          ? 'bg-white/90 dark:bg-navy-950/85 backdrop-blur-xl border-b border-slate-200/80 dark:border-white/[0.08] shadow-sm dark:shadow-black/20'
+          : 'bg-white/70 dark:bg-navy-950/60 backdrop-blur-md border-b border-slate-200/50 dark:border-white/[0.05]'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -80,15 +78,15 @@ export const Navbar = () => {
           {/* Brand Logo & Tagline */}
           <Link to="/" className="flex items-center gap-3 group focus:outline-none">
             <div className="relative flex items-center justify-center w-11 h-11 rounded-xl bg-gradient-to-tr from-brand-600 via-indigo-500 to-cyber-500 p-0.5 shadow-glow-sm group-hover:shadow-glow-md transition-all duration-300">
-              <div className="w-full h-full bg-navy-950 rounded-[10px] flex items-center justify-center">
-                <Compass className="w-6 h-6 text-brand-400 group-hover:rotate-45 transition-transform duration-500" />
+              <div className="w-full h-full bg-white dark:bg-navy-950 rounded-[10px] flex items-center justify-center transition-colors">
+                <Compass className="w-6 h-6 text-brand-600 dark:text-brand-400 group-hover:rotate-45 transition-transform duration-500" />
               </div>
             </div>
             <div className="flex flex-col">
-              <span className="text-xl font-extrabold tracking-tight text-white flex items-center gap-1.5">
+              <span className="text-xl font-extrabold tracking-tight text-slate-900 dark:text-white flex items-center gap-1.5 transition-colors">
                 CareerPilot <span className="gradient-ai">AI</span>
               </span>
-              <span className="text-[11px] font-medium text-slate-400 tracking-wider uppercase hidden sm:block">
+              <span className="text-[11px] font-medium text-slate-500 dark:text-slate-400 tracking-wider uppercase hidden sm:block transition-colors">
                 Your Career, Supercharged
               </span>
             </div>
@@ -103,8 +101,8 @@ export const Navbar = () => {
                 className={({ isActive }) =>
                   `px-3.5 py-2 text-sm font-medium rounded-lg transition-all duration-200 relative ${
                     isActive
-                      ? 'text-white font-semibold bg-white/[0.08]'
-                      : 'text-slate-300 hover:text-white hover:bg-white/[0.04]'
+                      ? 'text-brand-600 dark:text-white font-semibold bg-brand-50 dark:bg-white/[0.08]'
+                      : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100 dark:text-slate-300 dark:hover:text-white dark:hover:bg-white/[0.04]'
                   }`
                 }
               >
@@ -114,7 +112,7 @@ export const Navbar = () => {
                     {isActive && (
                       <motion.div
                         layoutId="activeNavIndicator"
-                        className="absolute bottom-0 left-3 right-3 h-0.5 bg-gradient-to-r from-brand-400 to-cyber-400 rounded-full"
+                        className="absolute bottom-0 left-3 right-3 h-0.5 bg-gradient-to-r from-brand-500 to-cyber-500 rounded-full"
                         transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                       />
                     )}
@@ -139,12 +137,12 @@ export const Navbar = () => {
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
                       onBlur={() => !searchQuery && setSearchOpen(false)}
-                      className="w-64 pl-9 pr-8 py-1.5 text-xs rounded-xl bg-navy-900 border border-brand-500/50 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-500"
+                      className="w-64 pl-9 pr-8 py-1.5 text-xs rounded-xl bg-slate-50 dark:bg-navy-900 border border-slate-300 dark:border-brand-500/50 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-500"
                     />
                     <button
                       type="button"
                       onClick={() => setSearchOpen(false)}
-                      className="absolute right-2.5 text-slate-400 hover:text-white"
+                      className="absolute right-2.5 text-slate-400 hover:text-slate-700 dark:hover:text-white"
                     >
                       <X className="w-3.5 h-3.5" />
                     </button>
@@ -154,7 +152,7 @@ export const Navbar = () => {
                 <button
                   type="button"
                   onClick={() => setSearchOpen(true)}
-                  className="p-2 rounded-xl text-slate-300 hover:text-white hover:bg-white/[0.06] transition-colors focus:outline-none"
+                  className="p-2 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-slate-100 dark:text-slate-300 dark:hover:text-white dark:hover:bg-white/[0.06] transition-colors focus:outline-none"
                   title="Search platform"
                   aria-label="Search"
                 >
@@ -163,16 +161,8 @@ export const Navbar = () => {
               )}
             </div>
 
-            {/* Theme Toggle (Phase 1.5 Ready) */}
-            <button
-              type="button"
-              onClick={() => setIsDarkMode(!isDarkMode)}
-              className="p-2 rounded-xl text-slate-300 hover:text-white hover:bg-white/[0.06] transition-colors focus:outline-none"
-              title={isDarkMode ? 'Theme Mode: Dark' : 'Theme Mode: Light'}
-              aria-label="Toggle Theme"
-            >
-              {isDarkMode ? <Moon className="w-4 h-4 text-brand-300" /> : <Sun className="w-4 h-4 text-amber-400" />}
-            </button>
+            {/* Global Theme Toggle */}
+            <ThemeToggle />
 
             {/* Gateway Status */}
             <ApiHealthBadge className="hidden xl:inline-flex" />
@@ -187,7 +177,7 @@ export const Navbar = () => {
                 </Link>
                 <button
                   onClick={logout}
-                  className="p-2 text-slate-400 hover:text-rose-400 hover:bg-rose-500/10 rounded-xl transition-colors"
+                  className="p-2 text-slate-500 hover:text-rose-600 hover:bg-rose-500/10 dark:text-slate-400 dark:hover:text-rose-400 rounded-xl transition-colors"
                   title="Sign Out"
                 >
                   <LogOut className="w-4 h-4" />
@@ -209,12 +199,13 @@ export const Navbar = () => {
             )}
           </div>
 
-          {/* Mobile Menu & Search Icon */}
-          <div className="flex items-center gap-2 lg:hidden">
+          {/* Mobile Actions (Theme + Search + Menu) */}
+          <div className="flex items-center gap-1.5 lg:hidden">
+            <ThemeToggle variant="simple" />
             <button
               type="button"
               onClick={() => setSearchOpen(!searchOpen)}
-              className="p-2 rounded-xl text-slate-300 hover:text-white hover:bg-white/[0.06] transition-colors"
+              className="p-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/[0.06] transition-colors"
               aria-label="Search"
             >
               <Search className="w-5 h-5" />
@@ -222,7 +213,7 @@ export const Navbar = () => {
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-xl text-slate-200 hover:text-white hover:bg-white/[0.06] transition-colors focus:outline-none"
+              className="p-2 rounded-xl text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-white/[0.06] transition-colors focus:outline-none"
               aria-label="Toggle navigation menu"
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -246,7 +237,7 @@ export const Navbar = () => {
                   placeholder="Search jobs, skills, companies..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-navy-900 border border-slate-700 text-white text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"
+                  className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-50 dark:bg-navy-900 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"
                 />
               </form>
             </motion.div>
@@ -262,7 +253,7 @@ export const Navbar = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2 }}
-            className="lg:hidden border-b border-white/[0.08] bg-navy-950/95 backdrop-blur-2xl px-5 py-6 space-y-5"
+            className="lg:hidden border-b border-slate-200 dark:border-white/[0.08] bg-white/95 dark:bg-navy-950/95 backdrop-blur-2xl px-5 py-6 space-y-5"
           >
             {/* Navigation links */}
             <div className="flex flex-col space-y-1">
@@ -273,20 +264,20 @@ export const Navbar = () => {
                   className={({ isActive }) =>
                     `flex items-center justify-between px-3.5 py-2.5 rounded-xl text-base font-medium transition-colors ${
                       isActive
-                        ? 'bg-brand-500/15 text-white font-semibold'
-                        : 'text-slate-300 hover:text-white hover:bg-white/[0.04]'
+                        ? 'bg-brand-500/10 text-brand-600 dark:text-white font-semibold'
+                        : 'text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/[0.04]'
                     }`
                   }
                 >
                   <span>{link.name}</span>
-                  <ChevronRight className="w-4 h-4 text-slate-500" />
+                  <ChevronRight className="w-4 h-4 text-slate-400 dark:text-slate-500" />
                 </NavLink>
               ))}
             </div>
 
-            {/* Health status on mobile */}
-            <div className="pt-2 border-t border-white/[0.06] flex items-center justify-between">
-              <span className="text-xs text-slate-400">System Gateway</span>
+            {/* Health status & theme mode on mobile */}
+            <div className="pt-2 border-t border-slate-200 dark:border-white/[0.06] flex items-center justify-between">
+              <span className="text-xs text-slate-500 dark:text-slate-400">System Gateway</span>
               <ApiHealthBadge />
             </div>
 
@@ -301,7 +292,7 @@ export const Navbar = () => {
                   </Link>
                   <Button
                     variant="outline"
-                    className="w-full justify-center text-rose-400 border-rose-500/30 hover:bg-rose-500/10"
+                    className="w-full justify-center text-rose-600 dark:text-rose-400 border-rose-500/30 hover:bg-rose-500/10"
                     onClick={logout}
                     icon={LogOut}
                   >

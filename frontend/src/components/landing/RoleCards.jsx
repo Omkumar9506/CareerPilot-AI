@@ -30,7 +30,7 @@ export const RoleCards = () => {
       ctaLink: '/register?role=candidate',
       ctaVariant: 'primary',
       icon: UserCheck,
-      badgeColor: 'bg-brand-500/10 text-brand-300 border-brand-500/20',
+      badgeColor: 'bg-brand-500/15 text-brand-700 dark:text-brand-300 border-brand-500/30',
       gradientBorder: 'hover:border-brand-500/40',
       image:
         'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=500&auto=format&fit=crop&q=80',
@@ -51,7 +51,7 @@ export const RoleCards = () => {
       ctaLink: '/employers',
       ctaVariant: 'glow',
       icon: Building,
-      badgeColor: 'bg-purple-500/10 text-purple-300 border-purple-500/20',
+      badgeColor: 'bg-purple-500/15 text-purple-700 dark:text-purple-300 border-purple-500/30',
       gradientBorder: 'hover:border-purple-500/40',
       image:
         'https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=500&auto=format&fit=crop&q=80',
@@ -72,7 +72,7 @@ export const RoleCards = () => {
       ctaLink: '/login',
       ctaVariant: 'secondary',
       icon: ShieldCheck,
-      badgeColor: 'bg-cyber-500/10 text-cyber-300 border-cyber-500/20',
+      badgeColor: 'bg-cyber-500/15 text-cyber-700 dark:text-cyber-300 border-cyber-500/30',
       gradientBorder: 'hover:border-cyber-500/40',
       image:
         'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=500&auto=format&fit=crop&q=80',
@@ -80,7 +80,7 @@ export const RoleCards = () => {
   ];
 
   return (
-    <section className="py-24 sm:py-32 relative overflow-hidden bg-navy-900/30" id="communities">
+    <section className="py-24 sm:py-32 relative overflow-hidden bg-slate-100/60 dark:bg-navy-900/30 transition-colors duration-200" id="communities">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
           badge="Ecosystem Alignment"
@@ -100,7 +100,7 @@ export const RoleCards = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-40px' }}
                 transition={{ duration: 0.6, delay: index * 0.15 }}
-                className={`relative flex flex-col justify-between rounded-3xl bg-navy-950/80 backdrop-blur-2xl border border-white/[0.08] overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl ${item.gradientBorder}`}
+                className={`relative flex flex-col justify-between rounded-3xl bg-white dark:bg-navy-950/80 backdrop-blur-2xl border border-slate-200 dark:border-white/[0.08] shadow-lg dark:shadow-2xl overflow-hidden transition-all duration-300 hover:-translate-y-2 ${item.gradientBorder}`}
               >
                 {/* Header Image Header */}
                 <div className="relative h-48 w-full overflow-hidden">
@@ -109,7 +109,7 @@ export const RoleCards = () => {
                     alt={item.role}
                     className="w-full h-full object-cover object-center transition-transform duration-700 hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/60 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-white dark:from-navy-950 via-white/50 dark:via-navy-950/60 to-transparent" />
                   
                   {/* Floating Role Badge */}
                   <div className="absolute top-4 left-4">
@@ -125,21 +125,21 @@ export const RoleCards = () => {
                 {/* Card Body */}
                 <div className="p-6 sm:p-8 flex-1 flex flex-col justify-between">
                   <div>
-                    <h3 className="text-2xl font-extrabold text-white">
+                    <h3 className="text-2xl font-extrabold text-slate-900 dark:text-white transition-colors">
                       {item.role}
                     </h3>
-                    <p className="mt-3 text-sm text-slate-400 leading-relaxed">
+                    <p className="mt-3 text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
                       {item.description}
                     </p>
 
                     {/* Features list */}
-                    <ul className="mt-6 space-y-3 pt-6 border-t border-white/[0.06]">
+                    <ul className="mt-6 space-y-3 pt-6 border-t border-slate-200 dark:border-white/[0.06]">
                       {item.features.map((feat) => (
                         <li
                           key={feat}
-                          className="flex items-start gap-2.5 text-sm text-slate-300"
+                          className="flex items-start gap-2.5 text-sm text-slate-700 dark:text-slate-300"
                         >
-                          <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                          <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
                           <span>{feat}</span>
                         </li>
                       ))}
@@ -147,7 +147,7 @@ export const RoleCards = () => {
                   </div>
 
                   {/* CTA Button */}
-                  <div className="mt-8 pt-6 border-t border-white/[0.06]">
+                  <div className="mt-8 pt-6 border-t border-slate-200 dark:border-white/[0.06]">
                     <Link to={item.ctaLink} className="w-full block">
                       <Button
                         variant={item.ctaVariant}

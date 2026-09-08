@@ -26,7 +26,7 @@ export const SectionHeading = ({
         </div>
       )}
 
-      <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight sm:leading-tight">
+      <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight sm:leading-tight transition-colors">
         {title}{' '}
         {highlight && (
           <span className="gradient-ai">{highlight}</span>
@@ -34,7 +34,7 @@ export const SectionHeading = ({
       </h2>
 
       {subtitle && (
-        <p className="mt-4 text-base sm:text-lg text-slate-400 font-normal leading-relaxed max-w-2xl">
+        <p className="mt-4 text-base sm:text-lg text-slate-600 dark:text-slate-400 font-normal leading-relaxed max-w-2xl transition-colors">
           {subtitle}
         </p>
       )}

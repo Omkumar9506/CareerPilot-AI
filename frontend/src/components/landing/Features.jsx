@@ -20,9 +20,9 @@ export const Features = () => {
         'Get instant ATS scores, keyword suggestions, and detailed feedback powered by Google Gemini.',
       link: '/resume-analyzer',
       icon: FileSearch,
-      iconColor: 'text-brand-400',
+      iconColor: 'text-brand-600 dark:text-brand-400',
       iconBg: 'bg-brand-500/10 border-brand-500/20 group-hover:border-brand-500/40',
-      glowColor: 'group-hover:shadow-brand-500/20',
+      glowColor: 'group-hover:shadow-brand-500/10 dark:group-hover:shadow-brand-500/20',
       badge: 'Gemini 1.5 Pro',
     },
     {
@@ -32,9 +32,9 @@ export const Features = () => {
         'Discover jobs that match your skills, experience, and career goals using advanced AI algorithms.',
       link: '/jobs',
       icon: Sparkles,
-      iconColor: 'text-cyber-400',
+      iconColor: 'text-cyber-600 dark:text-cyber-400',
       iconBg: 'bg-cyber-500/10 border-cyber-500/20 group-hover:border-cyber-500/40',
-      glowColor: 'group-hover:shadow-cyber-500/20',
+      glowColor: 'group-hover:shadow-cyber-500/10 dark:group-hover:shadow-cyber-500/20',
       badge: '98% Accuracy',
     },
     {
@@ -44,9 +44,9 @@ export const Features = () => {
         'Practice with role-specific questions, get real-time feedback, and improve your confidence.',
       link: '/mock-interview',
       icon: Bot,
-      iconColor: 'text-purple-400',
+      iconColor: 'text-purple-600 dark:text-purple-400',
       iconBg: 'bg-purple-500/10 border-purple-500/20 group-hover:border-purple-500/40',
-      glowColor: 'group-hover:shadow-purple-500/20',
+      glowColor: 'group-hover:shadow-purple-500/10 dark:group-hover:shadow-purple-500/20',
       badge: 'Real-Time Voice & Text',
     },
     {
@@ -56,9 +56,9 @@ export const Features = () => {
         'Identify missing skills and get a personalized learning roadmap to stay ahead in your career.',
       link: '/roadmap',
       icon: Compass,
-      iconColor: 'text-emerald-400',
+      iconColor: 'text-emerald-600 dark:text-emerald-400',
       iconBg: 'bg-emerald-500/10 border-emerald-500/20 group-hover:border-emerald-500/40',
-      glowColor: 'group-hover:shadow-emerald-500/20',
+      glowColor: 'group-hover:shadow-emerald-500/10 dark:group-hover:shadow-emerald-500/20',
       badge: 'Step-by-Step Paths',
     },
   ];
@@ -91,7 +91,7 @@ export const Features = () => {
               >
                 <Link
                   to={feat.link}
-                  className={`group relative flex flex-col justify-between h-full p-7 rounded-2xl bg-navy-900/70 backdrop-blur-xl border border-white/[0.08] transition-all duration-300 hover:-translate-y-2 hover:border-brand-500/40 hover:shadow-2xl ${feat.glowColor} focus:outline-none focus:ring-2 focus:ring-brand-500`}
+                  className={`group relative flex flex-col justify-between h-full p-7 rounded-2xl bg-white dark:bg-navy-900/70 backdrop-blur-xl border border-slate-200 dark:border-white/[0.08] shadow-md dark:shadow-xl transition-all duration-300 hover:-translate-y-2 hover:border-brand-500/40 hover:shadow-xl dark:hover:shadow-2xl ${feat.glowColor} focus:outline-none focus:ring-2 focus:ring-brand-500`}
                 >
                   {/* Subtle top indicator badge */}
                   <div className="flex items-center justify-between mb-6">
@@ -100,23 +100,23 @@ export const Features = () => {
                     >
                       <Icon className={`w-6 h-6 ${feat.iconColor}`} />
                     </div>
-                    <span className="text-[11px] font-semibold text-slate-400 bg-white/[0.04] px-2.5 py-1 rounded-full border border-white/[0.06]">
+                    <span className="text-[11px] font-semibold text-slate-600 dark:text-slate-400 bg-slate-100 dark:bg-white/[0.04] px-2.5 py-1 rounded-full border border-slate-200 dark:border-white/[0.06]">
                       {feat.badge}
                     </span>
                   </div>
 
                   {/* Feature Info */}
                   <div className="flex-1">
-                    <h3 className="text-xl font-bold text-white group-hover:text-brand-300 transition-colors">
+                    <h3 className="text-xl font-bold text-slate-900 dark:text-white group-hover:text-brand-600 dark:group-hover:text-brand-300 transition-colors">
                       {feat.title}
                     </h3>
-                    <p className="mt-3 text-sm text-slate-400 leading-relaxed">
+                    <p className="mt-3 text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
                       {feat.description}
                     </p>
                   </div>
 
                   {/* CTA link */}
-                  <div className="mt-6 pt-4 border-t border-white/[0.06] flex items-center text-sm font-semibold text-brand-400 group-hover:text-cyber-300 transition-colors">
+                  <div className="mt-6 pt-4 border-t border-slate-200 dark:border-white/[0.06] flex items-center text-sm font-semibold text-brand-600 dark:text-brand-400 group-hover:text-cyber-600 dark:group-hover:text-cyber-300 transition-colors">
                     <span>Learn More</span>
                     <ArrowRight className="w-4 h-4 ml-1.5 transition-transform duration-200 group-hover:translate-x-1" />
                   </div>

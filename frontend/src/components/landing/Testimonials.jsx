@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { SectionHeading } from '../common/SectionHeading';
 import {
   Quote,
@@ -74,14 +74,14 @@ export const Testimonials = () => {
           <div className="hidden md:flex items-center gap-3 mt-6 md:mt-0">
             <button
               onClick={handlePrev}
-              className="p-3 rounded-xl border border-white/10 bg-navy-900/60 hover:bg-white/[0.08] text-slate-300 hover:text-white transition-all focus:outline-none focus:ring-2 focus:ring-brand-500"
+              className="p-3 rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-navy-900/60 hover:bg-slate-100 dark:hover:bg-white/[0.08] text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-all shadow-sm focus:outline-none focus:ring-2 focus:ring-brand-500"
               aria-label="Previous testimonial"
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
             <button
               onClick={handleNext}
-              className="p-3 rounded-xl border border-white/10 bg-navy-900/60 hover:bg-white/[0.08] text-slate-300 hover:text-white transition-all focus:outline-none focus:ring-2 focus:ring-brand-500"
+              className="p-3 rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-navy-900/60 hover:bg-slate-100 dark:hover:bg-white/[0.08] text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-all shadow-sm focus:outline-none focus:ring-2 focus:ring-brand-500"
               aria-label="Next testimonial"
             >
               <ChevronRight className="w-5 h-5" />
@@ -98,19 +98,19 @@ export const Testimonials = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: idx * 0.15 }}
-              className={`relative flex flex-col justify-between p-8 rounded-3xl bg-navy-900/70 backdrop-blur-2xl border transition-all duration-300 ${
+              className={`relative flex flex-col justify-between p-8 rounded-3xl bg-white dark:bg-navy-900/70 backdrop-blur-2xl border shadow-md dark:shadow-xl transition-all duration-300 ${
                 activeIndex === idx
                   ? 'border-brand-500/50 shadow-glow-sm shadow-brand-500/10'
-                  : 'border-white/[0.08] hover:border-white/20'
+                  : 'border-slate-200 dark:border-white/[0.08] hover:border-slate-300 dark:hover:border-white/20'
               }`}
             >
               {/* Quote Icon & Star Rating */}
               <div>
                 <div className="flex items-center justify-between mb-6">
-                  <div className="w-10 h-10 rounded-xl bg-brand-500/10 border border-brand-500/20 flex items-center justify-center text-brand-400">
+                  <div className="w-10 h-10 rounded-xl bg-brand-500/10 border border-brand-500/20 flex items-center justify-center text-brand-600 dark:text-brand-400">
                     <Quote className="w-5 h-5" />
                   </div>
-                  <div className="flex items-center gap-1 text-amber-400">
+                  <div className="flex items-center gap-1 text-amber-500">
                     {[...Array(item.rating)].map((_, i) => (
                       <Star
                         key={i}
@@ -121,25 +121,25 @@ export const Testimonials = () => {
                 </div>
 
                 {/* Quote text */}
-                <p className="text-slate-300 text-sm sm:text-base leading-relaxed italic">
+                <p className="text-slate-700 dark:text-slate-300 text-sm sm:text-base leading-relaxed italic">
                   "{item.quote}"
                 </p>
               </div>
 
               {/* Author Info */}
-              <div className="mt-8 pt-6 border-t border-white/[0.06] flex items-center gap-4">
+              <div className="mt-8 pt-6 border-t border-slate-200 dark:border-white/[0.06] flex items-center gap-4">
                 <img
                   src={item.avatar}
                   alt={item.name}
                   className="w-12 h-12 rounded-full object-cover ring-2 ring-brand-500/30"
                 />
                 <div>
-                  <h4 className="text-base font-bold text-white">
+                  <h4 className="text-base font-bold text-slate-900 dark:text-white">
                     {item.name}
                   </h4>
-                  <p className="text-xs text-slate-400">
+                  <p className="text-xs text-slate-500 dark:text-slate-400">
                     {item.role} •{' '}
-                    <span className="text-brand-300 font-medium">
+                    <span className="text-brand-600 dark:text-brand-300 font-medium">
                       {item.company}
                     </span>
                   </p>
@@ -153,17 +153,17 @@ export const Testimonials = () => {
         <div className="flex md:hidden items-center justify-center gap-3 mt-8">
           <button
             onClick={handlePrev}
-            className="p-2.5 rounded-xl border border-white/10 bg-navy-900/60 text-slate-300"
+            className="p-2.5 rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-navy-900/60 text-slate-700 dark:text-slate-300"
             aria-label="Previous testimonial"
           >
             <ChevronLeft className="w-5 h-5" />
           </button>
-          <span className="text-xs text-slate-400 font-medium">
+          <span className="text-xs text-slate-600 dark:text-slate-400 font-medium">
             {activeIndex + 1} / {testimonials.length}
           </span>
           <button
             onClick={handleNext}
-            className="p-2.5 rounded-xl border border-white/10 bg-navy-900/60 text-slate-300"
+            className="p-2.5 rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-navy-900/60 text-slate-700 dark:text-slate-300"
             aria-label="Next testimonial"
           >
             <ChevronRight className="w-5 h-5" />

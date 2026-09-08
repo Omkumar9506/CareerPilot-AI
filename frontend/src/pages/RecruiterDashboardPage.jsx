@@ -35,9 +35,11 @@ import {
 } from 'recharts';
 import api from '../services/api';
 import { useAuth } from '../context/AuthContext';
+import { useChartTheme } from '../hooks/useChartTheme';
 
 export const RecruiterDashboardPage = () => {
   const { user } = useAuth();
+  const { textColor, tooltipStyle } = useChartTheme();
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -270,11 +272,9 @@ export const RecruiterDashboardPage = () => {
           <div className="h-52 w-full pt-2">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={recruitmentFunnel} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
-                <XAxis dataKey="stage" stroke="#64748b" fontSize={11} tickLine={false} />
-                <YAxis allowDecimals={false} stroke="#64748b" fontSize={11} tickLine={false} />
-                <Tooltip
-                  contentStyle={{ backgroundColor: '#0f172a', borderColor: '#334155', borderRadius: '12px', fontSize: '12px' }}
-                />
+                <XAxis dataKey="stage" stroke={textColor} fontSize={11} tickLine={false} />
+                <YAxis allowDecimals={false} stroke={textColor} fontSize={11} tickLine={false} />
+                <Tooltip contentStyle={tooltipStyle} />
                 <Bar dataKey="count" radius={[6, 6, 0, 0]}>
                   {recruitmentFunnel.map((entry, index) => (
                     <Cell key={`cell-${index}`} fill={entry.color} />

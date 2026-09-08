@@ -24,9 +24,12 @@ import { RecruiterDashboardPage } from './pages/RecruiterDashboardPage';
 import { AdminDashboardPage } from './pages/AdminDashboardPage';
 import { ProtectedRoute } from './components/common/ProtectedRoute';
 
+import { ThemeProvider } from './context/ThemeContext';
+
 function App() {
   return (
-    <AuthProvider>
+    <ThemeProvider>
+      <AuthProvider>
       <BrowserRouter>
         <Routes>
           {/* Main Layout */}
@@ -157,6 +160,7 @@ function App() {
         </Routes>
       </BrowserRouter>
     </AuthProvider>
+    </ThemeProvider>
   );
 }
 

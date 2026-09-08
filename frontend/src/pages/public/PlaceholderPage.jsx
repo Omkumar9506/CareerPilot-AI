@@ -77,8 +77,8 @@ export const PlaceholderPage = () => {
 
   return (
     <div className="min-h-[80vh] flex items-center justify-center py-20 px-4 sm:px-6 lg:px-8 glow-radial-bg relative">
-      <div className="max-w-2xl w-full text-center rounded-3xl bg-navy-900/80 backdrop-blur-2xl border border-white/10 p-8 sm:p-12 shadow-2xl relative overflow-hidden">
-        <div className="absolute top-0 right-0 -mr-16 -mt-16 w-60 h-60 bg-brand-500/15 blur-3xl rounded-full pointer-events-none" />
+      <div className="max-w-2xl w-full text-center rounded-3xl bg-white dark:bg-navy-900/80 backdrop-blur-2xl border border-slate-200 dark:border-white/10 p-8 sm:p-12 shadow-xl dark:shadow-2xl relative overflow-hidden transition-colors duration-200">
+        <div className="absolute top-0 right-0 -mr-16 -mt-16 w-60 h-60 bg-brand-500/10 dark:bg-brand-500/15 blur-3xl rounded-full pointer-events-none" />
 
         <div className="inline-flex mb-6">
           <Badge variant="glow" size="lg" icon={Icon}>
@@ -86,23 +86,23 @@ export const PlaceholderPage = () => {
           </Badge>
         </div>
 
-        <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight leading-tight">
+        <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight transition-colors">
           {config.title}
         </h1>
 
-        <p className="mt-4 text-base sm:text-lg text-slate-300 leading-relaxed">
+        <p className="mt-4 text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed transition-colors">
           {config.subtitle}
         </p>
 
         {/* Feature Highlights */}
-        <div className="mt-8 pt-6 border-t border-white/[0.08] text-left space-y-3">
-          <h4 className="text-xs font-bold uppercase tracking-wider text-brand-300">
+        <div className="mt-8 pt-6 border-t border-slate-200 dark:border-white/[0.08] text-left space-y-3">
+          <h4 className="text-xs font-bold uppercase tracking-wider text-brand-600 dark:text-brand-300">
             What to expect:
           </h4>
           <ul className="space-y-2.5">
             {config.highlights.map((item, idx) => (
-              <li key={idx} className="flex items-start gap-2.5 text-sm text-slate-300">
-                <span className="w-1.5 h-1.5 rounded-full bg-cyber-400 mt-2 shrink-0" />
+              <li key={idx} className="flex items-start gap-2.5 text-sm text-slate-700 dark:text-slate-300">
+                <span className="w-1.5 h-1.5 rounded-full bg-cyber-500 dark:bg-cyber-400 mt-2 shrink-0" />
                 <span>{item}</span>
               </li>
             ))}

@@ -29,8 +29,10 @@ import {
   Cell,
 } from 'recharts';
 import api from '../services/api';
+import { useChartTheme } from '../hooks/useChartTheme';
 
 export const ResumeAnalyzerPage = () => {
+  const { textColor, tooltipStyle } = useChartTheme();
   const [activeTab, setActiveTab] = useState('profile'); // 'profile' | 'paste'
   const [resumeText, setResumeText] = useState('');
   const [jobs, setJobs] = useState([]);
@@ -444,23 +446,15 @@ export const ResumeAnalyzerPage = () => {
                       layout="vertical"
                       margin={{ top: 5, right: 30, left: 40, bottom: 5 }}
                     >
-                      <XAxis type="number" domain={[0, 100]} stroke="#64748b" tick={{ fontSize: 11 }} />
+                      <XAxis type="number" domain={[0, 100]} stroke={textColor} tick={{ fontSize: 11 }} />
                       <YAxis
                         type="category"
                         dataKey="name"
-                        stroke="#94a3b8"
+                        stroke={textColor}
                         tick={{ fontSize: 11 }}
                         width={130}
                       />
-                      <Tooltip
-                        contentStyle={{
-                          backgroundColor: '#0f172a',
-                          borderColor: '#334155',
-                          borderRadius: '8px',
-                          color: '#f8fafc',
-                          fontSize: '12px',
-                        }}
-                      />
+                      <Tooltip contentStyle={tooltipStyle} />
                       <Bar dataKey="value" radius={[0, 6, 6, 0]} barSize={16}>
                         {chartData.map((entry, index) => (
                           <Cell
