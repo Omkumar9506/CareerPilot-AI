@@ -1,0 +1,24 @@
+# Backend dependencies
+node_modules/
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Uploads & Temporary files
+uploads/*
+!uploads/.gitkeep
+!uploads/resumes/
+uploads/resumes/*
+!uploads/resumes/.gitkeep
+temp/
+tmp/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Test coverage
+coverage/
