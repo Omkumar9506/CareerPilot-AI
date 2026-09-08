@@ -4,14 +4,15 @@ import { AuthProvider } from './context/AuthContext';
 import { PublicLayout } from './components/layout/PublicLayout';
 import { HomePage } from './pages/HomePage';
 import { JobsPage } from './pages/JobsPage';
+import { JobDetailsPage } from './pages/JobDetailsPage';
 import { ResumeAnalyzerPage } from './pages/ResumeAnalyzerPage';
 import { MockInterviewPage } from './pages/MockInterviewPage';
 import { RoadmapPage } from './pages/RoadmapPage';
 import { LoginPage } from './pages/LoginPage';
 import { RegisterPage } from './pages/RegisterPage';
+import { PlaceholderPage } from './pages/public/PlaceholderPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 import { ProfileRouterPage } from './pages/ProfileRouterPage';
-import { JobDetailsPage } from './pages/JobDetailsPage';
 import { RecruiterJobsPage } from './pages/RecruiterJobsPage';
 import { CandidateApplicationsPage } from './pages/CandidateApplicationsPage';
 import { RecruiterApplicantsPage } from './pages/RecruiterApplicantsPage';
@@ -28,8 +29,9 @@ function App() {
     <AuthProvider>
       <BrowserRouter>
         <Routes>
-          {/* Public & Protected Layout */}
+          {/* Main Layout */}
           <Route path="/" element={<PublicLayout />}>
+            {/* Core Public Routes */}
             <Route index element={<HomePage />} />
             <Route path="jobs" element={<JobsPage />} />
             <Route path="jobs/:id" element={<JobDetailsPage />} />
@@ -38,7 +40,17 @@ function App() {
             <Route path="roadmap" element={<RoadmapPage />} />
             <Route path="login" element={<LoginPage />} />
             <Route path="register" element={<RegisterPage />} />
-            
+
+            {/* Extended Platform Routes */}
+            <Route path="about" element={<PlaceholderPage />} />
+            <Route path="ai-tools" element={<PlaceholderPage />} />
+            <Route path="employers" element={<PlaceholderPage />} />
+            <Route path="pricing" element={<PlaceholderPage />} />
+            <Route path="privacy" element={<PlaceholderPage />} />
+            <Route path="terms" element={<PlaceholderPage />} />
+            <Route path="cookies" element={<PlaceholderPage />} />
+            <Route path="sitemap" element={<PlaceholderPage />} />
+
             {/* Protected Profile Route */}
             <Route
               path="profile"
@@ -139,6 +151,7 @@ function App() {
               }
             />
 
+            {/* 404 Route */}
             <Route path="*" element={<NotFoundPage />} />
           </Route>
         </Routes>
