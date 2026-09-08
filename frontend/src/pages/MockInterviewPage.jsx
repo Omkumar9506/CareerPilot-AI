@@ -351,14 +351,14 @@ export const MockInterviewPage = () => {
         <div className="space-y-10">
           {/* Header Banner */}
           <div className="text-center max-w-3xl mx-auto space-y-4">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-violet-500/10 text-violet-400 border border-violet-500/20 text-xs font-semibold uppercase">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-violet-500/10 text-violet-600 dark:text-violet-400 border border-violet-500/20 text-xs font-semibold uppercase">
               <Bot className="w-4 h-4" />
               Next-Gen AI Interview Simulation Studio
             </div>
-            <h1 className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight">
+            <h1 className="text-4xl sm:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight">
               Master High-Stakes Tech Interviews with <span className="gradient-text">Gemini AI</span>
             </h1>
-            <p className="text-base text-slate-400 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-base text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
               Simulate dynamic Technical, System Design, and STAR Behavioral interviews with real-time answer scoring, speech dictation, audio readouts, and comprehensive performance analytics.
             </p>
 
@@ -367,9 +367,9 @@ export const MockInterviewPage = () => {
               <div className="pt-2">
                 <button
                   onClick={() => setShowHistoryModal(true)}
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900 border border-slate-800 text-xs font-semibold text-slate-300 hover:text-white hover:border-slate-700 transition"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:border-slate-300 dark:hover:border-slate-700 transition shadow-sm"
                 >
-                  <History className="w-3.5 h-3.5 text-brand-400" />
+                  <History className="w-3.5 h-3.5 text-brand-600 dark:text-brand-400" />
                   View Past Interview Scorecards ({history.length})
                 </button>
               </div>
@@ -377,12 +377,12 @@ export const MockInterviewPage = () => {
           </div>
 
           {/* Configuration Form Card */}
-          <div className="max-w-4xl mx-auto glass-card p-6 sm:p-10 rounded-3xl border border-slate-800 shadow-2xl space-y-8">
+          <div className="max-w-4xl mx-auto bg-white dark:bg-slate-900/60 p-6 sm:p-10 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-8 transition-colors">
             <form onSubmit={handleStartInterview} className="space-y-8">
               
               {/* Target Role Title */}
               <div className="space-y-3">
-                <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider">
+                <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
                   Target Engineering Position *
                 </label>
                 <input
@@ -391,7 +391,7 @@ export const MockInterviewPage = () => {
                   placeholder="e.g. Senior Full Stack Engineer, Cloud Architect, React Lead..."
                   value={roleTitle}
                   onChange={(e) => setRoleTitle(e.target.value)}
-                  className="w-full bg-slate-950/80 border border-slate-800 rounded-2xl px-4 py-3.5 text-sm text-white focus:outline-none focus:border-brand-500 transition shadow-inner"
+                  className="w-full bg-slate-50 dark:bg-slate-950/80 border border-slate-300 dark:border-slate-800 rounded-2xl px-4 py-3.5 text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-brand-500 transition shadow-inner"
                 />
 
                 {/* Role Presets */}
@@ -403,8 +403,8 @@ export const MockInterviewPage = () => {
                       onClick={() => setRoleTitle(preset)}
                       className={`text-xs px-3 py-1.5 rounded-xl border transition ${
                         roleTitle === preset
-                          ? 'bg-brand-500/20 text-brand-300 border-brand-500/40 font-semibold'
-                          : 'bg-slate-900/80 text-slate-400 border-slate-800 hover:text-white'
+                          ? 'bg-brand-500/20 text-brand-700 dark:text-brand-300 border-brand-500/40 font-semibold'
+                          : 'bg-slate-100 dark:bg-slate-900/80 text-slate-600 dark:text-slate-400 border-slate-200 dark:border-slate-800 hover:text-slate-900 dark:hover:text-white'
                       }`}
                     >
                       {preset}
@@ -415,7 +415,7 @@ export const MockInterviewPage = () => {
 
               {/* Category Track Picker */}
               <div className="space-y-3">
-                <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider">
+                <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
                   Interview Category Track
                 </label>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -428,8 +428,8 @@ export const MockInterviewPage = () => {
                         onClick={() => setCategory(track.id)}
                         className={`p-5 rounded-2xl border cursor-pointer transition-all ${
                           isSelected
-                            ? 'bg-slate-900/90 border-brand-500/50 shadow-xl shadow-brand-500/10 ring-1 ring-brand-500/40'
-                            : 'bg-slate-950/60 border-slate-800/80 hover:border-slate-700 text-slate-400'
+                            ? 'bg-brand-50/50 dark:bg-slate-900/90 border-brand-500/50 shadow-md ring-1 ring-brand-500/40'
+                            : 'bg-slate-50 dark:bg-slate-950/60 border-slate-200 dark:border-slate-800/80 hover:border-slate-300 dark:hover:border-slate-700 text-slate-600 dark:text-slate-400'
                         }`}
                       >
                         <div className="flex items-center gap-3 mb-2">
@@ -438,9 +438,9 @@ export const MockInterviewPage = () => {
                           >
                             <Icon className="w-4 h-4" />
                           </div>
-                          <h4 className="text-sm font-bold text-white">{track.label}</h4>
+                          <h4 className="text-sm font-bold text-slate-900 dark:text-white">{track.label}</h4>
                         </div>
-                        <p className="text-xs text-slate-400 leading-relaxed">{track.desc}</p>
+                        <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">{track.desc}</p>
                       </div>
                     );
                   })}
@@ -452,24 +452,24 @@ export const MockInterviewPage = () => {
                 
                 {/* Seniority Level */}
                 <div className="space-y-2">
-                  <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider">
+                  <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
                     Experience Level
                   </label>
                   <select
                     value={difficulty}
                     onChange={(e) => setDifficulty(e.target.value)}
-                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-brand-500"
+                    className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-brand-500"
                   >
-                    <option value="Entry">Entry / Junior (0-2y)</option>
-                    <option value="Mid-Level">Mid-Level (2-5y)</option>
-                    <option value="Senior">Senior Engineer (5-8y)</option>
-                    <option value="Lead">Lead / Staff Architect (8y+)</option>
+                    <option value="Entry" className="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">Entry / Junior (0-2y)</option>
+                    <option value="Mid-Level" className="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">Mid-Level (2-5y)</option>
+                    <option value="Senior" className="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">Senior Engineer (5-8y)</option>
+                    <option value="Lead" className="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">Lead / Staff Architect (8y+)</option>
                   </select>
                 </div>
 
                 {/* Target Company / Culture */}
                 <div className="space-y-2">
-                  <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider">
+                  <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
                     Target Company (Optional)
                   </label>
                   <input
@@ -477,23 +477,23 @@ export const MockInterviewPage = () => {
                     placeholder="e.g. Google, Stripe, Startups..."
                     value={targetCompany}
                     onChange={(e) => setTargetCompany(e.target.value)}
-                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-brand-500"
+                    className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-brand-500"
                   />
                 </div>
 
                 {/* Question Count */}
                 <div className="space-y-2">
-                  <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider">
+                  <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
                     Simulation Length
                   </label>
                   <select
                     value={questionCount}
                     onChange={(e) => setQuestionCount(Number(e.target.value))}
-                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-brand-500"
+                    className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-brand-500"
                   >
-                    <option value={3}>3 Questions (Express ~15 min)</option>
-                    <option value={4}>4 Questions (Standard ~25 min)</option>
-                    <option value={5}>5 Questions (Comprehensive ~35 min)</option>
+                    <option value={3} className="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">3 Questions (Express ~15 min)</option>
+                    <option value={4} className="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">4 Questions (Standard ~25 min)</option>
+                    <option value={5} className="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">5 Questions (Comprehensive ~35 min)</option>
                   </select>
                 </div>
 
@@ -501,16 +501,16 @@ export const MockInterviewPage = () => {
 
               {/* Error Alert */}
               {errorMessage && (
-                <div className="p-4 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs flex items-center gap-2.5">
-                  <AlertCircle className="w-4 h-4 text-rose-400 shrink-0" />
+                <div className="p-4 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-700 dark:text-rose-300 text-xs flex items-center gap-2.5">
+                  <AlertCircle className="w-4 h-4 text-rose-500 shrink-0" />
                   <span>{errorMessage}</span>
                 </div>
               )}
 
               {/* Submit CTA */}
-              <div className="pt-4 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-slate-800/80">
-                <div className="flex items-center gap-2 text-xs text-slate-400">
-                  <Sparkles className="w-4 h-4 text-brand-400" />
+              <div className="pt-4 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-slate-200 dark:border-slate-800/80">
+                <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
+                  <Sparkles className="w-4 h-4 text-brand-600 dark:text-brand-400" />
                   <span>Powered by Gemini 1.5 Flash Real-Time Evaluation</span>
                 </div>
 
@@ -554,14 +554,14 @@ export const MockInterviewPage = () => {
         <div className="max-w-4xl mx-auto space-y-6">
           
           {/* Top Session Progress Bar */}
-          <div className="glass-card p-4 rounded-2xl border border-slate-800 flex flex-wrap items-center justify-between gap-4">
+          <div className="bg-white dark:bg-slate-900/60 p-4 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm flex flex-wrap items-center justify-between gap-4 transition-colors">
             <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-xl bg-violet-500/20 text-violet-400 flex items-center justify-center font-bold text-xs">
+              <div className="w-9 h-9 rounded-xl bg-violet-500/15 text-violet-700 dark:text-violet-400 flex items-center justify-center font-bold text-xs">
                 {currentQuestionIndex + 1}/{session.questions.length}
               </div>
               <div>
-                <h3 className="text-sm font-bold text-white">{session.roleTitle}</h3>
-                <p className="text-[11px] text-slate-400">
+                <h3 className="text-sm font-bold text-slate-900 dark:text-white">{session.roleTitle}</h3>
+                <p className="text-[11px] text-slate-500 dark:text-slate-400">
                   {session.category} Track • {session.difficulty} Level
                 </p>
               </div>
@@ -569,14 +569,14 @@ export const MockInterviewPage = () => {
 
             {/* Timer & Abort */}
             <div className="flex items-center gap-4">
-              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-950 border border-slate-800 text-xs font-mono font-bold text-brand-300">
-                <Clock className="w-3.5 h-3.5 text-brand-400" />
+              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-xs font-mono font-bold text-brand-700 dark:text-brand-300 shadow-xs">
+                <Clock className="w-3.5 h-3.5 text-brand-600 dark:text-brand-400" />
                 {formatTime(timerSeconds)}
               </div>
 
               <button
                 onClick={() => setViewState('setup')}
-                className="text-xs text-slate-500 hover:text-rose-400 transition"
+                className="text-xs text-slate-500 hover:text-rose-600 dark:hover:text-rose-400 transition font-medium"
               >
                 Quit Session
               </button>
@@ -584,13 +584,13 @@ export const MockInterviewPage = () => {
           </div>
 
           {/* Question Card */}
-          <div className="glass-card p-6 sm:p-8 rounded-3xl border border-slate-800 shadow-2xl space-y-6 relative overflow-hidden">
+          <div className="bg-white dark:bg-slate-900/60 p-6 sm:p-8 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-6 relative overflow-hidden transition-colors">
             <div className="flex items-start justify-between gap-4">
               <div className="space-y-1.5">
-                <span className="text-[10px] uppercase font-extrabold px-2.5 py-0.5 rounded-full bg-brand-500/10 text-brand-400 border border-brand-500/20">
+                <span className="text-[10px] uppercase font-extrabold px-2.5 py-0.5 rounded-full bg-brand-500/10 text-brand-700 dark:text-brand-400 border border-brand-500/20">
                   {session.questions[currentQuestionIndex]?.category || 'Technical'} Question
                 </span>
-                <h2 className="text-lg sm:text-xl font-bold text-white leading-snug">
+                <h2 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white leading-snug">
                   {session.questions[currentQuestionIndex]?.questionText}
                 </h2>
               </div>
@@ -603,8 +603,8 @@ export const MockInterviewPage = () => {
                 }
                 className={`p-3 rounded-2xl border transition ${
                   isSpeaking
-                    ? 'bg-brand-500/20 text-brand-300 border-brand-500/40 animate-pulse'
-                    : 'bg-slate-900 border-slate-800 text-slate-400 hover:text-white'
+                    ? 'bg-brand-500/20 text-brand-700 dark:text-brand-300 border-brand-500/40 animate-pulse'
+                    : 'bg-slate-100 dark:bg-slate-900 border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
                 }`}
                 title={isSpeaking ? 'Mute Question' : 'Listen to AI Interviewer'}
               >
@@ -621,19 +621,19 @@ export const MockInterviewPage = () => {
                     placeholder="Articulate your structured response here... (You can type or click the microphone to speak your response aloud)"
                     value={candidateAnswer}
                     onChange={(e) => setCandidateAnswer(e.target.value)}
-                    className="w-full bg-slate-950/80 border border-slate-800 rounded-2xl p-4 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-brand-500 transition leading-relaxed shadow-inner"
+                    className="w-full bg-slate-50 dark:bg-slate-950/80 border border-slate-300 dark:border-slate-800 rounded-2xl p-4 text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-brand-500 transition leading-relaxed shadow-inner"
                   />
 
                   {/* Word count */}
-                  <div className="absolute right-4 bottom-4 text-[11px] text-slate-500 font-mono">
+                  <div className="absolute right-4 bottom-4 text-[11px] text-slate-400 dark:text-slate-500 font-mono">
                     {candidateAnswer.trim() ? candidateAnswer.trim().split(/\s+/).length : 0} words
                   </div>
                 </div>
 
                 {/* Error Banner */}
                 {errorMessage && (
-                  <div className="p-3.5 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs flex items-center gap-2">
-                    <AlertCircle className="w-4 h-4 text-rose-400 shrink-0" />
+                  <div className="p-3.5 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-700 dark:text-rose-300 text-xs flex items-center gap-2">
+                    <AlertCircle className="w-4 h-4 text-rose-500 shrink-0" />
                     <span>{errorMessage}</span>
                   </div>
                 )}
@@ -647,18 +647,18 @@ export const MockInterviewPage = () => {
                     onClick={toggleVoiceDictation}
                     className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border text-xs font-semibold transition ${
                       isListening
-                        ? 'bg-rose-500/20 border-rose-500/40 text-rose-300 animate-pulse'
-                        : 'bg-slate-900 border-slate-800 text-slate-300 hover:text-white'
+                        ? 'bg-rose-500/20 border-rose-500/40 text-rose-700 dark:text-rose-300 animate-pulse'
+                        : 'bg-slate-100 dark:bg-slate-900 border-slate-300 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'
                     }`}
                   >
                     {isListening ? (
                       <>
-                        <MicOff className="w-4 h-4 text-rose-400" />
+                        <MicOff className="w-4 h-4 text-rose-500" />
                         Listening... Click to Stop
                       </>
                     ) : (
                       <>
-                        <Mic className="w-4 h-4 text-brand-400" />
+                        <Mic className="w-4 h-4 text-brand-600 dark:text-brand-400" />
                         Voice Dictation (Speech-to-Text)
                       </>
                     )}
@@ -687,28 +687,28 @@ export const MockInterviewPage = () => {
               </div>
             ) : (
               /* Immediate Evaluation Feedback Card */
-              <div className="space-y-6 pt-2 border-t border-slate-800/80 animate-in fade-in duration-300">
+              <div className="space-y-6 pt-2 border-t border-slate-200 dark:border-slate-800/80 animate-in fade-in duration-300">
                 
                 {/* Score & Feedback Header */}
-                <div className="p-5 rounded-2xl bg-gradient-to-r from-slate-900 via-brand-950/30 to-slate-900 border border-brand-500/30 space-y-3">
+                <div className="p-5 rounded-2xl bg-gradient-to-r from-brand-50/50 via-indigo-50/30 to-slate-50 dark:from-slate-900 dark:via-brand-950/30 dark:to-slate-900 border border-brand-500/30 space-y-3">
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-bold text-brand-300 uppercase tracking-wider">
+                    <span className="text-xs font-bold text-brand-700 dark:text-brand-300 uppercase tracking-wider">
                       Immediate AI Evaluation
                     </span>
                     <span
                       className={`text-sm font-extrabold px-3 py-1 rounded-xl border ${
                         evaluatedCurrentQuestion.score >= 80
-                          ? 'bg-emerald-500/15 text-emerald-300 border-emerald-500/30'
+                          ? 'bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border-emerald-500/30'
                           : evaluatedCurrentQuestion.score >= 60
-                          ? 'bg-brand-500/15 text-brand-300 border-brand-500/30'
-                          : 'bg-amber-500/15 text-amber-300 border-amber-500/30'
+                          ? 'bg-brand-500/15 text-brand-700 dark:text-brand-300 border-brand-500/30'
+                          : 'bg-amber-500/15 text-amber-700 dark:text-amber-300 border-amber-500/30'
                       }`}
                     >
                       {evaluatedCurrentQuestion.score}/100
                     </span>
                   </div>
 
-                  <p className="text-xs text-slate-200 leading-relaxed">
+                  <p className="text-xs text-slate-700 dark:text-slate-200 leading-relaxed">
                     {evaluatedCurrentQuestion.feedback}
                   </p>
                 </div>
@@ -716,15 +716,15 @@ export const MockInterviewPage = () => {
                 {/* Strengths & Improvements */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {/* Strengths */}
-                  <div className="p-4 rounded-2xl bg-slate-950/60 border border-emerald-500/20 space-y-2">
-                    <div className="flex items-center gap-2 text-emerald-400 text-xs font-semibold uppercase">
+                  <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-950/60 border border-emerald-500/20 space-y-2">
+                    <div className="flex items-center gap-2 text-emerald-600 dark:text-emerald-400 text-xs font-semibold uppercase">
                       <CheckCircle2 className="w-4 h-4" />
                       Observed Strengths
                     </div>
-                    <ul className="space-y-1.5 text-xs text-slate-300">
+                    <ul className="space-y-1.5 text-xs text-slate-700 dark:text-slate-300">
                       {evaluatedCurrentQuestion.strengths?.map((s, idx) => (
                         <li key={idx} className="flex items-start gap-1.5">
-                          <span className="text-emerald-400 font-bold">•</span>
+                          <span className="text-emerald-600 dark:text-emerald-400 font-bold">•</span>
                           <span>{s}</span>
                         </li>
                       ))}
@@ -732,15 +732,15 @@ export const MockInterviewPage = () => {
                   </div>
 
                   {/* Improvements */}
-                  <div className="p-4 rounded-2xl bg-slate-950/60 border border-amber-500/20 space-y-2">
-                    <div className="flex items-center gap-2 text-amber-400 text-xs font-semibold uppercase">
+                  <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-950/60 border border-amber-500/20 space-y-2">
+                    <div className="flex items-center gap-2 text-amber-600 dark:text-amber-400 text-xs font-semibold uppercase">
                       <AlertCircle className="w-4 h-4" />
                       Key Growth Opportunities
                     </div>
-                    <ul className="space-y-1.5 text-xs text-slate-300">
+                    <ul className="space-y-1.5 text-xs text-slate-700 dark:text-slate-300">
                       {evaluatedCurrentQuestion.improvements?.map((imp, idx) => (
                         <li key={idx} className="flex items-start gap-1.5">
-                          <span className="text-amber-400 font-bold">•</span>
+                          <span className="text-amber-600 dark:text-amber-400 font-bold">•</span>
                           <span>{imp}</span>
                         </li>
                       ))}
@@ -750,9 +750,9 @@ export const MockInterviewPage = () => {
 
                 {/* Model Guidance */}
                 {evaluatedCurrentQuestion.idealAnswerSummary && (
-                  <div className="p-4 rounded-2xl bg-slate-950/80 border border-slate-800 space-y-1 text-xs text-slate-300">
-                    <span className="font-bold text-brand-300">Ideal Benchmark Highlights: </span>
-                    <span className="text-slate-400 leading-relaxed">
+                  <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-950/80 border border-slate-200 dark:border-slate-800 space-y-1 text-xs text-slate-700 dark:text-slate-300">
+                    <span className="font-bold text-brand-700 dark:text-brand-300">Ideal Benchmark Highlights: </span>
+                    <span className="text-slate-600 dark:text-slate-400 leading-relaxed">
                       {evaluatedCurrentQuestion.idealAnswerSummary}
                     </span>
                   </div>
@@ -794,7 +794,7 @@ export const MockInterviewPage = () => {
         <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in duration-300">
           
           {/* Main Grand Score Card */}
-          <div className="glass-card p-6 sm:p-10 rounded-3xl border border-brand-500/30 bg-gradient-to-br from-slate-900 via-brand-950/30 to-slate-900 shadow-2xl space-y-6 text-center relative overflow-hidden">
+          <div className="bg-white dark:bg-gradient-to-br dark:from-slate-900 dark:via-brand-950/30 dark:to-slate-900 p-6 sm:p-10 rounded-3xl border border-brand-500/30 shadow-md space-y-6 text-center relative overflow-hidden transition-colors">
             <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-brand-500 via-indigo-500 to-cyber-500" />
 
             <div className="w-16 h-16 rounded-3xl bg-gradient-to-tr from-brand-600 to-cyber-500 text-white mx-auto flex items-center justify-center shadow-xl shadow-brand-600/30">
@@ -802,31 +802,31 @@ export const MockInterviewPage = () => {
             </div>
 
             <div className="space-y-2">
-              <span className="text-xs uppercase font-extrabold px-3 py-1 rounded-full bg-brand-500/20 text-brand-300 border border-brand-500/30">
+              <span className="text-xs uppercase font-extrabold px-3 py-1 rounded-full bg-brand-500/15 text-brand-700 dark:text-brand-300 border border-brand-500/30">
                 Official AI Simulation Scorecard
               </span>
-              <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+              <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
                 {session.roleTitle}
               </h1>
-              <p className="text-xs text-slate-400">
+              <p className="text-xs text-slate-500 dark:text-slate-400">
                 Completed on {new Date(session.updatedAt || Date.now()).toLocaleDateString()} • {session.questions.length} Questions Evaluated
               </p>
             </div>
 
             {/* Big Score Gauge */}
             <div className="pt-2">
-              <div className="inline-flex flex-col items-center p-6 rounded-3xl bg-slate-950/80 border border-slate-800 shadow-inner">
-                <span className="text-5xl font-black text-white tracking-tight">
+              <div className="inline-flex flex-col items-center p-6 rounded-3xl bg-slate-50 dark:bg-slate-950/80 border border-slate-200 dark:border-slate-800 shadow-inner">
+                <span className="text-5xl font-black text-slate-900 dark:text-white tracking-tight">
                   {session.overallScore}
-                  <span className="text-xl font-medium text-slate-500">/100</span>
+                  <span className="text-xl font-medium text-slate-400 dark:text-slate-500">/100</span>
                 </span>
                 <span
                   className={`mt-2 px-3 py-0.5 rounded-full text-xs font-bold border ${
                     session.overallScore >= 85
-                      ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30'
+                      ? 'bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border-emerald-500/30'
                       : session.overallScore >= 70
-                      ? 'bg-brand-500/10 text-brand-400 border-brand-500/30'
-                      : 'bg-amber-500/10 text-amber-400 border-amber-500/30'
+                      ? 'bg-brand-500/10 text-brand-700 dark:text-brand-400 border-brand-500/30'
+                      : 'bg-amber-500/10 text-amber-700 dark:text-amber-400 border-amber-500/30'
                   }`}
                 >
                   {session.overallScore >= 85
@@ -839,15 +839,15 @@ export const MockInterviewPage = () => {
             </div>
 
             {/* Executive Summary */}
-            <div className="max-w-2xl mx-auto p-4 rounded-2xl bg-slate-950/60 border border-slate-800 text-xs text-slate-300 leading-relaxed">
+            <div className="max-w-2xl mx-auto p-4 rounded-2xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 text-xs text-slate-700 dark:text-slate-300 leading-relaxed">
               {session.feedbackSummary}
             </div>
           </div>
 
           {/* 4-Factor Dimensional Score Bars */}
-          <div className="glass-card p-6 sm:p-8 rounded-3xl border border-slate-800 space-y-6">
-            <h3 className="text-base font-bold text-white flex items-center gap-2">
-              <Award className="w-4 h-4 text-brand-400" />
+          <div className="bg-white dark:bg-slate-900/60 p-6 sm:p-8 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-6 transition-colors">
+            <h3 className="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+              <Award className="w-4 h-4 text-brand-600 dark:text-brand-400" />
               Dimensional Competency Ratings
             </h3>
 
@@ -855,10 +855,10 @@ export const MockInterviewPage = () => {
               {/* Technical Accuracy */}
               <div className="space-y-2">
                 <div className="flex justify-between text-xs font-medium">
-                  <span className="text-slate-400">Technical Depth & Accuracy</span>
-                  <span className="text-white font-bold">{session.metrics?.technicalAccuracy || 80}%</span>
+                  <span className="text-slate-600 dark:text-slate-400">Technical Depth & Accuracy</span>
+                  <span className="text-slate-900 dark:text-white font-bold">{session.metrics?.technicalAccuracy || 80}%</span>
                 </div>
-                <div className="w-full h-2.5 rounded-full bg-slate-900 overflow-hidden">
+                <div className="w-full h-2.5 rounded-full bg-slate-100 dark:bg-slate-900 overflow-hidden">
                   <div
                     className="h-full rounded-full bg-gradient-to-r from-brand-500 to-indigo-500"
                     style={{ width: `${session.metrics?.technicalAccuracy || 80}%` }}
@@ -869,10 +869,10 @@ export const MockInterviewPage = () => {
               {/* Communication */}
               <div className="space-y-2">
                 <div className="flex justify-between text-xs font-medium">
-                  <span className="text-slate-400">Communication & Articulation</span>
-                  <span className="text-white font-bold">{session.metrics?.communication || 80}%</span>
+                  <span className="text-slate-600 dark:text-slate-400">Communication & Articulation</span>
+                  <span className="text-slate-900 dark:text-white font-bold">{session.metrics?.communication || 80}%</span>
                 </div>
-                <div className="w-full h-2.5 rounded-full bg-slate-900 overflow-hidden">
+                <div className="w-full h-2.5 rounded-full bg-slate-100 dark:bg-slate-900 overflow-hidden">
                   <div
                     className="h-full rounded-full bg-gradient-to-r from-cyan-500 to-teal-500"
                     style={{ width: `${session.metrics?.communication || 80}%` }}
@@ -883,10 +883,10 @@ export const MockInterviewPage = () => {
               {/* Clarity */}
               <div className="space-y-2">
                 <div className="flex justify-between text-xs font-medium">
-                  <span className="text-slate-400">Clarity & Response Framing</span>
-                  <span className="text-white font-bold">{session.metrics?.clarity || 78}%</span>
+                  <span className="text-slate-600 dark:text-slate-400">Clarity & Response Framing</span>
+                  <span className="text-slate-900 dark:text-white font-bold">{session.metrics?.clarity || 78}%</span>
                 </div>
-                <div className="w-full h-2.5 rounded-full bg-slate-900 overflow-hidden">
+                <div className="w-full h-2.5 rounded-full bg-slate-100 dark:bg-slate-900 overflow-hidden">
                   <div
                     className="h-full rounded-full bg-gradient-to-r from-emerald-500 to-green-500"
                     style={{ width: `${session.metrics?.clarity || 78}%` }}
@@ -897,10 +897,10 @@ export const MockInterviewPage = () => {
               {/* Trade-offs & Depth */}
               <div className="space-y-2">
                 <div className="flex justify-between text-xs font-medium">
-                  <span className="text-slate-400">Trade-offs & Engineering Maturity</span>
-                  <span className="text-white font-bold">{session.metrics?.depth || 78}%</span>
+                  <span className="text-slate-600 dark:text-slate-400">Trade-offs & Engineering Maturity</span>
+                  <span className="text-slate-900 dark:text-white font-bold">{session.metrics?.depth || 78}%</span>
                 </div>
-                <div className="w-full h-2.5 rounded-full bg-slate-900 overflow-hidden">
+                <div className="w-full h-2.5 rounded-full bg-slate-100 dark:bg-slate-900 overflow-hidden">
                   <div
                     className="h-full rounded-full bg-gradient-to-r from-violet-500 to-purple-500"
                     style={{ width: `${session.metrics?.depth || 78}%` }}
@@ -914,15 +914,15 @@ export const MockInterviewPage = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             
             {/* Top Strengths */}
-            <div className="glass-card p-6 rounded-3xl border border-emerald-500/20 space-y-3">
-              <div className="flex items-center gap-2 text-emerald-400 text-xs font-bold uppercase">
+            <div className="bg-white dark:bg-slate-900/60 p-6 rounded-3xl border border-emerald-500/20 shadow-sm space-y-3 transition-colors">
+              <div className="flex items-center gap-2 text-emerald-600 dark:text-emerald-400 text-xs font-bold uppercase">
                 <CheckCircle2 className="w-4 h-4" />
                 Key Demonstrated Strengths
               </div>
-              <ul className="space-y-2 text-xs text-slate-300">
+              <ul className="space-y-2 text-xs text-slate-700 dark:text-slate-300">
                 {session.strengths?.map((str, idx) => (
                   <li key={idx} className="flex items-start gap-2">
-                    <span className="text-emerald-400 font-bold">•</span>
+                    <span className="text-emerald-600 dark:text-emerald-400 font-bold">•</span>
                     <span>{str}</span>
                   </li>
                 ))}
@@ -930,15 +930,15 @@ export const MockInterviewPage = () => {
             </div>
 
             {/* Actionable Recommendations */}
-            <div className="glass-card p-6 rounded-3xl border border-brand-500/20 space-y-3">
-              <div className="flex items-center gap-2 text-brand-300 text-xs font-bold uppercase">
-                <Sparkles className="w-4 h-4 text-brand-400" />
+            <div className="bg-white dark:bg-slate-900/60 p-6 rounded-3xl border border-brand-500/20 shadow-sm space-y-3 transition-colors">
+              <div className="flex items-center gap-2 text-brand-700 dark:text-brand-300 text-xs font-bold uppercase">
+                <Sparkles className="w-4 h-4 text-brand-600 dark:text-brand-400" />
                 Coaching Roadmaps to Elevate
               </div>
-              <ul className="space-y-2 text-xs text-slate-300">
+              <ul className="space-y-2 text-xs text-slate-700 dark:text-slate-300">
                 {session.recommendations?.map((rec, idx) => (
                   <li key={idx} className="flex items-start gap-2">
-                    <span className="text-brand-400 font-bold">•</span>
+                    <span className="text-brand-600 dark:text-brand-400 font-bold">•</span>
                     <span>{rec}</span>
                   </li>
                 ))}
@@ -948,9 +948,9 @@ export const MockInterviewPage = () => {
           </div>
 
           {/* Question-by-Question Accordion Breakdown */}
-          <div className="glass-card p-6 sm:p-8 rounded-3xl border border-slate-800 space-y-4">
-            <h3 className="text-base font-bold text-white flex items-center gap-2">
-              <FileText className="w-4 h-4 text-brand-400" />
+          <div className="bg-white dark:bg-slate-900/60 p-6 sm:p-8 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-4 transition-colors">
+            <h3 className="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+              <FileText className="w-4 h-4 text-brand-600 dark:text-brand-400" />
               Detailed Question-by-Question Audit
             </h3>
 
@@ -960,23 +960,23 @@ export const MockInterviewPage = () => {
                 return (
                   <div
                     key={q._id || idx}
-                    className="rounded-2xl bg-slate-950/70 border border-slate-800 overflow-hidden"
+                    className="rounded-2xl bg-slate-50 dark:bg-slate-950/70 border border-slate-200 dark:border-slate-800 overflow-hidden"
                   >
                     <div
                       onClick={() => toggleAccordion(idx)}
-                      className="p-4 flex items-center justify-between cursor-pointer hover:bg-slate-900/40 transition"
+                      className="p-4 flex items-center justify-between cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-900/40 transition"
                     >
                       <div className="flex items-center gap-3">
-                        <span className="w-6 h-6 rounded-lg bg-slate-900 border border-slate-800 text-[11px] font-bold text-slate-400 flex items-center justify-center">
+                        <span className="w-6 h-6 rounded-lg bg-slate-200 dark:bg-slate-900 border border-slate-300 dark:border-slate-800 text-[11px] font-bold text-slate-700 dark:text-slate-400 flex items-center justify-center">
                           Q{idx + 1}
                         </span>
-                        <p className="text-xs font-semibold text-white line-clamp-1">
+                        <p className="text-xs font-semibold text-slate-900 dark:text-white line-clamp-1">
                           {q.questionText}
                         </p>
                       </div>
 
                       <div className="flex items-center gap-3 shrink-0">
-                        <span className="text-xs font-bold text-emerald-400">{q.score}/100</span>
+                        <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400">{q.score}/100</span>
                         {isExpanded ? (
                           <ChevronUp className="w-4 h-4 text-slate-400" />
                         ) : (
@@ -986,23 +986,23 @@ export const MockInterviewPage = () => {
                     </div>
 
                     {isExpanded && (
-                      <div className="p-4 pt-1 border-t border-slate-850 space-y-3 text-xs">
+                      <div className="p-4 pt-1 border-t border-slate-200 dark:border-slate-850 space-y-3 text-xs">
                         <div>
-                          <span className="font-semibold text-slate-400 block mb-1">Your Answer:</span>
-                          <p className="text-slate-300 leading-relaxed bg-slate-900/60 p-3 rounded-xl border border-slate-850">
+                          <span className="font-semibold text-slate-600 dark:text-slate-400 block mb-1">Your Answer:</span>
+                          <p className="text-slate-800 dark:text-slate-300 leading-relaxed bg-white dark:bg-slate-900/60 p-3 rounded-xl border border-slate-200 dark:border-slate-850">
                             {q.candidateAnswer || 'No answer recorded'}
                           </p>
                         </div>
 
                         <div>
-                          <span className="font-semibold text-brand-400 block mb-1">Evaluator Feedback:</span>
-                          <p className="text-slate-300 leading-relaxed">{q.feedback}</p>
+                          <span className="font-semibold text-brand-600 dark:text-brand-400 block mb-1">Evaluator Feedback:</span>
+                          <p className="text-slate-700 dark:text-slate-300 leading-relaxed">{q.feedback}</p>
                         </div>
 
                         {q.idealAnswerSummary && (
-                          <div className="pt-2 border-t border-slate-850/80">
+                          <div className="pt-2 border-t border-slate-200 dark:border-slate-850/80">
                             <span className="font-semibold text-slate-500 block mb-1">What an Ideal Answer Looks Like:</span>
-                            <p className="text-slate-400 leading-relaxed">{q.idealAnswerSummary}</p>
+                            <p className="text-slate-600 dark:text-slate-400 leading-relaxed">{q.idealAnswerSummary}</p>
                           </div>
                         )}
                       </div>
@@ -1024,7 +1024,7 @@ export const MockInterviewPage = () => {
             </button>
             <Link
               to="/jobs"
-              className="w-full sm:w-auto px-8 py-3.5 bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white text-xs font-bold rounded-2xl border border-slate-800 transition text-center"
+              className="w-full sm:w-auto px-8 py-3.5 bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white text-xs font-bold rounded-2xl border border-slate-200 dark:border-slate-800 transition text-center shadow-sm"
             >
               Explore Matching Positions
             </Link>
@@ -1035,14 +1035,14 @@ export const MockInterviewPage = () => {
 
       {/* History Modal Drawer */}
       {showHistoryModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm">
-          <div className="w-full max-w-2xl bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 space-y-6 shadow-2xl">
-            <div className="flex items-center justify-between border-b border-slate-800 pb-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-sm">
+          <div className="w-full max-w-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-8 space-y-6 shadow-2xl transition-colors">
+            <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-4">
               <div className="flex items-center gap-2.5">
-                <History className="w-5 h-5 text-brand-400" />
-                <h3 className="text-lg font-bold text-white">Your Past Interview Sessions</h3>
+                <History className="w-5 h-5 text-brand-600 dark:text-brand-400" />
+                <h3 className="text-lg font-bold text-slate-900 dark:text-white">Your Past Interview Sessions</h3>
               </div>
-              <button onClick={() => setShowHistoryModal(false)} className="text-slate-400 hover:text-white">
+              <button onClick={() => setShowHistoryModal(false)} className="text-slate-400 hover:text-slate-600 dark:hover:text-white">
                 <X className="w-5 h-5" />
               </button>
             </div>
@@ -1051,16 +1051,16 @@ export const MockInterviewPage = () => {
               {history.map((item) => (
                 <div
                   key={item._id}
-                  className="p-4 rounded-2xl bg-slate-950/60 border border-slate-800 flex items-center justify-between gap-4"
+                  className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 flex items-center justify-between gap-4"
                 >
                   <div className="space-y-1">
-                    <h4 className="text-sm font-bold text-white">{item.roleTitle}</h4>
-                    <p className="text-xs text-slate-400">
+                    <h4 className="text-sm font-bold text-slate-900 dark:text-white">{item.roleTitle}</h4>
+                    <p className="text-xs text-slate-500 dark:text-slate-400">
                       {item.category} Track • {item.difficulty} • {new Date(item.createdAt).toLocaleDateString()}
                     </p>
                   </div>
                   <div className="flex items-center gap-3">
-                    <span className="text-sm font-black text-emerald-400">
+                    <span className="text-sm font-black text-emerald-600 dark:text-emerald-400">
                       {item.overallScore || 0}/100
                     </span>
                     <button
@@ -1079,7 +1079,7 @@ export const MockInterviewPage = () => {
                           setLoading(false);
                         }
                       }}
-                      className="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs text-brand-300 font-semibold border border-slate-700"
+                      className="px-3 py-1.5 rounded-xl bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-xs text-brand-600 dark:text-brand-300 font-semibold border border-slate-200 dark:border-slate-700 shadow-xs"
                     >
                       View Report
                     </button>
@@ -1088,10 +1088,10 @@ export const MockInterviewPage = () => {
               ))}
             </div>
 
-            <div className="flex justify-end pt-2 border-t border-slate-800">
+            <div className="flex justify-end pt-2 border-t border-slate-200 dark:border-slate-800">
               <button
                 onClick={() => setShowHistoryModal(false)}
-                className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded-xl text-xs font-semibold"
+                className="px-4 py-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-800 dark:text-white rounded-xl text-xs font-semibold"
               >
                 Close
               </button>

@@ -138,7 +138,7 @@ export const JobDetailsPage = () => {
       <div>
         <Link
           to="/jobs"
-          className="inline-flex items-center gap-2 text-xs font-semibold text-slate-400 hover:text-white transition-colors"
+          className="inline-flex items-center gap-2 text-xs font-semibold text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />
           Back to Open Positions
@@ -146,7 +146,7 @@ export const JobDetailsPage = () => {
       </div>
 
       {/* Main Header Card */}
-      <div className="glass-card p-6 sm:p-8 rounded-3xl border border-slate-800 space-y-6 relative overflow-hidden">
+      <div className="bg-white dark:bg-slate-900/60 p-6 sm:p-8 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-6 relative overflow-hidden transition-colors">
         {/* Subtle top glow if high match */}
         {aiMatch?.matchScore >= 85 && (
           <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-emerald-500 via-teal-400 to-cyan-500" />
@@ -154,30 +154,30 @@ export const JobDetailsPage = () => {
 
         <div className="flex flex-col sm:flex-row items-start justify-between gap-6">
           <div className="flex items-start gap-4">
-            <div className="w-16 h-16 rounded-2xl bg-slate-900 border border-slate-800 flex items-center justify-center text-xl font-extrabold text-brand-400 shadow-inner">
+            <div className="w-16 h-16 rounded-2xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-center text-xl font-extrabold text-brand-600 dark:text-brand-400 shadow-inner">
               {job.company?.[0] || 'C'}
             </div>
             <div className="space-y-1">
               <div className="flex items-center gap-2">
-                <span className="text-sm font-semibold text-brand-400">{job.company}</span>
-                <span className="text-[10px] uppercase font-extrabold px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                <span className="text-sm font-semibold text-brand-600 dark:text-brand-400">{job.company}</span>
+                <span className="text-[10px] uppercase font-extrabold px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
                   {job.status}
                 </span>
               </div>
-              <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">{job.title}</h1>
-              <div className="flex flex-wrap items-center gap-3 text-xs text-slate-400 pt-1">
+              <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">{job.title}</h1>
+              <div className="flex flex-wrap items-center gap-3 text-xs text-slate-600 dark:text-slate-400 pt-1">
                 <span className="flex items-center gap-1">
-                  <MapPin className="w-3.5 h-3.5 text-slate-500" />
+                  <MapPin className="w-3.5 h-3.5 text-slate-400 dark:text-slate-500" />
                   {job.location} ({job.workplaceType})
                 </span>
                 <span>•</span>
                 <span className="flex items-center gap-1">
-                  <Briefcase className="w-3.5 h-3.5 text-slate-500" />
+                  <Briefcase className="w-3.5 h-3.5 text-slate-400 dark:text-slate-500" />
                   {job.employmentType} ({job.experienceLevel})
                 </span>
                 <span>•</span>
                 <span className="flex items-center gap-1">
-                  <Clock className="w-3.5 h-3.5 text-slate-500" />
+                  <Clock className="w-3.5 h-3.5 text-slate-400 dark:text-slate-500" />
                   Posted {new Date(job.createdAt).toLocaleDateString()}
                 </span>
               </div>
@@ -188,8 +188,8 @@ export const JobDetailsPage = () => {
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto">
             {isCandidate ? (
               hasApplied ? (
-                <div className="px-6 py-2.5 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-xs font-semibold flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                <div className="px-6 py-2.5 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-700 dark:text-emerald-300 text-xs font-semibold flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
                   <span>Applied ({existingApp?.status || 'Under Review'})</span>
                 </div>
               ) : (
@@ -208,7 +208,7 @@ export const JobDetailsPage = () => {
                 Sign In to Apply
               </Link>
             ) : (
-              <span className="text-xs text-slate-500 px-3 py-2 bg-slate-900 rounded-lg border border-slate-800">
+              <span className="text-xs text-slate-500 dark:text-slate-400 px-3 py-2 bg-slate-100 dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-800">
                 Viewing as {user.role}
               </span>
             )}
@@ -217,12 +217,12 @@ export const JobDetailsPage = () => {
 
         {/* Success Alert if just submitted */}
         {successMessage && (
-          <div className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs flex items-center justify-between">
+          <div className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-700 dark:text-emerald-300 text-xs flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+              <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
               <span>{successMessage}</span>
             </div>
-            <Link to="/applications" className="text-brand-300 hover:underline font-semibold">
+            <Link to="/applications" className="text-brand-600 dark:text-brand-300 hover:underline font-semibold">
               Track Applications →
             </Link>
           </div>
@@ -238,25 +238,25 @@ export const JobDetailsPage = () => {
         )}
 
         {/* Highlight Compensation Bar */}
-        <div className="p-4 rounded-2xl bg-slate-900/60 border border-slate-800/80 flex flex-wrap items-center justify-between gap-4">
+        <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800/80 flex flex-wrap items-center justify-between gap-4">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center">
+            <div className="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
               <DollarSign className="w-4 h-4" />
             </div>
             <div>
               <p className="text-[11px] text-slate-500 uppercase font-semibold">Compensation Range</p>
-              <p className="text-sm font-bold text-white">{formatSalary(job.salary)}</p>
+              <p className="text-sm font-bold text-slate-900 dark:text-white">{formatSalary(job.salary)}</p>
             </div>
           </div>
 
           {job.deadline && (
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-lg bg-brand-500/10 text-brand-400 flex items-center justify-center">
+              <div className="w-8 h-8 rounded-lg bg-brand-500/10 text-brand-600 dark:text-brand-400 flex items-center justify-center">
                 <Calendar className="w-4 h-4" />
               </div>
               <div>
                 <p className="text-[11px] text-slate-500 uppercase font-semibold">Application Deadline</p>
-                <p className="text-sm font-bold text-white">{new Date(job.deadline).toLocaleDateString()}</p>
+                <p className="text-sm font-bold text-slate-900 dark:text-white">{new Date(job.deadline).toLocaleDateString()}</p>
               </div>
             </div>
           )}
@@ -265,20 +265,20 @@ export const JobDetailsPage = () => {
 
       {/* AI Compatibility & Fit Analysis Card (Candidate Only) */}
       {isCandidate && (
-        <div className="glass-card p-6 sm:p-8 rounded-3xl border border-brand-500/30 bg-gradient-to-br from-slate-900 via-brand-950/20 to-slate-900 shadow-2xl space-y-6">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800/80 pb-5">
+        <div className="bg-white dark:bg-gradient-to-br dark:from-slate-900 dark:via-brand-950/20 dark:to-slate-900 p-6 sm:p-8 rounded-3xl border border-brand-500/30 shadow-md space-y-6 transition-colors">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 dark:border-slate-800/80 pb-5">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-2xl bg-brand-500/20 text-brand-400 flex items-center justify-center">
+              <div className="w-10 h-10 rounded-2xl bg-brand-500/20 text-brand-600 dark:text-brand-400 flex items-center justify-center">
                 <Cpu className="w-5 h-5" />
               </div>
               <div>
-                <h2 className="text-base sm:text-lg font-bold text-white flex items-center gap-2">
+                <h2 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
                   AI Compatibility & Fit Analysis
-                  <span className="text-[10px] uppercase px-2 py-0.5 rounded-full bg-brand-500/20 text-brand-300 font-bold border border-brand-500/30">
+                  <span className="text-[10px] uppercase px-2 py-0.5 rounded-full bg-brand-500/15 text-brand-600 dark:text-brand-300 font-bold border border-brand-500/30">
                     Phase 9
                   </span>
                 </h2>
-                <p className="text-xs text-slate-400">
+                <p className="text-xs text-slate-600 dark:text-slate-400">
                   Algorithmic alignment between your candidate profile and this specific vacancy.
                 </p>
               </div>
@@ -294,18 +294,18 @@ export const JobDetailsPage = () => {
           </div>
 
           {loadingMatch ? (
-            <div className="py-8 flex flex-col items-center justify-center gap-2 text-slate-400 text-xs">
-              <Loader2 className="w-6 h-6 text-brand-400 animate-spin" />
+            <div className="py-8 flex flex-col items-center justify-center gap-2 text-slate-500 dark:text-slate-400 text-xs">
+              <Loader2 className="w-6 h-6 text-brand-500 animate-spin" />
               <span>Analyzing profile alignment...</span>
             </div>
           ) : aiMatch ? (
             <div className="space-y-6">
               
               {/* Fit Summary */}
-              <div className="p-4 rounded-2xl bg-slate-950/60 border border-slate-850 text-xs text-slate-300 leading-relaxed flex items-start gap-3">
-                <Sparkles className="w-4 h-4 text-brand-400 shrink-0 mt-0.5" />
+              <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-850 text-xs text-slate-700 dark:text-slate-300 leading-relaxed flex items-start gap-3">
+                <Sparkles className="w-4 h-4 text-brand-600 dark:text-brand-400 shrink-0 mt-0.5" />
                 <div>
-                  <span className="font-semibold text-white">Diagnostic Insight: </span>
+                  <span className="font-semibold text-slate-900 dark:text-white">Diagnostic Insight: </span>
                   {aiMatch.summary}
                 </div>
               </div>
@@ -314,12 +314,12 @@ export const JobDetailsPage = () => {
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 
                 {/* Skills Fit */}
-                <div className="p-4 rounded-2xl bg-slate-950/50 border border-slate-800/80 space-y-2">
+                <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-950/50 border border-slate-200 dark:border-slate-800/80 space-y-2">
                   <div className="flex items-center justify-between text-xs">
-                    <span className="text-slate-400 font-medium">Skills Coverage</span>
-                    <span className="text-white font-bold">{aiMatch.breakdown?.skillsScore}%</span>
+                    <span className="text-slate-600 dark:text-slate-400 font-medium">Skills Coverage</span>
+                    <span className="text-slate-900 dark:text-white font-bold">{aiMatch.breakdown?.skillsScore}%</span>
                   </div>
-                  <div className="w-full h-2 rounded-full bg-slate-800 overflow-hidden">
+                  <div className="w-full h-2 rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden">
                     <div
                       className="h-full rounded-full bg-gradient-to-r from-brand-500 to-indigo-500 transition-all duration-500"
                       style={{ width: `${aiMatch.breakdown?.skillsScore}%` }}
@@ -328,12 +328,12 @@ export const JobDetailsPage = () => {
                 </div>
 
                 {/* Experience Fit */}
-                <div className="p-4 rounded-2xl bg-slate-950/50 border border-slate-800/80 space-y-2">
+                <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-950/50 border border-slate-200 dark:border-slate-800/80 space-y-2">
                   <div className="flex items-center justify-between text-xs">
-                    <span className="text-slate-400 font-medium">Experience Level</span>
-                    <span className="text-white font-bold">{aiMatch.breakdown?.experienceScore}%</span>
+                    <span className="text-slate-600 dark:text-slate-400 font-medium">Experience Level</span>
+                    <span className="text-slate-900 dark:text-white font-bold">{aiMatch.breakdown?.experienceScore}%</span>
                   </div>
-                  <div className="w-full h-2 rounded-full bg-slate-800 overflow-hidden">
+                  <div className="w-full h-2 rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden">
                     <div
                       className="h-full rounded-full bg-gradient-to-r from-cyan-500 to-teal-500 transition-all duration-500"
                       style={{ width: `${aiMatch.breakdown?.experienceScore}%` }}
@@ -342,12 +342,12 @@ export const JobDetailsPage = () => {
                 </div>
 
                 {/* Location Fit */}
-                <div className="p-4 rounded-2xl bg-slate-950/50 border border-slate-800/80 space-y-2">
+                <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-950/50 border border-slate-200 dark:border-slate-800/80 space-y-2">
                   <div className="flex items-center justify-between text-xs">
-                    <span className="text-slate-400 font-medium">Location / Remote</span>
-                    <span className="text-white font-bold">{aiMatch.breakdown?.locationScore}%</span>
+                    <span className="text-slate-600 dark:text-slate-400 font-medium">Location / Remote</span>
+                    <span className="text-slate-900 dark:text-white font-bold">{aiMatch.breakdown?.locationScore}%</span>
                   </div>
-                  <div className="w-full h-2 rounded-full bg-slate-800 overflow-hidden">
+                  <div className="w-full h-2 rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden">
                     <div
                       className="h-full rounded-full bg-gradient-to-r from-emerald-500 to-green-500 transition-all duration-500"
                       style={{ width: `${aiMatch.breakdown?.locationScore}%` }}
@@ -356,12 +356,12 @@ export const JobDetailsPage = () => {
                 </div>
 
                 {/* Role Fit */}
-                <div className="p-4 rounded-2xl bg-slate-950/50 border border-slate-800/80 space-y-2">
+                <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-950/50 border border-slate-200 dark:border-slate-800/80 space-y-2">
                   <div className="flex items-center justify-between text-xs">
-                    <span className="text-slate-400 font-medium">Role & Title Fit</span>
-                    <span className="text-white font-bold">{aiMatch.breakdown?.roleScore}%</span>
+                    <span className="text-slate-600 dark:text-slate-400 font-medium">Role & Title Fit</span>
+                    <span className="text-slate-900 dark:text-white font-bold">{aiMatch.breakdown?.roleScore}%</span>
                   </div>
-                  <div className="w-full h-2 rounded-full bg-slate-800 overflow-hidden">
+                  <div className="w-full h-2 rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden">
                     <div
                       className="h-full rounded-full bg-gradient-to-r from-violet-500 to-purple-500 transition-all duration-500"
                       style={{ width: `${aiMatch.breakdown?.roleScore}%` }}
@@ -374,8 +374,8 @@ export const JobDetailsPage = () => {
               {/* Matched vs Missing Skills Clusters */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
                 {/* Matched Skills */}
-                <div className="p-4 rounded-2xl bg-slate-950/60 border border-emerald-500/20 space-y-2.5">
-                  <div className="flex items-center gap-2 text-emerald-400 text-xs font-semibold uppercase">
+                <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-950/60 border border-emerald-500/20 space-y-2.5">
+                  <div className="flex items-center gap-2 text-emerald-600 dark:text-emerald-400 text-xs font-semibold uppercase">
                     <CheckCircle2 className="w-4 h-4" />
                     Matched Skills ({aiMatch.matchedSkills?.length || 0})
                   </div>
@@ -384,7 +384,7 @@ export const JobDetailsPage = () => {
                       aiMatch.matchedSkills.map((s, idx) => (
                         <span
                           key={idx}
-                          className="px-2.5 py-1 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 text-xs font-medium"
+                          className="px-2.5 py-1 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-700 dark:text-emerald-300 text-xs font-medium"
                         >
                           ✓ {s}
                         </span>
@@ -396,8 +396,8 @@ export const JobDetailsPage = () => {
                 </div>
 
                 {/* Missing Skills */}
-                <div className="p-4 rounded-2xl bg-slate-950/60 border border-rose-500/20 space-y-2.5">
-                  <div className="flex items-center gap-2 text-rose-400 text-xs font-semibold uppercase">
+                <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-950/60 border border-rose-500/20 space-y-2.5">
+                  <div className="flex items-center gap-2 text-rose-600 dark:text-rose-400 text-xs font-semibold uppercase">
                     <AlertCircle className="w-4 h-4" />
                     Missing / High-Value Gaps ({aiMatch.missingSkills?.length || 0})
                   </div>
@@ -406,32 +406,32 @@ export const JobDetailsPage = () => {
                       aiMatch.missingSkills.map((s, idx) => (
                         <span
                           key={idx}
-                          className="px-2.5 py-1 rounded-lg bg-rose-500/10 border border-rose-500/20 text-rose-300 text-xs font-medium"
+                          className="px-2.5 py-1 rounded-lg bg-rose-500/10 border border-rose-500/20 text-rose-700 dark:text-rose-300 text-xs font-medium"
                         >
                           + {s}
                         </span>
                       ))
                     ) : (
-                      <span className="text-xs text-emerald-400">All required tech skills satisfied!</span>
+                      <span className="text-xs text-emerald-600 dark:text-emerald-400">All required tech skills satisfied!</span>
                     )}
                   </div>
                 </div>
               </div>
 
               {/* Action Banner to AI Resume Optimizer */}
-              <div className="p-4 rounded-2xl bg-slate-950/80 border border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-950/80 border border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
                 <div className="flex items-center gap-3">
-                  <FileText className="w-5 h-5 text-brand-400" />
+                  <FileText className="w-5 h-5 text-brand-600 dark:text-brand-400" />
                   <div>
-                    <h4 className="text-xs font-bold text-white">Want to boost your ATS compatibility for this role?</h4>
-                    <p className="text-[11px] text-slate-400">Run a deep Gemini audit against this exact vacancy to get custom bullet rewrites.</p>
+                    <h4 className="text-xs font-bold text-slate-900 dark:text-white">Want to boost your ATS compatibility for this role?</h4>
+                    <p className="text-[11px] text-slate-600 dark:text-slate-400">Run a deep Gemini audit against this exact vacancy to get custom bullet rewrites.</p>
                   </div>
                 </div>
                 <Link
                   to={`/resume-analyzer`}
-                  className="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-brand-300 hover:text-white text-xs font-semibold border border-slate-700 transition flex items-center gap-1.5 shrink-0"
+                  className="px-4 py-2 rounded-xl bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-brand-600 dark:text-brand-300 hover:text-brand-700 dark:hover:text-white text-xs font-semibold border border-slate-200 dark:border-slate-700 transition flex items-center gap-1.5 shrink-0 shadow-sm"
                 >
-                  <Sparkles className="w-3.5 h-3.5 text-brand-400" />
+                  <Sparkles className="w-3.5 h-3.5 text-brand-600 dark:text-brand-400" />
                   Optimize Resume for Role
                 </Link>
               </div>
@@ -452,21 +452,21 @@ export const JobDetailsPage = () => {
         <div className="lg:col-span-2 space-y-8">
           
           {/* Overview */}
-          <div className="glass-card p-6 sm:p-8 rounded-2xl border border-slate-800 space-y-4">
-            <h2 className="text-lg font-bold text-white tracking-tight">Role Overview</h2>
-            <div className="text-sm text-slate-300 leading-relaxed whitespace-pre-line">
+          <div className="bg-white dark:bg-slate-900/60 p-6 sm:p-8 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-4 transition-colors">
+            <h2 className="text-lg font-bold text-slate-900 dark:text-white tracking-tight">Role Overview</h2>
+            <div className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed whitespace-pre-line">
               {job.description}
             </div>
           </div>
 
           {/* Key Responsibilities */}
           {job.responsibilities?.length > 0 && (
-            <div className="glass-card p-6 sm:p-8 rounded-2xl border border-slate-800 space-y-4">
-              <h2 className="text-lg font-bold text-white tracking-tight">Key Responsibilities</h2>
+            <div className="bg-white dark:bg-slate-900/60 p-6 sm:p-8 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-4 transition-colors">
+              <h2 className="text-lg font-bold text-slate-900 dark:text-white tracking-tight">Key Responsibilities</h2>
               <ul className="space-y-2.5">
                 {job.responsibilities.map((resp, idx) => (
-                  <li key={idx} className="flex items-start gap-3 text-sm text-slate-300">
-                    <CheckCircle2 className="w-4 h-4 text-brand-400 flex-shrink-0 mt-1" />
+                  <li key={idx} className="flex items-start gap-3 text-sm text-slate-700 dark:text-slate-300">
+                    <CheckCircle2 className="w-4 h-4 text-brand-600 dark:text-brand-400 flex-shrink-0 mt-1" />
                     <span>{resp}</span>
                   </li>
                 ))}
@@ -476,12 +476,12 @@ export const JobDetailsPage = () => {
 
           {/* Requirements */}
           {job.requirements?.length > 0 && (
-            <div className="glass-card p-6 sm:p-8 rounded-2xl border border-slate-800 space-y-4">
-              <h2 className="text-lg font-bold text-white tracking-tight">Requirements & Qualifications</h2>
+            <div className="bg-white dark:bg-slate-900/60 p-6 sm:p-8 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-4 transition-colors">
+              <h2 className="text-lg font-bold text-slate-900 dark:text-white tracking-tight">Requirements & Qualifications</h2>
               <ul className="space-y-2.5">
                 {job.requirements.map((req, idx) => (
-                  <li key={idx} className="flex items-start gap-3 text-sm text-slate-300">
-                    <ShieldCheck className="w-4 h-4 text-cyber-400 flex-shrink-0 mt-1" />
+                  <li key={idx} className="flex items-start gap-3 text-sm text-slate-700 dark:text-slate-300">
+                    <ShieldCheck className="w-4 h-4 text-cyan-600 dark:text-cyber-400 flex-shrink-0 mt-1" />
                     <span>{req}</span>
                   </li>
                 ))}
@@ -491,13 +491,13 @@ export const JobDetailsPage = () => {
 
           {/* Skills Required */}
           {job.skills?.length > 0 && (
-            <div className="glass-card p-6 sm:p-8 rounded-2xl border border-slate-800 space-y-4">
-              <h2 className="text-lg font-bold text-white tracking-tight">Tech Stack & Required Skills</h2>
+            <div className="bg-white dark:bg-slate-900/60 p-6 sm:p-8 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-4 transition-colors">
+              <h2 className="text-lg font-bold text-slate-900 dark:text-white tracking-tight">Tech Stack & Required Skills</h2>
               <div className="flex flex-wrap gap-2">
                 {job.skills.map((skill) => (
                   <span
                     key={skill}
-                    className="px-3 py-1 rounded-xl text-xs font-semibold bg-brand-500/15 text-brand-300 border border-brand-500/25"
+                    className="px-3 py-1 rounded-xl text-xs font-semibold bg-brand-500/10 dark:bg-brand-500/15 text-brand-700 dark:text-brand-300 border border-brand-500/20 dark:border-brand-500/25"
                   >
                     {skill}
                   </span>
@@ -510,29 +510,29 @@ export const JobDetailsPage = () => {
 
         {/* Right 1 Col: Company & Recruiter Profile */}
         <div className="space-y-6">
-          <div className="glass-card p-6 rounded-2xl border border-slate-800 space-y-5">
-            <h3 className="text-base font-bold text-white flex items-center gap-2">
-              <Building2 className="w-4 h-4 text-cyber-400" />
+          <div className="bg-white dark:bg-slate-900/60 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-5 transition-colors">
+            <h3 className="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+              <Building2 className="w-4 h-4 text-cyan-600 dark:text-cyber-400" />
               About the Company
             </h3>
 
             <div className="space-y-3 text-xs">
               <div>
                 <span className="text-slate-500 uppercase font-semibold block mb-0.5">Organization</span>
-                <span className="text-white font-medium text-sm">{job.company}</span>
+                <span className="text-slate-900 dark:text-white font-medium text-sm">{job.company}</span>
               </div>
 
               {recruiterProfile?.industry && (
                 <div>
                   <span className="text-slate-500 uppercase font-semibold block mb-0.5">Industry</span>
-                  <span className="text-slate-300">{recruiterProfile.industry}</span>
+                  <span className="text-slate-700 dark:text-slate-300">{recruiterProfile.industry}</span>
                 </div>
               )}
 
               {recruiterProfile?.companySize && (
                 <div>
                   <span className="text-slate-500 uppercase font-semibold block mb-0.5">Team Size</span>
-                  <span className="text-slate-300">{recruiterProfile.companySize} Employees</span>
+                  <span className="text-slate-700 dark:text-slate-300">{recruiterProfile.companySize} Employees</span>
                 </div>
               )}
 
@@ -543,7 +543,7 @@ export const JobDetailsPage = () => {
                     href={recruiterProfile.website}
                     target="_blank"
                     rel="noreferrer"
-                    className="text-brand-400 hover:underline flex items-center gap-1"
+                    className="text-brand-600 dark:text-brand-400 hover:underline flex items-center gap-1 font-medium"
                   >
                     Visit Website
                     <Globe className="w-3 h-3" />
@@ -552,8 +552,8 @@ export const JobDetailsPage = () => {
               )}
 
               {recruiterProfile?.description && (
-                <div className="pt-2 border-t border-slate-800">
-                  <p className="text-slate-400 leading-relaxed">{recruiterProfile.description}</p>
+                <div className="pt-2 border-t border-slate-200 dark:border-slate-800">
+                  <p className="text-slate-600 dark:text-slate-400 leading-relaxed">{recruiterProfile.description}</p>
                 </div>
               )}
             </div>
